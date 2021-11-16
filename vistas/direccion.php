@@ -3,9 +3,8 @@
 include ("layout/header.php");
 
 ?>
-  <title>Cablevisión | Robles</title>
-  <!-- Tell the browser to be responsive to screen width -->
- 
+
+
 <?php
 
 include ("layout/nav.php");
@@ -18,7 +17,7 @@ include ("layout/nav.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Usuarios</h1>
+            <h1>Direcciones</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -37,7 +36,7 @@ include ("layout/nav.php");
           
             <div class="card">
               <div class="card-header">
-              <a type="submit" class="btn btn-primary" href="usuario_ingresar.php">Ingresar usuario</a>
+              <a type="submit" class="btn btn-primary" href="direccion_ingresar.php">Ingresar dirección</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -45,10 +44,8 @@ include ("layout/nav.php");
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Nombres</th>
-                    <th>Apellido</th>
-                    <th>Usuario</th>
-                    <th>Permiso</th>
+                    <th>Municipio</th>
+                    <th>Dirección</th>
                     <th>Acciones</th>
                   </tr>
                   </thead>
@@ -57,8 +54,6 @@ include ("layout/nav.php");
                     <td>Misc</td>
                     <td>IE Mobile</td>
                     <td>Windows Mobile 6</td>
-                    <td>Windows Mobile 6</td>
-                    <td>-</td>
                     <td> 
                     <a type="submit" class="btn btn-primary">
                     <i class="fas fa-pen"></i> 
@@ -75,8 +70,6 @@ include ("layout/nav.php");
                     <td>Misc</td>
                     <td>PSP browser</td>
                     <td>PSP</td>
-                    <td>Windows Mobile 6</td>
-                    <td>-</td>
                     <td><a type="submit" href="usuario_editar.php" class="btn btn-primary">
                     <i class="fas fa-pen"></i> 
                     </a>
@@ -91,8 +84,6 @@ include ("layout/nav.php");
                     <td>Other browsers</td>
                     <td>All others</td>
                     <td>-</td>
-                    <td>-</td>
-                    <td>Windows Mobile 6</td>
                     <td><a type="submit" class="btn btn-primary">
                     <i class="fas fa-pen"></i> 
                     </a>
@@ -107,11 +98,9 @@ include ("layout/nav.php");
                   <tfoot>
                   <tr>
                   <th>ID</th>
-                  <th>Nombres</th>
-                  <th>Apellido</th>
-                  <th>Usuario</th>
-                  <th>Permiso</th>
-                  <th>Acciones</th>
+                    <th>Municipio</th>
+                    <th>Dirección</th>
+                    <th>Acciones</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -128,6 +117,7 @@ include ("layout/nav.php");
     </section>
     <!-- /.content -->
   </div>
+
 
 <?php
 

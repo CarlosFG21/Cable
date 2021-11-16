@@ -25,6 +25,11 @@
   <link rel="stylesheet" href="../app/AdminLTE-3.0.5/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../app/AdminLTE-3.0.5/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="../../app/AdminLTE-3.0.5/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="../../app/AdminLTE-3.0.5/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="../../app/AdminLTE-3.0.5/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -89,7 +94,7 @@
           <li class="nav-header">ACCIONES</li>
           <li class="nav-item">
             <a href="cliente.php" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
+              <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Clientes
               </p>
@@ -97,7 +102,7 @@
           </li>
           <li class="nav-item">
             <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-tools"></i>
               <p>
                 Servicios
               </p>
@@ -105,7 +110,7 @@
           </li>
           <li class="nav-item">
             <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-toolbox"></i>
               <p>
                 Reparaciones
               </p>
@@ -113,23 +118,23 @@
           </li>
           <li class="nav-item">
             <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fab fa-paypal"></i>
               <p>
                 Pagos
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+            <a href="personal.php" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
               <p>
-                Tecnicos
+                Personal
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+            <a href="direccion.php" class="nav-link">
+              <i class="nav-icon fas fa-map-marker-alt"></i>
               <p>
                 Direcciones
               </p>
@@ -137,7 +142,7 @@
           </li>
           <li class="nav-item">
             <a href="usuario.php" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 Usuarios
               </p>

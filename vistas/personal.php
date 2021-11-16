@@ -18,7 +18,7 @@ include ("layout/nav.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Usuarios</h1>
+            <h1>Personal</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -37,7 +37,7 @@ include ("layout/nav.php");
           
             <div class="card">
               <div class="card-header">
-              <a type="submit" class="btn btn-primary" href="usuario_ingresar.php">Ingresar usuario</a>
+              <a type="submit" class="btn btn-primary" href="personal_ingresar.php">Ingresar personal</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -47,8 +47,8 @@ include ("layout/nav.php");
                     <th>ID</th>
                     <th>Nombres</th>
                     <th>Apellido</th>
-                    <th>Usuario</th>
-                    <th>Permiso</th>
+                    <th>Telefono</th>
+                    <th>Cargo</th>
                     <th>Acciones</th>
                   </tr>
                   </thead>
@@ -107,11 +107,11 @@ include ("layout/nav.php");
                   <tfoot>
                   <tr>
                   <th>ID</th>
-                  <th>Nombres</th>
-                  <th>Apellido</th>
-                  <th>Usuario</th>
-                  <th>Permiso</th>
-                  <th>Acciones</th>
+                    <th>Nombres</th>
+                    <th>Apellido</th>
+                    <th>Telefono</th>
+                    <th>Cargo</th>
+                    <th>Acciones</th>
                   </tr>
                   </tfoot>
                 </table>

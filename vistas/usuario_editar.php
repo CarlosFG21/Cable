@@ -3,14 +3,15 @@
 include ("layout/header.php");
 
 ?>
-
-<title>Cablevision | Robles</title>
-
+  <title>Cablevisión | Robles</title>
+  <!-- Tell the browser to be responsive to screen width -->
+ 
 <?php
 
 include ("layout/nav.php");
 
 ?>
+
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -18,7 +19,7 @@ include ("layout/nav.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Clientes</h1>
+            <h1>Usuarios</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -40,85 +41,56 @@ include ("layout/nav.php");
             <!-- general form elements disabled -->
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Ingresar</h3>
+                <h3 class="card-title">Editar</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <form role="form">
                   <div class="row">
-                  <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>DPI</label>
-                        <input type="number" class="form-control" placeholder="DPI" min="1" pattern="^[0-9]+">
-                      </div>
-                    </div>  
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>NIT</label>
-                        <input type="number" class="form-control" placeholder="NIT" min="1" pattern="^[0-9]+">
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Nombres</label>
-                        <input type="text" class="form-control" placeholder="Nombre" 
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" placeholder="Nombre"
                         required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Apellidos</label>
+                        <label>Apellido</label>
                         <input type="text" class="form-control" placeholder="Apellido"
                         required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Dirección</label>
-                        <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected">Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select>
+                        <label>Usuario</label>
+                        <input type="text" class="form-control" placeholder="Usuario">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Genero</label>
+                        <label>Permiso</label>
                         <select class="form-control">
-                          <option>Masculino</option>
-                          <option>Femenino</option>
+                          <option>Usuario</option>
+                          <option>Administrador</option>
                         </select>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Telefono</label>
-                        <input type="number" class="form-control" placeholder="Telefono" min="1" pattern="^[0-9]+" minlength="8" maxlength="8" required>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Fecha de nacimiento</label>
-                        <input type="date" class="form-control" placeholder="Fecha de nacimiento">
+                        <label>Contraseña</label>
+                        <input type="password" class="form-control" placeholder="Contraseña">
                       </div>
                     </div>
                   </div>  
                   <div class="">
                   <a type="submit" class="btn btn-primary" href="">Guardar</a>
-                  <a type="submit" class="btn btn-danger" href="cliente.php">Regresar</a>
+                  <a type="submit" class="btn btn-danger" href="usuario.php">Regresar</a>
                 </div>     
                 </form>
               </div>
@@ -136,8 +108,6 @@ include ("layout/nav.php");
     </section>
     <!-- /.content -->
   </div>
-
-
 
 <?php
 
