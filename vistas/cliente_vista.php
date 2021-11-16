@@ -6,6 +6,7 @@ include ("layout/header.php");
 
 <title>Cablevision | Robles</title>
 
+
 <?php
 
 include ("layout/nav.php");
@@ -40,7 +41,7 @@ include ("layout/nav.php");
             <!-- general form elements disabled -->
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Ingresar</h3>
+                <h3 class="card-title">Ver</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -50,14 +51,14 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>DPI</label>
-                        <input type="number" class="form-control" placeholder="DPI" min="1" pattern="^[0-9]+">
+                        <input type="number" class="form-control" placeholder="DPI" min="1" pattern="^[0-9]+" disabled>
                       </div>
                     </div>  
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>NIT</label>
-                        <input type="number" class="form-control" placeholder="NIT" min="1" pattern="^[0-9]+">
+                        <input type="number" class="form-control" placeholder="NIT" min="1" pattern="^[0-9]+" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -65,7 +66,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Nombres</label>
                         <input type="text" class="form-control" placeholder="Nombre" 
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
+                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -73,51 +74,40 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Apellidos</label>
                         <input type="text" class="form-control" placeholder="Apellido"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
+                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Dirección</label>
-                        <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected">Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select>
+                        <input type="number" class="form-control" placeholder="Dirección" min="1" pattern="^[0-9]+" minlength="8" maxlength="8" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Genero</label>
-                        <select class="form-control">
-                          <option>Masculino</option>
-                          <option>Femenino</option>
-                        </select>
+                        <input type="number" class="form-control" placeholder="Genero" min="1" pattern="^[0-9]+" minlength="8" maxlength="8" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Telefono</label>
-                        <input type="number" class="form-control" placeholder="Telefono" min="1" pattern="^[0-9]+" minlength="8" maxlength="8" required>
+                        <input type="number" class="form-control" placeholder="Telefono" min="1" pattern="^[0-9]+" minlength="8" maxlength="8" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Fecha de nacimiento</label>
-                        <input type="date" class="form-control" placeholder="Fecha de nacimiento">
+                        <input type="text" class="form-control" placeholder="Fecha de nacimiento" disabled>
                       </div>
                     </div>
                   </div>  
                   <div class="">
-                  <a type="submit" class="btn btn-primary" href="">Guardar</a>
+                  
                   <a type="submit" class="btn btn-danger" href="cliente.php">Regresar</a>
                 </div>     
                 </form>
@@ -136,7 +126,6 @@ include ("layout/nav.php");
     </section>
     <!-- /.content -->
   </div>
-
 
 
 <?php

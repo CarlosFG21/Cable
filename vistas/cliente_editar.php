@@ -6,6 +6,7 @@ include ("layout/header.php");
 
 <title>Cablevision | Robles</title>
 
+
 <?php
 
 include ("layout/nav.php");
@@ -40,7 +41,7 @@ include ("layout/nav.php");
             <!-- general form elements disabled -->
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Ingresar</h3>
+                <h3 class="card-title">Editar</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -136,7 +137,6 @@ include ("layout/nav.php");
     </section>
     <!-- /.content -->
   </div>
-
 
 
 <?php
