@@ -77,13 +77,7 @@ include ("layout/nav.php");
                         required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
                       </div>
                     </div>
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Dirección</label>
-                        <input type="number" class="form-control" placeholder="Dirección" min="1" pattern="^[0-9]+" minlength="8" maxlength="8" disabled>
-                      </div>
-                    </div>
+                    
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
