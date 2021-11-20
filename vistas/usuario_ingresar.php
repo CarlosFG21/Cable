@@ -67,7 +67,7 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Usuario</label>
-                        <input type="text" class="form-control" placeholder="Usuario">
+                        <input type="text" class="form-control" placeholder="Usuario" minlength="3" maxlength="9">
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -84,7 +84,7 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Contraseña</label>
-                        <input type="password" class="form-control" placeholder="Contraseña">
+                        <input type="password" class="form-control" placeholder="Contraseña" minlength="4" maxlength="8">
                       </div>
                     </div>
                   </div>  

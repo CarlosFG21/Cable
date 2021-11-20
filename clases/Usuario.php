@@ -436,11 +436,11 @@
         }
 
         //---Guardamos en variable de sesión el usuario
-        //---Inicializamos la sesión
-        session_start();
+        
         //Guardamos el objeto usuario en sesión
         if($validador==1){
-        
+            //---Inicializamos la sesión
+             session_start();
             $_SESSION['usuario']=$usuario;
         
         }
