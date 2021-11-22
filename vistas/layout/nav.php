@@ -1,3 +1,5 @@
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../app/AdminLTE-3.0.5/plugins/fontawesome-free/css/all.min.css">
@@ -43,6 +45,8 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
     </ul>
+
+    <ul class="navbar-nav ml-auto"><a href="../crud/cerrarSesion.php">Cerrar sesión</a></ul>
   </nav>
   <!-- /.navbar -->
 
@@ -63,7 +67,16 @@
           <img src="../app/AdminLTE-3.0.5/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+
+        <?php
+          include("../clases/Usuario.php");
+          session_start();
+          $usuario = $_SESSION['usuario'];
+          $nombre = $usuario->getNombre();
+          $apellido = $usuario->getApellido();
+
+          echo"<a href='#' class='d-block'>$nombre $apellido</a>";
+        ?>
         </div>
       </div>
 

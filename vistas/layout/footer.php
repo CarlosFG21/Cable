@@ -52,6 +52,8 @@
 <script src="../app/AdminLTE-3.0.5/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="../app/AdminLTE-3.0.5/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="../app/AdminLTE-3.0.5/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../js/confirmacion.js"></script>
+<script src="../js/confirmacionReactivar.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({

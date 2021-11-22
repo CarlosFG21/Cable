@@ -1,5 +1,5 @@
 <?php
-    require "db/Conexion.php";
+    include("../db/Conexion.php");
 
     class Personal{
        
