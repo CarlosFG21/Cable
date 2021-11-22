@@ -12,6 +12,10 @@ include ("layout/nav.php");
 
 ?>
 
+<?php
+  include("../clases/Usuario.php");
+?>
+
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -51,38 +55,68 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Nombre</label>
-                        <input type="text" class="form-control" placeholder="Nombre"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
+                        <?php  
+                        
+                        $usuario = new Usuario();
+                        $id= $_REQUEST['id'];
+                        $resultado = $usuario->buscarPorId($id);
+
+                        $nombre = $resultado->getNombre();
+                        $apellido = $resultado->getApellido();
+                        $nickname = $resultado->getNickname();
+                        $permiso = $resultado->getRol();
+                        $contrasena = $resultado->getContrasena();
+                        //Imprimimos nombre
+                        echo "<input type='text' class='form-control' placeholder='$nombre'
+                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1' disabled>";
+                        
+                        ?>
+
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Apellido</label>
-                        <input type="text" class="form-control" placeholder="Apellido"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
-                      </div>
+                        
+                        <?php
+                        //-----------------Imprimimos el apellido
+                        echo "<input type='text' class='form-control' placeholder='$apellido'
+                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1' disabled>"; 
+                        
+                        ?>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Usuario</label>
-                        <input type="text" class="form-control" placeholder="Usuario" disabled>
+                      <?php  
+                        //-----------Imprimimos el usuario
+                        echo "<input type='text' class='form-control' placeholder='$nickname' disabled>";
+                      ?>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Permiso</label>
-                        <input type="text" class="form-control" placeholder="Apellido"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
+                        
+                        <?php
+                        //------------Imprimimos el permiso
+                        echo "<input type='text' class='form-control' placeholder='$permiso'
+                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1' disabled>";
+                        ?>
+
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Contraseña</label>
-                        <input type="password" class="form-control" placeholder="Contraseña" disabled>
+                        <?php
+                        echo "<input type='password' class='form-control' value='$contrasena' disabled>";
+                        ?>
                       </div>
                     </div>
                   </div>  

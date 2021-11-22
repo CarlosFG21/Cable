@@ -1,6 +1,6 @@
 <?php
 
-    require "db/Conexion.php";
+    include("../db/Conexion.php");
 
      class Usuario{
         
@@ -233,7 +233,7 @@
         //Array contenedor de resultados
         $resultadoUsuarios = array();
         //Instrucción SQL
-        $sql = "select *from usuario where estado=1";
+        $sql = "select *from usuario";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -479,6 +479,7 @@
         //Devolvemos resultado 1=existe, 0 = no existe
         return $res;
        }
+
 
     }
 ?>

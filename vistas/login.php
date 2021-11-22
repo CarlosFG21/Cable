@@ -11,15 +11,15 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup"-->
-                <form action="../controlador/validacion.php" class="sign-in-form" method="post">
+                <form action="../crud/validarUsuario.php" class="sign-in-form" method="post">
                     <h2 class="title">Bienvenido</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Usuario" name="nickname" required/>
+                        <input type="text" placeholder="Usuario" name="nickname" id="nickname" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Contraseña" name="contrasena" required/>
+                        <input type="password" placeholder="Contraseña" name="contrasena" id="contrasena" required/>
                     </div>
                     <input type="submit" value="Acceder" class="btn solid" />
                     <p class="social-text">!Accede ahora!</p>

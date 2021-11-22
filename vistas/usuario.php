@@ -12,6 +12,11 @@ include ("layout/nav.php");
 
 ?>
 
+<?php
+  include("../clases/Usuario.php");
+
+?>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -45,64 +50,74 @@ include ("layout/nav.php");
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Nombres</th>
+                    <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Usuario</th>
                     <th>Permiso</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Misc</td>
-                    <td>IE Mobile</td>
-                    <td>Windows Mobile 6</td>
-                    <td>Windows Mobile 6</td>
-                    <td>-</td>
-                    <td> 
-                    <a type="submit" class="btn btn-primary">
-                    <i class="fas fa-pen"></i> 
-                    </a>
-                    <a type="submit" class="btn btn-danger">
-                    <i class="fas fa-trash-alt"></i> 
-                    </a>
-                    <a type="submit" class="btn bg-gradient-success">
-                    <i class="fas fa-eye"></i> 
-                    </a>
-                  </td>
-                  </tr>
-                  <tr>
-                    <td>Misc</td>
-                    <td>PSP browser</td>
-                    <td>PSP</td>
-                    <td>Windows Mobile 6</td>
-                    <td>-</td>
-                    <td><a type="submit" href="usuario_editar.php" class="btn btn-primary">
-                    <i class="fas fa-pen"></i> 
-                    </a>
-                    <a type="submit" href="usuario_eliminar.php"class="btn btn-danger">
-                    <i class="fas fa-trash-alt"></i> 
-                    </a>
-                    <a type="submit" href="usuario_vista.php"class="btn bg-gradient-success">
-                    <i class="fas fa-eye"></i> 
-                    </a></td>
-                  </tr>
-                  <tr>
-                    <td>Other browsers</td>
-                    <td>All others</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>Windows Mobile 6</td>
-                    <td><a type="submit" class="btn btn-primary">
-                    <i class="fas fa-pen"></i> 
-                    </a>
-                    <a type="submit" class="btn btn-danger">
-                    <i class="fas fa-trash-alt"></i> 
-                    </a>
-                    <a type="submit" class="btn bg-gradient-success">
-                    <i class="fas fa-eye"></i> 
-                    </a></td>
-                  </tr>
+                 
+                 
+                <?php
+                
+                $usuario = new Usuario();
+                $usuarioArray = $usuario->obtenerUsuarios();
+                
+                for($i=0; $i<sizeof($usuarioArray);$i++){
+                  echo "<tr>";
+
+                  $id = $usuarioArray[$i]->getIdUsuario();
+                  $nombre = $usuarioArray[$i]->getNombre();
+                  $apellido = $usuarioArray[$i]->getApellido();
+                  $usuario = $usuarioArray[$i]->getNickname();
+                  $permiso = $usuarioArray[$i]->getRol();
+                  $estado = $usuarioArray[$i]->getEstado();
+
+                  //Imprimimos datos
+                  echo "
+                    
+                    <td>$id</td>
+                    <td>$nombre</td>
+                    <td>$apellido</td>
+                    <td>$usuario</td>
+                    <td>$permiso</td>
+                    ";
+
+                  //Imprimimos según estado
+                 
+                  if($estado==1){
+                    echo "<td><h4><span class='badge bg-success'>Activo</span></h4></td>";
+                  }else{
+                    echo "<td><h4><span class='badge bg-danger'>Inactivo</span></h4></td>";
+                  }
+
+                  //Imprimimos botones
+                  
+                    echo "<td><a type='submit' href='usuario_editar.php?id=$id' class='btn btn-primary'>
+                    <i class='fas fa-pen'></i> 
+                    </a>";
+
+                    if($estado==1){
+                    echo"<a type='submit' class='btn btn-danger' id='btnEliminar' href='../crud/eliminarUsuario.php?id=$id'>
+                    <i class='fas fa-trash-alt'></i>
+                    </a>"; 
+                    }else{
+                      //Imprimimo botón de reactivar
+                      echo"<a type='submit' class='btn btn-warning' id='btnReactivar' href='../crud/reactivarUsuario.php?id=$id'>
+                    <i class='fa fa-arrow-left'></i>
+                    </a>"; 
+                    }
+                    echo"<a type='submit' href='usuario_vista.php?id=$id'class='btn bg-gradient-success'>
+                    <i class='fas fa-eye'></i> 
+                    </a></td>";
+                  
+                  echo "</tr>";
+                }
+                  ?>
+                  
                   </tbody>
                   <tfoot>
                   <tr>

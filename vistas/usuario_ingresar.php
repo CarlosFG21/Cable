@@ -1,3 +1,4 @@
+
 <?php
 
 include ("layout/header.php");
@@ -45,13 +46,13 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form">
+                <form role="form" method="post" action="../crud/ingresarUsuario.php">
                   <div class="row">
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Nombre</label>
-                        <input type="text" class="form-control" placeholder="Nombre"
+                        <input type="text" class="form-control" placeholder="Nombre" name="nombre" id="nombre"
                         required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
                       </div>
                     </div>
@@ -59,7 +60,7 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Apellido</label>
-                        <input type="text" class="form-control" placeholder="Apellido"
+                        <input type="text" class="form-control" placeholder="Apellido" name="apellido" id="apellido"
                         required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
                       </div>
                     </div>
@@ -67,14 +68,14 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Usuario</label>
-                        <input type="text" class="form-control" placeholder="Usuario" minlength="3" maxlength="9">
+                        <input type="text" class="form-control" placeholder="Usuario" minlength="3" maxlength="9" required name="usuario" id="usuario">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Permiso</label>
-                        <select class="form-control">
+                        <select class="form-control" name="permiso" id="permiso">
                           <option>Usuario</option>
                           <option>Administrador</option>
                         </select>
@@ -84,12 +85,12 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Contraseña</label>
-                        <input type="password" class="form-control" placeholder="Contraseña" minlength="4" maxlength="8">
+                        <input type="password" class="form-control" placeholder="Contraseña" minlength="4" maxlength="8" required name="contrasena" id="contrasena">
                       </div>
                     </div>
                   </div>  
                   <div class="">
-                  <a type="submit" class="btn btn-primary" href="">Guardar</a>
+                  <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
                   <a type="submit" class="btn btn-danger" href="usuario.php">Regresar</a>
                 </div>     
                 </form>
