@@ -122,6 +122,7 @@ include ("layout/nav.php");
                   <th>Apellido</th>
                   <th>Usuario</th>
                   <th>Permiso</th>
+                  <th>Estado</th>
                   <th>Acciones</th>
                   </tr>
                   </tfoot>
