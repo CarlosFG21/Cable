@@ -65,7 +65,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Nombres</label>
                         <input type="text" class="form-control" placeholder="Nombre" 
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" name="nombre" id="nombre" required>
+                         min="1" name="nombre" id="nombre" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -73,7 +73,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Apellidos</label>
                         <input type="text" class="form-control" placeholder="Apellido"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" name="apellido" id="apellido" required>
+                         min="1" name="apellido" id="apellido" required>
                       </div>
                     </div>
                     <div class="col-sm-6">

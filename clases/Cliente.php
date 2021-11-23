@@ -224,7 +224,7 @@
          $resultadoCliente = new Cliente();
          
          //Instrucción SQL
-        $sql = "select *from cliente where id_cliente='" . $idBusqueda . "'" ." and estado=1";
+        $sql = "select *from cliente where id_cliente='" . $idBusqueda . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -261,7 +261,7 @@
         //Array contenedor de resultados
         $resultadoClientes = array();
         //Instrucción SQL
-        $sql = "select *from cliente where estado=1";
+        $sql = "select *from cliente";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
