@@ -44,65 +44,71 @@ include ("layout/nav.php");
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>Id</th>
                     <th>Nombres</th>
-                    <th>Apellido</th>
-                    <th>Telefono</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
                     <th>Cargo</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                    <td>Misc</td>
-                    <td>IE Mobile</td>
-                    <td>Windows Mobile 6</td>
-                    <td>Windows Mobile 6</td>
-                    <td>-</td>
-                    <td> 
-                    <a type="submit" class="btn btn-primary">
-                    <i class="fas fa-pen"></i> 
-                    </a>
-                    <a type="submit" class="btn btn-danger">
-                    <i class="fas fa-trash-alt"></i> 
-                    </a>
-                    <a type="submit" class="btn bg-gradient-success">
-                    <i class="fas fa-eye"></i> 
-                    </a>
-                  </td>
-                  </tr>
-                  <tr>
-                    <td>Misc</td>
-                    <td>PSP browser</td>
-                    <td>PSP</td>
-                    <td>Windows Mobile 6</td>
-                    <td>-</td>
-                    <td><a type="submit" href="usuario_editar.php" class="btn btn-primary">
-                    <i class="fas fa-pen"></i> 
-                    </a>
-                    <a type="submit" href="usuario_eliminar.php"class="btn btn-danger">
-                    <i class="fas fa-trash-alt"></i> 
-                    </a>
-                    <a type="submit" href="usuario_vista.php"class="btn bg-gradient-success">
-                    <i class="fas fa-eye"></i> 
-                    </a></td>
-                  </tr>
-                  <tr>
-                    <td>Other browsers</td>
-                    <td>All others</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>Windows Mobile 6</td>
-                    <td><a type="submit" class="btn btn-primary">
-                    <i class="fas fa-pen"></i> 
-                    </a>
-                    <a type="submit" class="btn btn-danger">
-                    <i class="fas fa-trash-alt"></i> 
-                    </a>
-                    <a type="submit" class="btn bg-gradient-success">
-                    <i class="fas fa-eye"></i> 
-                    </a></td>
-                  </tr>
+
+                  <?php
+
+
+                    $personal = new Personal();
+                    $arrayPersonal = $personal->obtenerPersonal();
+
+                  for($i=0; $i<sizeof($arrayPersonal); $i++){
+                    
+                    $idPersonal = $arrayPersonal[$i]->getIdPersonal();
+                    $nombres = $arrayPersonal[$i]->getNombres();
+                    $apellidos = $arrayPersonal[$i]->getApellidos();
+                    $telefono = $arrayPersonal[$i]->getTelefono();
+                    $cargo = $arrayPersonal[$i]->getCargo();
+                    $estado = $arrayPersonal[$i]->getEstado();
+
+                    
+                    
+                    echo "<td>$idPersonal</td>";
+                    echo "<td>$nombres</td>";
+                    echo "<td>$apellidos</td>";
+                    echo "<td>$telefono</td>";
+                    echo "<td>$cargo</td>";
+                    
+                    if($estado==1){
+                      echo "<td><h4><span class='badge bg-success'>Activo</span></h4></td>";
+                    }else{
+                      echo "<td><h4><span class='badge bg-danger'>Inactivo</span></h4></td>";
+                    }
+
+                    echo "<td><a type='submit' href='personal_editar.php?id=$idPersonal' class='btn btn-primary'>
+                    <i class='fas fa-pen'></i> 
+                    </a>";
+
+                    if($estado==1){
+                    echo"<a type='submit' class='btn btn-danger' id='btnEliminar' href='../crud/eliminarPersonal.php?id=$idPersonal'>
+                    <i class='fas fa-trash-alt'></i>
+                    </a>"; 
+                    }else{
+                      //Imprimimo botón de reactivar
+                      echo"<a type='submit' class='btn btn-warning' id='btnReactivar' href='../crud/reactivarPersonal.php?id=$idPersonal'>
+                    <i class='fa fa-arrow-left'></i>
+                    </a>"; 
+                    }
+                    echo"<a type='submit' href='personal_vista.php?id=$idPersonal'class='btn bg-gradient-success'>
+                    <i class='fas fa-eye'></i> 
+                    </a></td>";
+                  
+                  echo "</tr>";
+
+                  }
+                  ?>
+
+                
                   </tbody>
                   <tfoot>
                   <tr>

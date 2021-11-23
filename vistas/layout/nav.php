@@ -73,6 +73,7 @@
          
           
           include("../clases/Usuario.php");
+          include("../clases/Personal.php");
           
           session_start();
 

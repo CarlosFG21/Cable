@@ -45,37 +45,37 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form">
+                <form role="form" method="post" action="../crud/ingresarPersonal.php">
                   <div class="row">
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Nombres</label>
-                        <input type="text" class="form-control" placeholder="Nombre"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
+                        <input type="text" class="form-control" placeholder="Nombre" name='nombres' id='nombres'
+                        required min="1">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Apellidos</label>
-                        <input type="text" class="form-control" placeholder="Apellido"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
+                        <input type="text" class="form-control" placeholder="Apellido" name='apellidos' id='apellidos'
+                        required min="1">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Telefono</label>
-                        <input type="number" class="form-control" placeholder="Telefono" min="1" pattern="^[0-9]+">
+                        <input type="number" class="form-control" placeholder="Telefono" min="1" pattern="^[0-9]+" required name='telefono' id='telefono'>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Cargo</label>
-                        <select class="form-control">
-                          <option>Tecnico</option>
+                        <select class="form-control" name='cargo' id='cargo'>
+                          <option>Técnico</option>
                           <option>Asistente</option>
                         </select>
                       </div>
@@ -84,7 +84,7 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Genero</label>
-                        <select class="form-control">
+                        <select class="form-control" name='genero' id='genero'>
                           <option>Masculino</option>
                           <option>Femenino</option>
                         </select>
@@ -94,12 +94,12 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Fecha de nacimiento</label>
-                        <input type="date" class="form-control" placeholder="Fecha de nacimiento">
+                        <input type="date" class="form-control" placeholder="Fecha de nacimiento" id='fechaNacimiento' name='fechaNacimiento'>
                       </div>
                     </div>
                     </div>  
                   <div class="">
-                  <a type="submit" class="btn btn-primary" href="">Guardar</a>
+                  <a> <input type="submit" class="btn btn-primary"  value='Guardar' href="" id='btnGuardar' name='btnGuardar'></a>
                   <a type="submit" class="btn btn-danger" href="personal.php">Regresar</a>
                 </div>     
                 </form>
