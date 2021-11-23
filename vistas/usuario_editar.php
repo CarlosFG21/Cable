@@ -1,3 +1,5 @@
+
+
 <?php
 
 include ("layout/header.php");
@@ -12,10 +14,6 @@ include ("layout/nav.php");
 
 ?>
 
-<?php
-  include("../clases/Usuario.php");
-
-?>
 
 
 <div class="content-wrapper">
