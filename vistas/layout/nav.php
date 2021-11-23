@@ -1,5 +1,4 @@
 
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../app/AdminLTE-3.0.5/plugins/fontawesome-free/css/all.min.css">
@@ -69,8 +68,21 @@
         <div class="info">
 
         <?php
+          
+          //Incluimos todas las clases
+         
+          
           include("../clases/Usuario.php");
+          
           session_start();
+
+          if(isset($_SESSION['usuario'])){
+
+          }else{
+            header("Location: ../vistas/login.php");
+          }
+
+
           $usuario = $_SESSION['usuario'];
           $nombre = $usuario->getNombre();
           $apellido = $usuario->getApellido();

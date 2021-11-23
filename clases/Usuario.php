@@ -1,7 +1,5 @@
 <?php
-
-    include("../db/Conexion.php");
-
+ include("../db/Conexion.php");
      class Usuario{
         
         public $idUsuario;
@@ -199,7 +197,7 @@
          $resultadoUsuario = new Usuario();
          
          //Instrucción SQL
-        $sql = "select *from usuario where id_usuario='" . $idBusqueda . "'" ." and estado=1";
+        $sql = "select *from usuario where id_usuario='" . $idBusqueda . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 

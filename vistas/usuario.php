@@ -12,10 +12,6 @@ include ("layout/nav.php");
 
 ?>
 
-<?php
-  include("../clases/Usuario.php");
-
-?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
