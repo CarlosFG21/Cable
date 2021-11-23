@@ -74,6 +74,7 @@
           
           include("../clases/Usuario.php");
           include("../clases/Personal.php");
+          include("../clases/Cliente.php");
           
           session_start();
 

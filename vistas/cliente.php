@@ -46,46 +46,85 @@ include ("layout/nav.php");
                   <thead>
                   <tr>
                     <th>ID</th>
+                    <th>Nit</th>
                     <th>Nombres</th>
                     <th>Apellidos</th>
-                    <th>Nit</th>
                     <th>Telefono</th>
                     <th>Fecha de nacimiento</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                    <td>X</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5</td>
-                    <td>C</td>
-                    <td>X</td>
-                    <td>X</td>
-                  </tr>
+                  <?php
+
+                    $client = new Cliente();
+                    $clientArray = $client->obtenerClientes();
+
+                    for($i=0; $i<sizeof($clientArray); $i++){
+
+                      echo "<tr>";
+
+                      $id = $clientArray[$i]->getIdCliente();
+                      $nit = $clientArray[$i]->getNit();
+                      $nombre = $clientArray[$i]->getNombres();
+                      $apellido = $clientArray[$i]->getApellidos();
+                      $telefono = $clientArray[$i]->getTelefono();
+                      $fecha = $clientArray[$i]->getFechaNacimiento(); 
+                      $estado = $clientArray[$i]->getEstado();
+
+                      echo "
+                      
+                         <td>$id</td>
+                         <td>$nit</td>
+                         <td>$nombre</td>
+                         <td>$apellido</td>
+                         <td>$telefono</td>
+                         <td>$fecha</td>
+
+                      ";
+
+                      if($estado==1){
+                        echo "<td><h4><span class='badge bg-success'>Activo</span></h4></td>";
+                      }else{
+                        echo "<td><h4><span class='badge bg-danger'>Inactivo</span></h4></td>";
+                      }
+
+                      echo "<td><a type='submit' href='cliente_editar.php?id=$id' class='btn btn-primary'>
+                      <i class='fas fa-pen'></i> 
+                      </a>";
+
+                      if($estado==1){
+                        echo"<a type='submit' class='btn btn-danger' id='btnEliminar' href='../crud/eliminarCliente.php?id=$id'>
+                        <i class='fas fa-trash-alt'></i>
+                        </a>"; 
+                        }else{
+                          
+                          echo"<a type='submit' class='btn btn-warning' id='btnReactivar' href='../crud/reactivarCliente.php?id=$id'>
+                        <i class='fa fa-arrow-left'></i>
+                        </a>"; 
+                        }
+
+                        echo"<a type='submit' href='cliente_vista.php?id=$id'class='btn bg-gradient-success'>
+                        <i class='fas fa-eye'></i> 
+                        </a></td>";
+                      
+
+                      echo "</tr>";
+
+                    }
+
+                  ?>
                   </tbody>
                   <tfoot>
                   <tr>
                   <th>ID</th>
+                  <th>Nit</th>
                   <th>Nombres</th>
                   <th>Apellidos</th>
-                  <th>Nit</th>
                   <th>Telefono</th>
                   <th>Fecha de nacimiento</th>
+                  <th>Estado</th>
                   <th>Acciones</th>
                   </tr>
                   </tfoot>
