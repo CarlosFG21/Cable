@@ -43,27 +43,41 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form">
+              <?php
+              $servicio = new Servicio();
+
+              $id = $_REQUEST['id'];
+              $resultado = $servicio->buscarPorId($id);
+
+              $tipo = $resultado->getNombre();
+              $precio = $resultado->getPrecio();
+
+              ?>
+                <form role="form" method="post" action="../crud/editarPlan.php?id=<?php echo $id;?>">
                   <div class="row">
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Tipo</label>
-                        <input type="text" class="form-control" placeholder="Tipo"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
-                      </div>
+                        <?php
+                        echo "<input type='text' class='form-control' placeholder='tipo' value='$tipo' name='tipo' id='tipo'
+                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1' >"
+                        ?>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Precio</label>
-                        <input type="text" class="form-control" placeholder="Precio"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
-                      </div>
+                        <?php
+                        echo "<input type='text' class='form-control' placeholder='Precio' value='$precio' name='precio' id='precio'
+                        min='1'>"
+                         ?>
+                        </div>
                     </div>
                   </div>  
                   <div class="">
-                  <a type="submit" class="btn btn-primary" href="">Guardar</a>
+                  <input type="submit" class="btn btn-primary" value="Editar" name="btnEditar" id="btnEditar">
                   <a type="submit" class="btn btn-danger" href="plan.php">Regresar</a>
                 </div>     
                 </form>

@@ -50,7 +50,7 @@ include ("layout/nav.php");
                     <th>Nombres</th>
                     <th>Apellidos</th>
                     <th>Telefono</th>
-                    <th>Fecha de nacimiento</th>
+                    <th>Mensaje</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
@@ -80,9 +80,16 @@ include ("layout/nav.php");
                          <td>$nombre</td>
                          <td>$apellido</td>
                          <td>$telefono</td>
-                         <td>$fecha</td>
+                         
 
                       ";
+
+                      $time = strtotime($fecha);
+                      if(date('m-d')==date('m-d',$time)){
+                        echo "<td><span class='badge bg-primary'>Cumpliendo años</span></td>";
+                      }else{
+                        echo "<td><span class='badge bg-warning'>No cumpliendo años</span></td>";
+                      }
 
                       if($estado==1){
                         echo "<td><h4><span class='badge bg-success'>Activo</span></h4></td>";
@@ -123,7 +130,7 @@ include ("layout/nav.php");
                   <th>Nombres</th>
                   <th>Apellidos</th>
                   <th>Telefono</th>
-                  <th>Fecha de nacimiento</th>
+                  <th>Mensaje</th>
                   <th>Estado</th>
                   <th>Acciones</th>
                   </tr>

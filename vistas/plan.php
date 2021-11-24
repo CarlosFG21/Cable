@@ -44,62 +44,72 @@ include ("layout/nav.php");
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Municipio</th>
-                    <th>Dirección</th>
+                    <th>Tipo</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Misc</td>
-                    <td>IE Mobile</td>
-                    <td>Windows Mobile 6</td>
-                    <td> 
-                    <a type="submit" class="btn btn-primary">
-                    <i class="fas fa-pen"></i> 
-                    </a>
-                    <a type="submit" class="btn btn-danger">
-                    <i class="fas fa-trash-alt"></i> 
-                    </a>
-                    <a type="submit" class="btn bg-gradient-success">
-                    <i class="fas fa-eye"></i> 
-                    </a>
-                  </td>
-                  </tr>
-                  <tr>
-                    <td>Misc</td>
-                    <td>PSP browser</td>
-                    <td>PSP</td>
-                    <td><a type="submit" href="usuario_editar.php" class="btn btn-primary">
-                    <i class="fas fa-pen"></i> 
-                    </a>
-                    <a type="submit" href="usuario_eliminar.php"class="btn btn-danger">
-                    <i class="fas fa-trash-alt"></i> 
-                    </a>
-                    <a type="submit" href="usuario_vista.php"class="btn bg-gradient-success">
-                    <i class="fas fa-eye"></i> 
-                    </a></td>
-                  </tr>
-                  <tr>
-                    <td>Other browsers</td>
-                    <td>All others</td>
-                    <td>-</td>
-                    <td><a type="submit" class="btn btn-primary">
-                    <i class="fas fa-pen"></i> 
-                    </a>
-                    <a type="submit" class="btn btn-danger">
-                    <i class="fas fa-trash-alt"></i> 
-                    </a>
-                    <a type="submit" class="btn bg-gradient-success">
-                    <i class="fas fa-eye"></i> 
-                    </a></td>
-                  </tr>
+                  <?php
+                  $servicio = new Servicio();
+                  $servicioArray = $servicio->obtenerServicios();
+
+                  for($i=0; $i<sizeof($servicioArray); $i++){
+
+                    $id =  $servicioArray[$i]->getIdServicio();
+                    $tipo = $servicioArray[$i]->getNombre();
+                    $precio = $servicioArray[$i]->getPrecio();
+                    $estado = $servicioArray[$i]->getEstado();
+
+                    echo "<tr>";
+
+                    echo "
+                        <td>$id</td>
+                        <td>$tipo</td>
+                        <td>$precio</td>
+                        
+                    
+                    ";
+
+                    if($estado==1){
+                      echo "<td><h4><span class='badge bg-success'>Activo</span></h4></td>";
+                    }else{
+                      echo "<td><h4><span class='badge bg-danger'>Inactivo</span></h4></td>";
+                    }
+
+                    echo "<td><a type='submit' href='plan_editar.php?id=$id' class='btn btn-primary'>
+                    <i class='fas fa-pen'></i> 
+                    </a>";
+
+                    if($estado==1){
+                    echo"<a type='submit' class='btn btn-danger' id='btnEliminar' href='../crud/eliminarPlan.php?id=$id'>
+                    <i class='fas fa-trash-alt'></i>
+                    </a>"; 
+                    }else{
+                      //Imprimimo botón de reactivar
+                      echo"<a type='submit' class='btn btn-warning' id='btnReactivar' href='../crud/reactivarPlan.php?id=$id'>
+                    <i class='fa fa-arrow-left'></i>
+                    </a>"; 
+                    }
+                    echo"<a type='submit' href='plan_vista.php?id=$id'class='btn bg-gradient-success'>
+                    <i class='fas fa-eye'></i> 
+                    </a></td>";
+
+
+
+                    echo "</tr>";
+
+                  }
+
+                  ?>
                   </tbody>
                   <tfoot>
                   <tr>
                   <th>ID</th>
-                    <th>Municipio</th>
-                    <th>Dirección</th>
+                    <th>Tipo</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
                   </tfoot>
