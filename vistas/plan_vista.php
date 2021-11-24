@@ -43,23 +43,35 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form">
+                <form role="form" >
                   <div class="row">
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Tipo</label>
-                        <input type="text" class="form-control" placeholder="Tipo"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
-                      </div>
+                        <?php
+                        $servicio = new Servicio();
+                        $id = $_REQUEST['id'];
+
+                        $resultado=$servicio->buscarPorId($id);
+
+                        $tipo = $resultado->getNombre();
+                        $precio = $resultado->getPrecio();
+                              
+                        echo "<input type='text' class='form-control' placeholder='$tipo'
+                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1' disabled>";
+                        ?>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Precio</label>
-                        <input type="text" class="form-control" placeholder="Precio"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
-                      </div>
+                        <?php
+                        echo "<input type='text' class='form-control' placeholder='$precio'
+                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1' disabled>"
+                      ?>
+                        </div>
                     </div>
                   </div>  
                   <div class="">

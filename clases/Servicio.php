@@ -1,6 +1,6 @@
 <?php
     
-    include("../db/Conexion.php");
+    //include("../db/Conexion.php");
 
     class Servicio{
 
@@ -166,7 +166,7 @@
          $resultadoServicio = new Servicio();
          
          //Instrucción SQL
-        $sql = "select *from servicio where id_servicio='" . $idBusqueda . "'" ." and estado=1";
+        $sql = "select *from servicio where id_servicio='" . $idBusqueda . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -196,7 +196,7 @@
         //Array contenedor de resultados
         $resultadoServicio = array();
         //Instrucción SQL
-        $sql = "select *from servicio where estado=1";
+        $sql = "select *from servicio";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
