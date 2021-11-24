@@ -103,7 +103,7 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Tablero
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -111,7 +111,7 @@
               <li class="nav-item">
                 <a href="index.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Datos</p>
                 </a>
               </li>
             </ul>
@@ -160,10 +160,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="direccion.php" class="nav-link">
-              <i class="nav-icon fas fa-map-marker-alt"></i>
+            <a href="plan.php" class="nav-link">
+              <i class="nav-icon fas fa-parking"></i>
               <p>
-                Direcciones
+                Plan
               </p>
             </a>
           </li>

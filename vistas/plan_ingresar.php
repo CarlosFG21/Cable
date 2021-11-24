@@ -17,7 +17,7 @@ include ("layout/nav.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Direcciones</h1>
+            <h1>Plan</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -39,7 +39,7 @@ include ("layout/nav.php");
             <!-- general form elements disabled -->
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Editar</h3>
+                <h3 class="card-title">Ingresar</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -48,23 +48,23 @@ include ("layout/nav.php");
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Municipio</label>
-                        <input type="text" class="form-control" placeholder="Gualan"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
+                        <label>Tipo</label>
+                        <input type="text" class="form-control" placeholder="Tipo"
+                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" >
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Dirección</label>
-                        <input type="text" class="form-control" placeholder="Direccion"
+                        <label>Precio</label>
+                        <input type="text" class="form-control" placeholder="Precio"
                         required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
                       </div>
                     </div>
                   </div>  
                   <div class="">
                   <a type="submit" class="btn btn-primary" href="">Guardar</a>
-                  <a type="submit" class="btn btn-danger" href="direccion.php">Regresar</a>
+                  <a type="submit" class="btn btn-danger" href="plan.php">Regresar</a>
                 </div>     
                 </form>
               </div>

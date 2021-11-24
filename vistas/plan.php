@@ -17,7 +17,7 @@ include ("layout/nav.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Direcciones</h1>
+            <h1>Plan</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -36,7 +36,7 @@ include ("layout/nav.php");
           
             <div class="card">
               <div class="card-header">
-              <a type="submit" class="btn btn-primary" href="direccion_ingresar.php">Ingresar dirección</a>
+              <a type="submit" class="btn btn-primary" href="plan_ingresar.php">Ingresar plan</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
