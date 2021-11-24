@@ -39,6 +39,7 @@ include ("layout/nav.php");
             <div class="card">
               <div class="card-header">
               <a type="submit" class="btn btn-primary" href="usuario_ingresar.php">Ingresar usuario</a>
+              <a type="submit" class="btn btn-primary" target="_blank" href="../reportes/reporte_usuario.php">Reporte</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
