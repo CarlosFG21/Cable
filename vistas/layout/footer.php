@@ -14,11 +14,11 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
+<!-- jQuery ->
 <script src="../app/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
+<!- jQuery UI 1.11.4 ->
 <script src="../app/AdminLTE-3.0.5/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
@@ -54,6 +54,8 @@
 <script src="../app/AdminLTE-3.0.5/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="../js/confirmacion.js"></script>
 <script src="../js/confirmacionReactivar.js"></script>
+<!-- Select2 -->
+<script src="../app/AdminLTE-3.0.5/plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
