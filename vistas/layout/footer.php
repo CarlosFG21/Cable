@@ -16,9 +16,8 @@
 
 <!-- jQuery -->
 <script src="../app/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 ->
 <script src="../app/AdminLTE-3.0.5/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
@@ -66,12 +65,31 @@
 <script src="../app/AdminLTE-3.0.5/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="../js/confirmacion.js"></script>
 <script src="../js/confirmacionReactivar.js"></script>
-
 <script>
   $(function () {
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
+      language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar ",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
     });
     $('#example2').DataTable({
       "paging": true,

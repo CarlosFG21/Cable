@@ -38,6 +38,7 @@ include ("layout/nav.php");
             <div class="card">
               <div class="card-header">
               <a type="submit" class="btn btn-primary" href="personal_ingresar.php">Ingresar personal</a>
+              <a type="submit" class="btn btn-primary" href="../reportes/reporte_personal.php" target="_blank">Reporte</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -128,6 +129,8 @@ include ("layout/nav.php");
                     <th>Apellido</th>
                     <th>Telefono</th>
                     <th>Cargo</th>
+                    <th>Mensaje</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
                   </tfoot>
