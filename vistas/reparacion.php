@@ -60,27 +60,32 @@ include ("layout/nav.php");
                  
                 <?php
                 
-                $reparacion = new Reparcion();
+                $reparacion = new Reparacion();
                 $reparacionArray = $reparacion->obtenerReparaciones();
                 
                 for($i=0; $i<sizeof($reparacionArray);$i++){
                   echo "<tr>";
 
-                  $id = $reparacionArray[$i]->getIdUsuario();
-                  $nombre = $reparacionArray[$i]->getNombre();
-                  $apellido = $reparacionArray[$i]->getApellido();
-                  $usuario = $reparacionArray[$i]->getNickname();
-                  $permiso = $reparacionArray[$i]->getRol();
+                  $id = $reparacionArray[$i]->getIdReparacion();
+                  $cliente = $reparacionArray[$i]->getCliente();
+                  $direccion = $reparacionArray[$i]->getDireccion();
+                  $tecnico = $reparacionArray[$i]->getIdPersonal();
+                  $descripcion = $reparacionArray[$i]->getDescripcion();
                   $estado = $reparacionArray[$i]->getEstado();
+                  $fecha = $reparacionArray[$i]->getFechaReporte();
+                  $hora = $reparacionArray[$i]->getHora();
 
                   //Imprimimos datos
                   echo "
                     
                     <td>$id</td>
-                    <td>$nombre</td>
-                    <td>$apellido</td>
-                    <td>$usuario</td>
-                    <td>$permiso</td>
+                    <td>$cliente</td>
+                    <td>$direccion</td>
+                    <td>$tecnico</td>
+                    <td>$descripcion</td>
+                    <td>$estado</td>
+                    <td>$fecha</td>
+                    <td>$hora</td>
                     ";
 
                   //Imprimimos según estado
@@ -119,12 +124,13 @@ include ("layout/nav.php");
                   <tfoot>
                   <tr>
                   <th>ID</th>
-                  <th>Nombres</th>
-                  <th>Apellido</th>
-                  <th>Usuario</th>
-                  <th>Permiso</th>
+                  <th>Cliente</th>
+                  <th>Dirección</th>
+                  <th>Tecnico</th>
+                  <th>Descripcion</th>
                   <th>Estado</th>
-                  <th>Acciones</th>
+                  <th>Hora</th>
+                  <th>Fecha</th>
                   </tr>
                   </tfoot>
                 </table>

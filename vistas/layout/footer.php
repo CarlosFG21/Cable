@@ -14,9 +14,9 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery ->
+<!-- jQuery -->
 <script src="../app/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
-<!- jQuery UI 1.11.4 ->
+<!-- jQuery UI 1.11.4 ->
 <script src="../app/AdminLTE-3.0.5/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
@@ -24,6 +24,10 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="../app/AdminLTE-3.0.5/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="../app/AdminLTE-3.0.5/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="../app/AdminLTE-3.0.5/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 <!-- ChartJS -->
 <script src="../app/AdminLTE-3.0.5/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
@@ -33,11 +37,17 @@
 <script src="../app/AdminLTE-3.0.5/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <!-- jQuery Knob Chart -->
 <script src="../app/AdminLTE-3.0.5/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
+<!-- InputMask -->
 <script src="../app/AdminLTE-3.0.5/plugins/moment/moment.min.js"></script>
+<script src="../app/AdminLTE-3.0.5/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+<!-- date-range-picker -->
 <script src="../app/AdminLTE-3.0.5/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="../app/AdminLTE-3.0.5/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="../app/AdminLTE-3.0.5/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="../app/AdminLTE-3.0.5/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <!-- Summernote -->
 <script src="../app/AdminLTE-3.0.5/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
@@ -46,6 +56,8 @@
 <script src="../app/AdminLTE-3.0.5/dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../app/AdminLTE-3.0.5/dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE App -->
+<script src="../app/AdminLTE-3.0.5/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../app/AdminLTE-3.0.5/dist/js/demo.js"></script>
 <script src="../app/AdminLTE-3.0.5/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -54,8 +66,7 @@
 <script src="../app/AdminLTE-3.0.5/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="../js/confirmacion.js"></script>
 <script src="../js/confirmacionReactivar.js"></script>
-<!-- Select2 -->
-<script src="../app/AdminLTE-3.0.5/plugins/select2/js/select2.full.min.js"></script>
+
 <script>
   $(function () {
     $("#example1").DataTable({
