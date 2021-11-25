@@ -18,7 +18,7 @@ include ("layout/nav.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Ingresar Reparacion</h1>
+            <h1>Editar Reparacion</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -40,7 +40,7 @@ include ("layout/nav.php");
             <!-- general form elements disabled -->
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Ingresar</h3>
+                <h3 class="card-title">Editar</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -50,43 +50,33 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Cliente</label>
-                        <select class="form-control select2" id="id_cliente">
-                          <option>Cliente 1</option>
-                          <option>Cliente 2</option>
-                        </select>
+                        <input type="text" readonly class="form-control">
                       </div>
                     </div>  
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Direccion</label>
-                        <select class="form-control" name="direccion" id="direccion">
-                          <option>Dirección 1</option>
-                          <option>Dirección 2</option>
-                        </select>
+                        <input type="text" readonly class="form-control">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Empleado</label>
-                        <select class="form-control select2" name="id_empleado" id="id_empleado">
-                          <option>Empleado 1</option>
-                          <option>Empleado 2</option>
-                        </select>
+                        <input type="text" class="form-control" readonly>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Descripcion</label>
-                        <input type="text" class="form-control" placeholder="Descripcion" min="1" pattern="^[A-Z]+" name="descripcion" id="descripcion" required>
+                        <input type="text" class="form-control" readonly>
                       </div>
                     </div>
                   </div>  
                   <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
-                  <a type="submit" class="btn btn-danger" href="cliente.php">Regresar</a>
+                  <a type="submit" class="btn btn-danger" href="reparacion.php">Regresar</a>
                 </div>     
                 </form>
               </div>
@@ -111,14 +101,3 @@ include ("layout/nav.php");
 include ("layout/footer.php");
 
 ?>
- <script>
-    $(function () {
-      //Initialize Select2 Elements
-      $('.select2').select2()
-
-      //Initialize Select2 Elements
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
-      })
-    });
-    </script>
