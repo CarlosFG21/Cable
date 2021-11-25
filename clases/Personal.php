@@ -202,7 +202,7 @@
          $resultadoPersonal = new Personal();
          
          //Instrucción SQL
-        $sql = "select *from personal where id_personal='" . $idBusqueda . "'" ." and estado=1";
+        $sql = "select *from personal where id_personal='" . $idBusqueda . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -237,7 +237,7 @@
         //Array contenedor de resultados
         $resultadoPersonal = array();
         //Instrucción SQL
-        $sql = "select *from personal where estado=1";
+        $sql = "select *from personal";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 

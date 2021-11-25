@@ -1,7 +1,7 @@
 <?php
 
     include("../clases/Personal.php");
-
+    include("../db/Conexion.php");
     
     if(isset($_POST['btnGuardar'])){
 

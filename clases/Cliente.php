@@ -59,7 +59,7 @@
         }
         //obtener nit
         public function getNit(){
-            return $this->dpi;
+            return $this->nit;
         }
         //setear nit
         public function setNit($_nit){
