@@ -49,6 +49,7 @@ include ("layout/nav.php");
                     <th>Apellidos</th>
                     <th>Teléfono</th>
                     <th>Cargo</th>
+                    <th>Mensaje</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
@@ -70,7 +71,7 @@ include ("layout/nav.php");
                     $telefono = $arrayPersonal[$i]->getTelefono();
                     $cargo = $arrayPersonal[$i]->getCargo();
                     $estado = $arrayPersonal[$i]->getEstado();
-
+                    $fecha = $arrayPersonal[$i]->getFechaNacimiento();
                     
                     
                     echo "<td>$idPersonal</td>";
@@ -79,6 +80,14 @@ include ("layout/nav.php");
                     echo "<td>$telefono</td>";
                     echo "<td>$cargo</td>";
                     
+                      $time = strtotime($fecha);
+                      if(date('m-d')==date('m-d',$time)){
+                        echo "<td><span class='badge bg-primary'>Cumpliendo años</span></td>";
+                      }else{
+                        echo "<td><span class='badge bg-warning'>No cumpliendo años</span></td>";
+                      }
+
+                    
                     if($estado==1){
                       echo "<td><h4><span class='badge bg-success'>Activo</span></h4></td>";
                     }else{
@@ -86,24 +95,26 @@ include ("layout/nav.php");
                     }
 
                     echo "<td><a type='submit' href='personal_editar.php?id=$idPersonal' class='btn btn-primary'>
-                    <i class='fas fa-pen'></i> 
-                    </a>";
+                      <i class='fas fa-pen'></i> 
+                      </a>";
 
-                    if($estado==1){
-                    echo"<a type='submit' class='btn btn-danger' id='btnEliminar' href='../crud/eliminarPersonal.php?id=$idPersonal'>
-                    <i class='fas fa-trash-alt'></i>
-                    </a>"; 
-                    }else{
-                      //Imprimimo botón de reactivar
-                      echo"<a type='submit' class='btn btn-warning' id='btnReactivar' href='../crud/reactivarPersonal.php?id=$idPersonal'>
-                    <i class='fa fa-arrow-left'></i>
-                    </a>"; 
-                    }
-                    echo"<a type='submit' href='personal_vista.php?id=$idPersonal'class='btn bg-gradient-success'>
-                    <i class='fas fa-eye'></i> 
-                    </a></td>";
-                  
-                  echo "</tr>";
+                      if($estado==1){
+                        echo"<a type='submit' class='btn btn-danger' id='btnEliminar' href='../crud/eliminarPersonal.php?id=$idPersonal'>
+                        <i class='fas fa-trash-alt'></i>
+                        </a>"; 
+                        }else{
+                          
+                          echo"<a type='submit' class='btn btn-warning' id='btnReactivar' href='../crud/reactivarPersonal.php?id=$idPersonal'>
+                        <i class='fa fa-arrow-left'></i>
+                        </a>"; 
+                        }
+
+                        echo"<a type='submit' href='personal_vista.php?id=$idPersonal'class='btn bg-gradient-success'>
+                        <i class='fas fa-eye'></i> 
+                        </a></td>";
+                      
+
+                      echo "</tr>";
 
                   }
                   ?>

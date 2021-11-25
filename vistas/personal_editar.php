@@ -45,38 +45,71 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form">
+                
+              
+                    <?php
+                        $personal = new Personal();
+                        $idBusqueda = $_REQUEST['id'];
+                        $personalResultado = $personal->buscarPorId($idBusqueda);
+
+                        $nombres = $personalResultado->getNombres();
+                        $apellidos = $personalResultado->getApellidos();
+                        $telefono = $personalResultado->getTelefono();
+                        $cargo = $personalResultado->getCargo();
+                        $genero = $personalResultado->getGenero();
+                        $fechaNacimiento = $personalResultado->getFechaNacimiento();  
+                      ?>
+
+              <form role="form" method="post" action="../crud/editarPersonal.php?id=<?php echo $idBusqueda;?>">
                   <div class="row">
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Nombres</label>
-                        <input type="text" class="form-control" placeholder="Nombre"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
-                      </div>
+                      <label>Nombres</label>
+
+                        <?php
+                        echo "<input type='text' class='form-control' placeholder='Nombres'
+                        required min='1' value='$nombres' name='nombres' id='nombres'>";
+                      
+                        ?>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Apellidos</label>
-                        <input type="text" class="form-control" placeholder="Apellido"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
-                      </div>
+                        <?php
+                        
+                        echo "<input type='text' class='form-control' placeholder='Apellidos'
+                        required min='1' value='$apellidos' name='apellidos' id='apellidos'>";
+                        
+                        ?>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Telefono</label>
-                        <input type="number" class="form-control" placeholder="Telefono" min="1" pattern="^[0-9]+">
+                      <?php
+                        echo "<input type='number' class='form-control' placeholder='Telefono' min='1' pattern='^[0-9]+' value='$telefono' required name='telefono' id='telefono'>";
+                      ?>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Cargo</label>
-                        <select class="form-control">
-                          <option>Tecnico</option>
-                          <option>Asistente</option>
+                        <select class="form-control" name="cargo" id="cargo">
+                          
+                          <?php
+                          if(strcmp($cargo,"Técnico")===0){
+                          echo "<option>Técnico</option>";
+                          echo "<option>Asistente</option>";
+                          }else{
+                            echo "<option>Asistente</option>";
+                            echo "<option>Técnico</option>";
+                          }
+                          ?>
                         </select>
                       </div>
                     </div>
@@ -84,22 +117,34 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Genero</label>
-                        <select class="form-control">
-                          <option>Masculino</option>
-                          <option>Femenino</option>
-                        </select>
+                        <select class="form-control" name="genero" id="genero">
+                          
+                        <?php
+                          if(strcmp($genero,"Masculino")===0){
+                          echo "<option>Masculino</option>";
+                          echo "<option>Femenino</option>";
+                          }else{
+                            echo "<option>Femenino</option>";
+                            echo "<option>Masculino</option>";
+                          }
+                        
+                        ?>
+                          </select>
                       </div>
                     </div> 
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Fecha de nacimiento</label>
-                        <input type="date" class="form-control" placeholder="Fecha de nacimiento">
-                      </div>
+                        
+                        <?php
+                        echo "<input type='date' class='form-control' placeholder='Fecha de nacimiento' value='$fechaNacimiento' required id='fechaNacimiento' name='fechaNacimiento'>";
+                        ?>
+                        </div>
                     </div>
                     </div>  
                   <div class="">
-                  <a type="submit" class="btn btn-primary" href="">Guardar</a>
+                  <a><input type="submit" class="btn btn-primary" href="" value="Editar" name="btnEditar" id="btnEditar"></a>
                   <a type="submit" class="btn btn-danger" href="personal.php">Regresar</a>
                 </div>     
                 </form>
