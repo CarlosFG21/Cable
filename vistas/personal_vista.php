@@ -51,45 +51,79 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Nombres</label>
-                        <input type="text" class="form-control" placeholder="Nombre"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
-                      </div>
+                        
+                        <?php
+                          $personal = new Personal();
+                          $idBusqueda = $_REQUEST['id'];
+
+                          $personalResultado = $personal->buscarPorId($idBusqueda);
+                        
+                          $nombres = $personalResultado->getNombres();
+                          $apellidos = $personalResultado->getApellidos();
+                          $telefono = $personalResultado->getTelefono();
+                          $cargo = $personalResultado->getCargo();
+                          $genero = $personalResultado->getGenero();
+                          $fechaNacimiento = $personalResultado->getFechaNacimiento();
+                        
+                        
+                        echo "<input type='text' class='form-control' placeholder='Nombre' value='$nombres'
+                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1' disabled>";
+                        
+                        ?>
+
+                        </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Apellidos</label>
-                        <input type="text" class="form-control" placeholder="Apellido"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" disabled>
-                      </div>
+                        <?php
+                        
+                        echo "<input type='text' class='form-control' placeholder='Apellido' value='$apellidos'
+                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1' disabled>";
+
+                        ?>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Telefono</label>
-                        <input type="number" class="form-control" placeholder="Telefono" min="1" pattern="^[0-9]+" disabled>
+                        
+                        <?php
+                        echo "<input type='number' class='form-control' placeholder='Telefono' min='1' pattern='^[0-9]+' disabled value='$telefono'>";
+                        ?>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Cargo</label>
-                        <input type="number" class="form-control" placeholder="Cargo" min="1" pattern="^[0-9]+" disabled>
+                      <?php
+                        
+                        echo "<input type='text' class='form-control' placeholder='Cargo' min='1' pattern='^[0-9]+' disabled value='$cargo'>";
+                        
+                        ?>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Genero</label>
-                        <input type="number" class="form-control" placeholder="Genero" min="1" pattern="^[0-9]+" disabled>
+                      <?php  
+                          echo "<input type='text' class='form-control' placeholder='Genero' min='1' pattern='^[0-9]+' value='$genero' disabled>";
+                      ?>
                       </div>
                     </div> 
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Fecha de nacimiento</label>
-                        <input type="text" class="form-control" placeholder="Fecha de nacimiento" disabled>
-                      </div>
+                        <?php
+                        echo "<input type='text' class='form-control' placeholder='Fecha de nacimiento' value='$fechaNacimiento' disabled>";
+                        
+                        ?>
+                        </div>
                     </div>
                     </div>  
                   <div class="">
