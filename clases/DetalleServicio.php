@@ -1,6 +1,6 @@
 <?php
     
-    include("../db/Conexion.php");
+    //include("../db/Conexion.php");
 
     class DetalleServicio{
 
@@ -193,7 +193,7 @@
         //Array contenedor de resultados
         $resultadoDetallesServicios = array();
         //Instrucción SQL
-        $sql = "select ds.id_detalle_servicio, ds.id_servicio, ds.id_direccion,ds.estado,ds.fecha, ds.hora,s.id_servicio, s.nombre as nombre_servicio, s.precio as precio_servicio, d.id_direccion, d.nombre as nombre_direccion from detalle_servicio ds, servicio s, direccion d where ds.id_servicio = s.id_servicio and ds.id_direccion = d.id_direccion and ds.estado=1";
+        $sql = "select ds.id_detalle_servicio, ds.id_servicio, ds.id_direccion,ds.estado,ds.fecha, ds.hora,s.id_servicio, s.nombre as nombre_servicio, s.precio as precio_servicio, d.id_direccion, d.nombre as nombre_direccion from detalle_servicio ds, servicio s, direccion d where ds.id_servicio = s.id_servicio and ds.id_direccion = d.id_direccion";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -311,6 +311,50 @@
         $resultadoDetallesServicios = array();
         //Instrucción SQL
         $sql = "select ds.id_detalle_servicio, ds.id_servicio, ds.id_direccion,ds.estado,ds.fecha, ds.hora,s.id_servicio, s.nombre as nombre_servicio, s.precio as precio_servicio, d.id_direccion, d.nombre as nombre_direccion from detalle_servicio ds, servicio s, direccion d where ds.id_servicio = s.id_servicio and ds.id_direccion = d.id_direccion and ds.estado=1 and ds.id_direccion='" . $idDireccionServicio . "'";
+        //Ejecución de instrucción     
+        $ejecutar = mysqli_query($conexion->db, $sql);
+
+        while($fila = mysqli_fetch_array($ejecutar)){
+            
+            //Instanciamos objeto
+            $detalleServicioIndex = new DetalleServicio();
+
+            $detalleServicioIndex->setIdDetalleServicio($fila['id_detalle_servicio']);
+            $detalleServicioIndex->setIdDireccion($fila['id_direccion']);
+            $detalleServicioIndex->setIdServicio($fila['id_servicio']);
+            $detalleServicioIndex->setEstado($fila['estado']);
+            $detalleServicioIndex->setFecha($fila['fecha']);
+            $detalleServicioIndex->setHora($fila['hora']);
+            $detalleServicioIndex->setNombreServicio($fila['nombre_servicio']);
+            $detalleServicioIndex->setNombreDireccion($fila['nombre_direccion']);
+            $detalleServicioIndex->setPrecioServicio($fila['precio_servicio']);
+
+            //Llenamos el array de resultados de detalle de servicios
+            array_push($resultadoDetallesServicios,$detalleServicioIndex);
+           
+        }
+
+        //Nos desconectamos de la base de datos
+        $conexion->desconectar();
+
+        //Devolvemos los usuarios encontrados
+        return $resultadoDetallesServicios;          
+        }
+
+
+        //--------obtener detalles de servicio por usuario------------------
+
+        //----------------------------Función para obtener todos los servicios de una dirección de vivienda de cliente--------
+
+        public function obtenerDetallesServiciosPorCliente($idClient){
+            //Instanciamos la clase conexión
+        $conexion = new Conexion();
+        //Conectamos a la base de datos
+        $conexion->conectar();
+        //Array contenedor de resultados
+        $resultadoDetallesServicios = array();
+        //Instrucción SQL
+        $sql = "select ds.id_detalle_servicio, ds.id_servicio, ds.id_direccion,ds.estado,ds.fecha, ds.hora,s.id_servicio, s.nombre as nombre_servicio, s.precio as precio_servicio, d.id_direccion, d.nombre as nombre_direccion, d.id_cliente, c.id_cliente from detalle_servicio ds, servicio s, direccion d, cliente c where ds.id_servicio = s.id_servicio and ds.id_direccion = d.id_direccion and d.id_cliente = c.id_cliente and c.id_cliente='" . $idClient . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 

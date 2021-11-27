@@ -12,9 +12,8 @@ include ("layout/header.php");
 include ("layout/nav.php");
 
 ?>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script type="text/javascript" src="../js/script_selector.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 
 <div class="content-wrapper">
@@ -45,126 +44,53 @@ include ("layout/nav.php");
             <!-- general form elements disabled -->
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Buscar un usuario</h3>
+                <h3 class="card-title">Buscar un cliente</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <form role="form">
-                  <div class="row">
-                  
-                  
-                  <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>IDENTIFICADOR</label>
-                        <?php
-                        
-                        $idMostrar = 1;
-                        echo "<input type='text' class='form-control' placeholder='$idMostrar'  disabled>";
-                        ?>
-                      </div>
-                    </div>
-
-                    <script>
-                      $(document).ready(function() {
-                           $('.js-example-basic-single').select2();
-                      });
-
-                    </script>
-
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                      <select class="js-example-basic-single" name="state">
-  <option value="AL">Alabama</option>
-    
-  <option value="WY">Wyoming</option>
-</select>
-                      </div>
-                    </div>
-                  
+                 
+                <div class="row">
                   
                   <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>DPI</label>
-                        <?php
+                        <label>Cliente</label>
+                        <select class="form-control select2" id="lista1" name="lista1">
+                          
+                          <?php
+                            $datosCliente = new Cliente();
 
-                        $cliente = new Cliente();
-                        $idvista = 1;
-                        $resultado = $cliente->buscarPorId($idvista);
+                            $resultado = $datosCliente->obtenerClientes();
 
-                        $dpi = $resultado->getDpi();
-                        $nit = $resultado->getNit();
-                        $nombre = $resultado->getNombres();
-                        $apellido = $resultado->getApellidos();
-                        $genero= $resultado->getGenero();
-                        $telefono=$resultado->getTelefono();
-                        $fecha=$resultado->getFechaNacimiento();
+                            for($i=0; $i<sizeof($resultado);$i++){
 
-                       echo "<input type='text' class='form-control' placeholder='$dpi'  disabled>";
-                      ?>
-                        </div>
+                              $idConsultado = $resultado[$i]->getIdCliente();
+                              $nombres = $resultado[$i]->getNombres();
+                              $apellidos = $resultado[$i]->getApellidos();
+                              $dpi = $resultado[$i]->getDpi();
+                              //echo "<option value='$idConsultado'>$nombres". " " . $apellidos . "</option>";
+
+                              echo "<option value='$idConsultado'>" ."[" . $dpi . "] " . "[". $nombres . " " . $apellidos . "]". "</option>";
+                              
+                            }
+
+                            
+                          ?>
+                          
+                        </select>
+                      </div>
                     </div>  
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>NIT</label>
-                        <?php
-                        echo "<input type='text' class='form-control' placeholder='$nit'  disabled>";
-                        ?>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Nombres</label>
-                        <?php
-                        echo "<input type='text' class='form-control' placeholder='$nombre'  disabled>";
-                        ?>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Apellidos</label>
-                        <?php
-                        echo "<input type='text' class='form-control' placeholder='$apellido'  disabled>";
-                        ?>
-                      </div>
-                    </div>
-                    
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Genero</label>
-                        <?php
-                        echo "<input type='text' class='form-control' placeholder='$genero'  disabled>";
-                        ?>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Telefono</label>
-                        <?php
-                        echo "<input type='text' class='form-control' placeholder='$telefono'  disabled>";
-                        ?>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Fecha de nacimiento</label>
-                        <?php
-                        echo "<input type='text' class='form-control' placeholder='$fecha'  disabled>";
-                        ?>
-                      </div>
-                    </div>
-                  </div>  
-                  <div class="">
                   
-                  <a type="submit" class="btn btn-danger" href="cliente.php">Regresar</a>
+                  <div id="select2lista" class="row"> 
+                  <!--Aquí se recargan los datos del cliente-->                    
+                  
+                            
+                </div>
+                  
+                  </div> 
+                  
+                  <a type="submit" class="btn btn-danger" href="servicio.php">Regresar</a>
                 </div>     
                 </form>
               </div>
@@ -183,9 +109,74 @@ include ("layout/nav.php");
     <!-- /.content -->
   </div>
 
+         
+  <div id="serviciosCliente"> 
+                  <!--Aquí se recargan los datos del cliente-->                    
+</div>
 
+    
 <?php
 
 include ("layout/footer.php");
 
 ?>
+
+
+<script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+    });
+
+    /*$( ".select2" ).change(function() {
+     //Aquí cargamos el usuario
+    });*/
+    </script>
+
+<script type="text/javascript">
+
+    function recargarLista(){
+        
+        //------------Para cargar los datos del cliente seleccionado
+        $.ajax({
+            type:"POST",
+            url:"cargarClienteServicio.php?id=" + $ ('#lista1').val() ,
+            //data:"id="+ $ ('#lista1').val(),
+            success:function(r){
+                $('#select2lista').html(r);
+            }
+        
+        });
+
+        //Para cargar la tabla de los servicios contratados
+        $.ajax({
+            type:"POST",
+            url:"cargarServiciosCliente.php?id=" + $ ('#lista1').val() ,
+            //data:"id="+ $ ('#lista1').val(),
+            success:function(r){
+                $('#serviciosCliente').html(r);
+            }
+        
+        });
+    
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    
+        //recargarLista();
+
+        $('#lista1').change(function(){
+         recargarLista();
+        });
+
+    });
+</script>
+
+
