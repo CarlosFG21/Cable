@@ -75,6 +75,8 @@
           include("../clases/Personal.php");
           include("../clases/Cliente.php");
           include("../clases/Servicio.php");
+          include("../clases/DetalleServicio.php");
+          include("../clases/Direccion.php");
           session_start();
 
           if(isset($_SESSION['usuario'])){
@@ -127,7 +129,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="servicio.php" class="nav-link">
+            <a href="servicio.php?id=0" class="nav-link">
               <i class="nav-icon fas fa-tools"></i>
               <p>
                 Servicios

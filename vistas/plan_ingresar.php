@@ -50,7 +50,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Tipo</label>
                         <input type="text" class="form-control" placeholder="Tipo" name="tipo" id="tipo"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1" >
+                        required  min="1" >
                       </div>
                     </div>
                     <div class="col-sm-6">
