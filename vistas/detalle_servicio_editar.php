@@ -121,7 +121,6 @@ include ("layout/nav.php");
                         
                         ?>
                         
-                        
                           <?php
                             $servicio = new Servicio();
 
