@@ -80,7 +80,9 @@
                   for($i=0; $i<sizeof($servicioArray); $i++){
 
                     $id =  $servicioArray[$i]->getIdDetalleServicio();
+                    $idDireccion = $servicioArray[$i]->getIdDireccion();
                     $direccion = $servicioArray[$i]->getNombreDireccion();
+                    $idServicio = $servicioArray[$i]->getIdServicio();
                     $nombreServicio = $servicioArray[$i]->getNombreServicio();
                     $fecha = $servicioArray[$i]->getFecha();
                     $estado = $servicioArray[$i]->getEstado();
@@ -103,7 +105,7 @@
                       echo "<td><h4><span class='badge bg-danger'>Inactivo</span></h4></td>";
                     }
 
-                    echo "<td><a type='submit' href='plan_editar.php?id=$id' class='btn btn-primary'>
+                    echo "<td><a type='submit' href='detalle_servicio_editar.php?id=$id&idDireccion=$idDireccion&idServicio=$idServicio&idCliente=$idClienteBuscar' class='btn btn-primary'>
                     <i class='fas fa-pen'></i> 
                     </a>";
 

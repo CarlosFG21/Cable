@@ -1,4 +1,3 @@
-
 <?php
 
 include ("layout/header.php");
@@ -23,12 +22,12 @@ include ("layout/nav.php");
         <div class="col-sm-6">
             
         <?php
-            $idc = $_REQUEST['id'];
+            $idc = $_REQUEST['idCliente'];
             $cl = new Cliente();
             $rc = $cl->buscarPorId($idc);
             $name = $rc->getNombres();
             $lastName = $rc->getApellidos();
-            echo "<h1>Agregar servicio a cliente: <span class='badge bg-success'>$name $lastName</span></h1>";
+            echo "<h1>Editar servicio a cliente: <span class='badge bg-success'>$name $lastName</span></h1>";
         ?>
           
           
@@ -65,17 +64,36 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Seleccionar dirección de instalación</label>
                         <select class="form-control selectDirecciones" id="lista2" name="lista2">
-                        <option value="0">Seleccione dirección</option>
+                        
+                        <?php
+                        
+                        //--------------OBTENEMOS LA DIRECCIÓN-----------------------
+                        $di = new Direccion();
+
+                        $idDir = $_REQUEST['idDireccion'];
+
+                        $respuesta = $di->buscarPorId($idDir);
+
+                        $nombreDire = $respuesta->getNombre();
+
+                        echo "<option value='$idDir'>$nombreDire</option>";
+                    
+
+                        ?>
+                        
+                        
                           <?php
                             $direccion = new Direccion();
-                            $idDirecciones = $_REQUEST['id'];
+                            $idDirecciones = $_REQUEST['idCliente'];
                             $resultado = $direccion->obtenerDireccionesCliente($idDirecciones);
 
                             for($i=0; $i<sizeof($resultado);$i++){
                                 $idDireccion = $resultado[$i]->getIdDireccion();
                                 $nombreDireccion = $resultado[$i]->getNombre();
-
+                                
+                               if($idDir!=$idDireccion){
                                 echo "<option value='$idDireccion'>$nombreDireccion</option>";
+                               }
                             }
 
                             
@@ -92,7 +110,18 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Servicios</label>
                         <select class="form-control select2" id="lista1" name="lista1">
-                          <option value="0">Seleccione servicio</option>
+                          
+                        <?php
+                            $ser = new Servicio();
+                            $idsr = $_REQUEST['idServicio'];
+                            $resSer = $ser->buscarPorId($idsr);
+                            $nomsr = $resSer->getNombre();
+
+                            echo "<option value='$idsr'>$nomsr</option>";
+                        
+                        ?>
+                        
+                        
                           <?php
                             $servicio = new Servicio();
 
@@ -102,9 +131,10 @@ include ("layout/nav.php");
 
                                 $idServicio = $resultado[$i]->getIdServicio();
                                 $nombre = $resultado[$i]->getNombre();
-
-                              echo "<option value='$idServicio'>$nombre</option>";
                               
+                                if($idServicio !=$idsr){
+                                echo "<option value='$idServicio'>$nombre</option>";
+                              }
                             }
 
                             
@@ -121,7 +151,7 @@ include ("layout/nav.php");
                     
                   </div>  
                   <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
+                  <input type="submit" value="Editar" class="btn btn-primary" name="btnEditar" id="btnEditar">
                   <a type="submit" class="btn btn-danger" href="servicio.php">Regresar</a>
                 </div>     
                 </form>
@@ -209,4 +239,3 @@ include ("layout/footer.php");
 
     });
 </script>
-

@@ -76,6 +76,7 @@
           include("../clases/Cliente.php");
           include("../clases/Servicio.php");
           include("../clases/DetalleServicio.php");
+          include("../clases/Direccion.php");
           session_start();
 
           if(isset($_SESSION['usuario'])){

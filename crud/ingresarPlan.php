@@ -1,6 +1,7 @@
 <?php
 
 include("../clases/Servicio.php");
+include("../db/Conexion.php");
 
 $servicio = new Servicio();
 
@@ -18,8 +19,6 @@ if(isset($_POST["btnGuardar"])){
      header("Location: ../vistas/plan.php");
 
 }
-
-
 
 
 ?>
