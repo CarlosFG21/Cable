@@ -106,16 +106,16 @@
                     }
 
                     echo "<td><a type='submit' href='detalle_servicio_editar.php?id=$id&idDireccion=$idDireccion&idServicio=$idServicio&idCliente=$idClienteBuscar' class='btn btn-primary'>
-                    <i class='fas fa-pen'></i> 
+                    <i class='fas fa-pen'></i>
                     </a>";
 
                     if($estado==1){
-                    echo"<a type='submit' class='btn btn-danger' id='btnEliminar' href='../crud/eliminarPlan.php?id=$id'>
+                    echo"<a type='submit' class='btn btn-danger' id='btnEliminar' href='../crud/eliminarDetalleServicio.php?id=$id'>
                     <i class='fas fa-trash-alt'></i>
                     </a>"; 
                     }else{
                       //Imprimimo botón de reactivar
-                      echo"<a type='submit' class='btn btn-warning' id='btnReactivar' href='../crud/reactivarPlan.php?id=$id'>
+                      echo"<a type='submit' class='btn btn-warning' id='btnReactivar' href='../crud/reactivarDetalleServicio.php?id=$id'>
                     <i class='fa fa-arrow-left'></i>
                     </a>"; 
                     }
@@ -155,4 +155,5 @@
     </section>
     <!-- /.content -->
   </div>
+
 
