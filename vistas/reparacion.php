@@ -53,6 +53,7 @@ include ("layout/nav.php");
                     <th>Estado</th>
                     <th>Fecha</th>
                     <th>Hora</th>
+                    <th>Acciones</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -67,9 +68,9 @@ include ("layout/nav.php");
                   echo "<tr>";
 
                   $id = $reparacionArray[$i]->getIdReparacion();
-                  $cliente = $reparacionArray[$i]->getCliente();
-                  $direccion = $reparacionArray[$i]->getDireccion();
-                  $tecnico = $reparacionArray[$i]->getIdPersonal();
+                  $cliente = $reparacionArray[$i]->getNombreCliente();
+                  $direccion = $reparacionArray[$i]->getNombreDireccion();
+                  $tecnico = $reparacionArray[$i]->getNombrePersonal();
                   $descripcion = $reparacionArray[$i]->getDescripcion();
                   $estado = $reparacionArray[$i]->getEstado();
                   $fecha = $reparacionArray[$i]->getFechaReporte();
@@ -82,19 +83,20 @@ include ("layout/nav.php");
                     <td>$cliente</td>
                     <td>$direccion</td>
                     <td>$tecnico</td>
-                    <td>$descripcion</td>
-                    <td>$estado</td>
-                    <td>$fecha</td>
-                    <td>$hora</td>
-                    ";
-
-                  //Imprimimos según estado
+                    <td>$descripcion</td>";
+                   //Imprimimos según estado
                  
                   if($estado==1){
                     echo "<td><h4><span class='badge bg-success'>Activo</span></h4></td>";
                   }else{
                     echo "<td><h4><span class='badge bg-danger'>Inactivo</span></h4></td>";
                   }
+                    
+                    echo "<td>$fecha</td>";
+                    echo "<td>$hora</td>";
+                    
+
+                  
 
                   //Imprimimos botones
                   
