@@ -106,7 +106,7 @@
                     }
 
                     echo "<td><a type='submit' href='detalle_servicio_editar.php?id=$id&idDireccion=$idDireccion&idServicio=$idServicio&idCliente=$idClienteBuscar' class='btn btn-primary'>
-                    <i class='fas fa-pen'></i> 
+                    <i class='fas fa-pen'></i>
                     </a>";
 
                     if($estado==1){
@@ -155,4 +155,5 @@
     </section>
     <!-- /.content -->
   </div>
+
 

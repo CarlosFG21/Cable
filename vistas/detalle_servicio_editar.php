@@ -23,7 +23,7 @@ include ("layout/nav.php");
             
         <?php
             $idc = $_REQUEST['idCliente'];
-            $idEditar = $_REQUEST['id'];
+            $idSe = $_REQUEST['id'];
             $cl = new Cliente();
             $rc = $cl->buscarPorId($idc);
             $name = $rc->getNombres();
@@ -57,7 +57,7 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form" method="post" action="../crud/editarDetalleServicio.php?id=<?php echo $idc; ?>">
+                <form role="form" method="post" action="../crud/editarDetalleServicio.php?id=<?php echo $idSe; ?>">
                   <div class="row">
                     
                   <div class="col-sm-6">
