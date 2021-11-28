@@ -1,6 +1,6 @@
 <?php
 
-include("../db/Conexion.php");
+//include("../db/Conexion.php");
 
     class Reparacion{
 
@@ -45,8 +45,8 @@ include("../db/Conexion.php");
             $this->nombreCliente = $_nombreCliente;
         }
         //Obtener id de dirección
-        public function getDireccion(){
-            return $this->direccion;
+        public function getIdDireccion(){
+            return $this->idDireccion;
         }
         //Setear id de dirección
         public function setIdDireccion($_idDireccion){
