@@ -86,7 +86,7 @@ include ("layout/nav.php");
                   </div>  
                   <div class="">
                   <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
-                  <a type="submit" class="btn btn-danger" href="cliente.php">Regresar</a>
+                  <a type="submit" class="btn btn-danger" href="reparacion.php">Regresar</a>
                 </div>     
                 </form>
               </div>
