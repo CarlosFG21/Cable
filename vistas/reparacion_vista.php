@@ -44,34 +44,66 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form" method="post" action="../crud/ingresarReparacion.php">
+                <form role="form">
                   <div class="row">
                   <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Cliente</label>
-                        <input type="text" readonly class="form-control">
-                      </div>
+                        <?php
+                        $reparacion = new Reparacion();
+                        $id= $_REQUEST['id'];
+                        $resultado = $reparacion->buscarPorId($id);
+
+                        $nombre = $resultado->getNombreCliente();
+                        $direccion = $resultado->getNombreDireccion();
+                        $empleado =  $resultado->getNombrePersonal();
+                        $descripcion = $resultado->getDescripcion();
+                        $estado =  $resultado->getEstado();
+                       echo " <input type='text' class='form-control' placeholder='$nombre'  disabled>";
+                         ?>
+                        </div>
                     </div>  
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Direccion</label>
-                        <input type="text" readonly class="form-control">
+                        <?php
+                       echo "<input type='text' placeholder='$direccion' class='form-control' disabled>"
+                        ?>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Empleado</label>
-                        <input type="text" class="form-control" readonly>
+                        <?php
+                        echo "<input type='text' placeholder='$empleado'class='form-control' disabled>"
+                        ?>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Descripcion</label>
-                        <input type="text" class="form-control" readonly>
+                        <?php
+                        echo "<input type='text' class='form-control' placeholder='$descripcion' disabled>"
+                        ?>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Proceso</label>
+                        <?php
+                        if($estado==0){
+                          echo "<input type='text' class='form-control' placeholder='Atendida' disabled>";
+                        }elseif($estado==1){
+                          echo "<input type='text' class='form-control' placeholder='Ingresada' disabled>";
+                        }elseif($estado==2){
+                        echo "<input type='text' class='form-control' placeholder='En proceso' disabled>";
+                        }
+                        ?>
                       </div>
                     </div>
                   </div>  
