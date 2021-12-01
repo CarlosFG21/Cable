@@ -117,13 +117,16 @@
         //--------------------Validar solvencia cliente------------------------------
 
         public function validarSolvencia($idCliente){
+
+        }
+
+        //--------------------funcion
+
+        public function validar(){
             
         }
 
     }
-
-
-
 
 
 ?>
