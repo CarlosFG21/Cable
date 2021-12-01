@@ -6,7 +6,7 @@
 
         public $idReparacion;
         
-        public $idCliente;
+        
         public $nombreCliente;
         
         public $idDireccion;
@@ -28,14 +28,7 @@
         public function setIdReparacion($_idReparacion){
             $this->idReparacion = $_idReparacion;
         }
-        //Obtener id de id de cliente
-        public function getIdCliente(){
-            return $this->idCliente;
-        }
-        //Setear id de id de cliente
-        public function setIdCliente($_idCliente){
-            $this->idCliente = $_idCliente;
-        }
+       
         //Obtener nombre de cliente
         public function getNombreCliente(){
             return $this->nombreCliente;
@@ -111,19 +104,19 @@
 
         //--------------------------Función para guardar reparación----------------------------
 
-        public function guardar($idClienteg, $idDirecciong,$idPersonalg,$descripciong,$fechaReporteg,$horag){
+        public function guardar($idDirecciong,$idPersonalg,$descripciong,$fechaReporteg,$horag){
             //Instanciamos la clase conexión
         $conexion = new Conexion();
         //Conectamos a la base de datos
         $conexion->conectar();
         //Instrucción SQL
-        $sql = "insert into reparacion(id_cliente,id_direccion,id_personal,descripcion,fecha_reporte,hora)values(?,?,?,?,?,?)";
+        $sql = "insert into reparacion(id_direccion,id_personal,descripcion,fecha_reporte,hora)values(?,?,?,?,?)";
         //Preparamos la instrucción sql
         $stmt = $conexion->db->prepare($sql);
         
         //Enviamos los parámetros
         //i = integer, s = string, d= double...se colocan segun el tamaño de parametros
-        $stmt->bind_param('iiisss',$idClienteg,$idDirecciong,$idPersonalg,$descripciong,$fechaReporteg,$horag);
+        $stmt->bind_param('iisss',$idDirecciong,$idPersonalg,$descripciong,$fechaReporteg,$horag);
           
         //Ejecutamos instrucción
         $stmt->execute();
@@ -134,19 +127,19 @@
 
         //--------------------------Función para editar reparación------------------------------
 
-        public function editar($idClientee, $idDireccione,$idPersonale,$descripcione,$fechaReportee,$horae,$idReparacione){
+        public function editar($idDireccione,$idPersonale,$descripcione,$fechaReportee,$horae,$idReparacione){
              //Instanciamos la clase conexión
         $conexion = new Conexion();
         //Conectamos a la base de datos
         $conexion->conectar();
         //Instrucción SQL
-        $sql = "update reparacion set id_cliente=?, id_direccion=?, id_personal=?, descripcion=?, fecha_reporte=?, hora=? where id_reparacion=?";
+        $sql = "update reparacion set id_direccion=?, id_personal=?, descripcion=?, fecha_reporte=?, hora=? where id_reparacion=?";
         //Preparamos la instrucción sql
         $stmt = $conexion->db->prepare($sql);
         
         //Enviamos los parámetros
         //i = integer, s = string, d= double...se colocan segun el tamaño de parametros
-        $stmt->bind_param('iiisssi',$idClientee,$idDireccione,$idPersonale,$descripcione,$fechaReportee,$horae,$idReparacione);
+        $stmt->bind_param('iisssi',$idDireccione,$idPersonale,$descripcione,$fechaReportee,$horae,$idReparacione);
           
         //Ejecutamos instrucción
         $stmt->execute();
@@ -214,7 +207,7 @@
         //Array contenedor de resultados
         $resultadoReparacion = array();
         //Instrucción SQL
-        $sql = "select r.id_reparacion, r.id_cliente, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where r.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and (r.estado=1 OR r.estado=2 OR r.estado=0)";
+        $sql = "select r.id_reparacion, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion, d.id_cliente, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where d.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and (r.estado=1 OR r.estado=2 OR r.estado=0)";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -224,7 +217,6 @@
             $reparacionIndex = new Reparacion();
 
             $reparacionIndex->setIdReparacion($fila['id_reparacion']);
-            $reparacionIndex->setIdCliente($fila['id_cliente']);
             $reparacionIndex->setNombreCliente($fila['nombres_cliente'] . " " . $fila['apellidos_cliente']);
             $reparacionIndex->setIdDireccion($fila['id_direccion']);
             $reparacionIndex->setNombreDireccion($fila['nombre_direccion']);
@@ -258,7 +250,7 @@
         //Array contenedor de resultados
         $resultadoReparacion = array();
         //Instrucción SQL
-        $sql = "select r.id_reparacion, r.id_cliente, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where r.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and r.estado=0";
+        $sql = "select r.id_reparacion, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion, d.id_cliente, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where d.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and r.estado=0";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -268,7 +260,6 @@
             $reparacionIndex = new Reparacion();
 
             $reparacionIndex->setIdReparacion($fila['id_reparacion']);
-            $reparacionIndex->setIdCliente($fila['id_cliente']);
             $reparacionIndex->setNombreCliente($fila['nombres_cliente'] . " " . $fila['apellidos_cliente']);
             $reparacionIndex->setIdDireccion($fila['id_direccion']);
             $reparacionIndex->setNombreDireccion($fila['nombre_direccion']);
@@ -304,14 +295,13 @@
          $resultadoReparacion = new Reparacion();
          
          //Instrucción SQL
-        $sql = "select r.id_reparacion, r.id_cliente, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where r.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and r.id_reparacion='" . $idBusqueda . "'";
+        $sql = "select r.id_reparacion, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion,d.id_cliente, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where d.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and r.id_reparacion='" . $idBusqueda . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
         while($fila = mysqli_fetch_array($ejecutar)){
             
             $resultadoReparacion->setIdReparacion($fila['id_reparacion']);
-            $resultadoReparacion->setIdCliente($fila['id_cliente']);
             $resultadoReparacion->setNombreCliente($fila['nombres_cliente'] . " " . $fila['apellidos_cliente']);
             $resultadoReparacion->setIdDireccion($fila['id_direccion']);
             $resultadoReparacion->setNombreDireccion($fila['nombre_direccion']);
@@ -340,7 +330,7 @@
         //Array contenedor de resultados
         $resultadoReparacion = array();
         //Instrucción SQL
-        $sql = "select r.id_reparacion, r.id_cliente, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where r.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and r.estado=1" . " and r.id_direccion='" . $idDireccionBusqueda . "'";
+        $sql = "select r.id_reparacion, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion,d.id_cliente, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where d.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and r.estado=1 and r.id_direccion='" . $idDireccionBusqueda . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -350,7 +340,6 @@
             $reparacionIndex = new Reparacion();
 
             $reparacionIndex->setIdReparacion($fila['id_reparacion']);
-            $reparacionIndex->setIdCliente($fila['id_cliente']);
             $reparacionIndex->setNombreCliente($fila['nombres_cliente'] . " " . $fila['apellidos_cliente']);
             $reparacionIndex->setIdDireccion($fila['id_direccion']);
             $reparacionIndex->setNombreDireccion($fila['nombre_direccion']);
@@ -384,7 +373,7 @@
         //Array contenedor de resultados
         $resultadoReparacion = array();
         //Instrucción SQL
-        $sql = "select r.id_reparacion, r.id_cliente, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where r.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and r.estado=1" . " and r.id_cliente='" . $idClienteBusqueda . "'";
+        $sql = "select r.id_reparacion, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion, d.id_cliente, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where d.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and r.estado=1 and c.id_cliente='" . $idClienteBusqueda . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -394,7 +383,6 @@
             $reparacionIndex = new Reparacion();
 
             $reparacionIndex->setIdReparacion($fila['id_reparacion']);
-            $reparacionIndex->setIdCliente($fila['id_cliente']);
             $reparacionIndex->setNombreCliente($fila['nombres_cliente'] . " " . $fila['apellidos_cliente']);
             $reparacionIndex->setIdDireccion($fila['id_direccion']);
             $reparacionIndex->setNombreDireccion($fila['nombre_direccion']);
