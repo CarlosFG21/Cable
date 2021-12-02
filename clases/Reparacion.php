@@ -150,13 +150,13 @@
 
         //--------------------------Función para desactivar reparación--------------------------
 
-        public function desactivar($idDesactivar){
+        public function enproceso($idDesactivar){
              //Instanciamos la clase conexión
          $conexion = new Conexion();
          //Conectamos a la base de datos
          $conexion->conectar();
          //Estado a enviar
-         $estado = 0;
+         $estado = 2;
          //Instrucción SQL
          $sql = "update reparacion set estado=? where id_reparacion=?";
          //Preparamos la instrucción sql
@@ -174,13 +174,13 @@
 
         //--------------------------Función para reactivar reparación---------------------------
 
-        public function reactivar($idReactivar){
+        public function desactivar($idReactivar){
              //Instanciamos la clase conexión
          $conexion = new Conexion();
          //Conectamos a la base de datos
          $conexion->conectar();
          //Estado a enviar
-         $estado = 1;
+         $estado = 0;
          //Instrucción SQL
          $sql = "update reparacion set estado=? where id_reparacion=?";
          //Preparamos la instrucción sql
@@ -197,6 +197,31 @@
 
         }
 
+        //-------------------------Funcion ingresada ----------------------------------------------
+
+        public function procesoatendida($idReactivar){
+            //Instanciamos la clase conexión
+        $conexion = new Conexion();
+        //Conectamos a la base de datos
+        $conexion->conectar();
+        //Estado a enviar
+        $estado = 3;
+        //Instrucción SQL
+        $sql = "update reparacion set estado=? where id_reparacion=?";
+        //Preparamos la instrucción sql
+        $stmt = $conexion->db->prepare($sql);
+        
+        //i = integer, s = string, d= double...se colocan segun el tamaño de parametros
+        $stmt->bind_param('ii',$estado,$idReactivar);
+        
+        //Ejecutamos instrucción
+        $stmt->execute();
+        
+        //Desconectamos la base de datos
+        $conexion->desconectar();
+
+       }
+
         //--------------------------Función para consultar todas las reparaciones---------------
 
         public function obtenerReparaciones(){
@@ -207,7 +232,7 @@
         //Array contenedor de resultados
         $resultadoReparacion = array();
         //Instrucción SQL
-        $sql = "select r.id_reparacion, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion, d.id_cliente, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where d.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and (r.estado=1 OR r.estado=2 OR r.estado=0)";
+        $sql = "select r.id_reparacion, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion, d.id_cliente, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where d.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and (r.estado=1 OR r.estado=2 OR r.estado=3)";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
