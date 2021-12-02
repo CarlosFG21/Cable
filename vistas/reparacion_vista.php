@@ -18,7 +18,7 @@ include ("layout/nav.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Editar Reparacion</h1>
+            <h1>Reparacion</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -40,7 +40,7 @@ include ("layout/nav.php");
             <!-- general form elements disabled -->
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Editar</h3>
+                <h3 class="card-title">Ver</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -96,7 +96,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Proceso</label>
                         <?php
-                        if($estado==0){
+                        if($estado==3){
                           echo "<input type='text' class='form-control' placeholder='Atendida' disabled>";
                         }elseif($estado==1){
                           echo "<input type='text' class='form-control' placeholder='Ingresada' disabled>";

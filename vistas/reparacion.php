@@ -87,7 +87,7 @@ include ("layout/nav.php");
                     echo "<td><h4><span class='badge bg-warning'>Ingresado</span></h4></td>";
                   }elseif($estado==2){
                     echo "<td><h4><span class='badge bg-primary'>En proceso</span></h4></td>";
-                  }elseif($estado==0){
+                  }elseif($estado==3){
                     echo "<td><h4><span class='badge bg-success'>Atendida</span></h4></td>";
                   }
    
@@ -97,17 +97,17 @@ include ("layout/nav.php");
                     <i class='fas fa-eye'></i> 
                     </a>";
 
-                    if($estado==0){
-                      echo"<a type='submit' class='btn btn-danger' id='btnEliminar' href='../crud/eliminarUsuario.php?id=$id'>
+                    if($estado==3){
+                      echo"<a type='submit' class='btn btn-danger' id='btnBaja' href='../crud/darBaja.php?id=$id'>
                       <i class='fas fa-trash-alt'></i>
                       </a>";
                     }elseif($estado==1){
-                      echo"<a type='submit' class='btn bg-warning' id='btnEliminar' href='../crud/eliminarUsuario.php?id=$id'>
+                      echo"<a type='submit' class='btn bg-warning' id='btnProceso' href='../crud/procesoReparacion.php?id=$id'>
                       <i class='fa fa-arrow-right'></i>
                       </a>"; 
                       }elseif($estado==2){
                         //Imprimimo botón de reactivar
-                        echo"<a type='submit' class='btn bg-primary' id='btnReactivar' href='../crud/reactivarUsuario.php?id=$id'>
+                        echo"<a type='submit' class='btn bg-primary' id='btnAtendida' href='../crud/atendidaReparacion.php?id=$id'>
                       <i class='fa fa-arrow-right'></i>
                       </a>"; 
                       }
