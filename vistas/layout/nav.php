@@ -78,6 +78,7 @@
           include("../clases/DetalleServicio.php");
           include("../clases/Direccion.php");
           include("../clases/Reparacion.php");
+          include("../clases/Pago.php");
           session_start();
 
           if(isset($_SESSION['usuario'])){
@@ -146,7 +147,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="pago.php" class="nav-link">
               <i class="nav-icon fab fa-paypal"></i>
               <p>
                 Pagos
