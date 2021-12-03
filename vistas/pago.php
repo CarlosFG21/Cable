@@ -12,7 +12,6 @@ include ("layout/nav.php");
 
 ?>
 
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -82,19 +81,57 @@ include ("layout/nav.php");
                     
                     <td>$idPago</td>
                     <td>$nombreServicio</td>
-                    <td>$nombreCliente</td>
-                    <td>$mesPago</td>
-                    <td>$anioPago</td>
+                    <td>$nombreCliente</td>";
+                    
+                    if($mesPago==1){
+                    echo "<td>Enero</td>";
+                    }
+                    if($mesPago==2){
+                      echo "<td>Febrero</td>";
+                    }
+                    if($mesPago==3){
+                      echo "<td>Marzo</td>";
+                    }
+                    if($mesPago==4){
+                      echo "<td>Abril</td>";
+                    }
+                    if($mesPago==5){
+                      echo "<td>Mayo</td>";
+                    }
+                    if($mesPago==6){
+                      echo "<td>Junio</td>";
+                    }
+                    if($mesPago==7){
+                      echo "<td>Julio</td>";
+                    }
+                    if($mesPago==8){
+                      echo "<td>Agosto</td>";
+                    }
+                    if($mesPago==9){
+                      echo "<td>Septiembre</td>";
+                    }
+                    if($mesPago==10){
+                      echo "<td>Octubre</td>";
+                    }
+                    if($mesPago==11){
+                      echo "<td>Noviembre</td>";
+                    }
+                    if($mesPago==12){
+                      echo "<td>Diciembre</td>";
+                    }
+                   
+                   
+                    echo "<td>$anioPago</td>
                     <td>$total</td>
-                    <td>$fechaPago</td>
-                    ";
+                    <td>$fechaPago</td>";
+                    
 
                   //Imprimimos según estado
                  
                   if($estado==1){
                     echo "<td><h4><span class='badge bg-success'>Pagado</span></h4></td>";
                   }else{
-                    echo "<td><h4><span class='badge bg-danger'>Pendiente</span></h4></td>";
+                    echo "<td><h4><span class='badge bg-danger'>Anulado</span></h4></td>";
                   }
 
                   //Imprimimos botones
@@ -104,12 +141,12 @@ include ("layout/nav.php");
                     </a>";
 
                     if($estado==1){
-                    echo"<a type='submit' class='btn btn-danger' id='btnEliminar' href='../crud/eliminarPago.php?id=$idPago'>
+                    echo"<a type='submit' class='btn btn-danger' id='btnEliminarPago' href='../crud/eliminarPago.php?id=$idPago'>
                     <i class='fas fa-trash-alt'></i>
                     </a>"; 
                     }else{
                       //Imprimimo botón de reactivar
-                      echo"<a type='submit' class='btn btn-warning' id='btnReactivar' href='../crud/reactivarPago.php?id=$idPago'>
+                      echo"<a type='submit' class='btn btn-warning' id='btnReactivarPago' href='../crud/reactivarPago.php?id=$idPago'>
                     <i class='fa fa-arrow-left'></i>
                     </a>"; 
                     }

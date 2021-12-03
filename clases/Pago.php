@@ -155,7 +155,7 @@
         //Conectamos a la base de datos
         $conexion->conectar();
         //Instrucción SQL
-        $sql = "update pago set id_detalle_servicio=?,id_usuario=?,descripcion=?,mes=?,anio=?,total=?,fecha=?,hora=? where id_detalle_servicio=?";
+        $sql = "update pago set id_detalle_servicio=?,id_usuario=?,descripcion=?,mes=?,anio=?,total=?,fecha=?,hora=? where id_pago=?";
         //Preparamos la instrucción sql
         $stmt = $conexion->db->prepare($sql);
         
@@ -218,17 +218,6 @@
           $conexion->desconectar();
         }
 
-        //---------------------Validar existencia pago-------------------------------
-
-        public function validarExistencia($mesPago,$anioPago,$idCliente){
-
-        }
-
-        //--------------------Validar solvencia cliente------------------------------
-
-        public function validarSolvencia($idCliente){
-
-        }
 
         //--------------------Función para obtener todos los pagos
 
@@ -314,6 +303,37 @@
             //Devolvemos el usuario encontrado
             return $resultadoPago;
 
+        }
+
+        //--------------------Función para validar si ya fue hecho el pago
+
+        public function validarExistenciaPago($mesp,$aniop,$idDetalleServiciop){
+            //Instanciamos la clase conexión
+         $conexion = new Conexion();
+         //Conectamos a la base de datos
+         $conexion->conectar();
+        
+         $resultado=0;
+         //Instrucción SQL
+        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and ds.id_detalle_servicio='" . $idDetalleServiciop . "'" ." and p.mes='". $mesp . "'" . " and p.anio='" . $aniop . "'";
+        //Ejecución de instrucción     
+        $ejecutar = mysqli_query($conexion->db, $sql);
+
+        while($fila = mysqli_fetch_array($ejecutar)){
+            
+            
+            if($fila['id_detalle_servicio']==$idDetalleServiciop && $fila['mes']==$mesp && $fila['anio'] == $aniop){
+                $resultado=1;
+            }
+            
+  
+        }
+            //Nos desconectamos de la base de datos
+            $conexion->desconectar();
+            //Devolvemos el usuario encontrado
+            return $resultado;
+
+    
         }
 
         
