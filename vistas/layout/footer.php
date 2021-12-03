@@ -68,6 +68,8 @@
 <script src="../js/proceso.js"></script>
 <script src="../js/atendida.js"></script>
 <script src="../js/darbaja.js"></script>
+<script src="../js/confirmacionEliminarPago.js"></script>
+<script src="../js/confirmacionReactivarPago.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({

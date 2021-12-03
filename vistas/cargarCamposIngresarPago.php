@@ -28,10 +28,14 @@
                           
                         </select>
 
+                        <div id="campos">
+
+                        </div>
+
 
                         
 
-                        <script>
+    <script>
     $(function () {
       //Initialize Select2 Elements
       $('.selectServicios').select2()
@@ -45,12 +49,35 @@
     </script>
 
 <script type="text/javascript">
+
+function recargarListaPrecio(){
+    
+   
+    $.ajax({
+        type:"POST",
+        url:"cargarPrecioDetalleServicio.php?id=" + $ ('#lista1').val() ,
+        //data:"id="+ $ ('#lista1').val(),
+        success:function(r){
+            $('#campos').html(r);
+        }
+    
+    });
+
+}
+</script>
+
+
+<script type="text/javascript">
     $(document).ready(function(){
     
         //Evento para notar cambio de datos del select
 
         $('#lista1').change(function(){
-            alert("Ha cambiado de elección");
+            //alert("Ha cambiado de elección");
+            
+            recargarListaPrecio();
+            
+            
         });
 
     });

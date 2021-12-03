@@ -42,11 +42,14 @@ include ("layout/nav.php");
             <!-- general form elements disabled -->
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Ingresar pago</h3>
+                <h3 class="card-title">Editar pago</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form" method="post" action="../crud/ingresarPago.php">
+                  <?php
+                    $idEditarPago = $_REQUEST['id'];
+                  ?>
+                <form role="form" method="post" action="../crud/editarPago.php?id=<?php echo $idEditarPago;?>">
                   <div class="row">
                     
                   <div class="col-sm-6">
@@ -67,8 +70,6 @@ include ("layout/nav.php");
 
                                 echo "<option value='$idCliente'>$nombreCliente</option>";
                             }
-
-                            
                             
                           ?>
                           
@@ -82,18 +83,74 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <div id="camposDesplegados">
                         <!--Aquí se cargarán los campos a rellenar-->
+                        <label>Servicio del cliente a pagar</label>
+                        <select class="form-control selectServicios" id="lista1" name="lista1">
+                          <option value="0">Seleccione el servicio</option>
+                          <?php
+                            $detalleServicio= new DetalleServicio();
+                            //$idCliente = $_REQUEST['id'];
+                            //Obtenemos el id del cliente para rellenar los servicios
+                            $pagoIdCliente = new Pago();
+                            $idSearch = $_REQUEST['id'];
+                            $resultadoIdClientePago = $pagoIdCliente->buscarPorId($idSearch);
+                            
+                            $detalleServicioIdCliente = new DetalleServicio();
+                            $idSearchServicio = $resultadoIdClientePago->getIdDetalleServicio();
+                            $resultadoIdClienteDetalleServicio = $detalleServicioIdCliente->buscarPorId($idSearchServicio);
+
+                            $direccionIdCliente = new Direccion();
+                            $idSearchDireccion = $resultadoIdClienteDetalleServicio->getIdDireccion();
+                            $resultadoIdClienteDireccion = $direccionIdCliente->buscarPorId($idSearchDireccion);
+
+                            $idCliente = $resultadoIdClienteDireccion->getIdCliente();
+
+
+                            $resultado = $detalleServicio->obtenerDetallesServiciosPorCliente($idCliente);
+
+                            for($i=0; $i<sizeof($resultado);$i++){
+
+                                $idServicio = $resultado[$i]->getIdDetalleServicio();
+                                $nombre = $resultado[$i]->getNombreServicio();
+
+                              echo "<option value='$idServicio'>$nombre</option>";
+                            
+                              
+                            }
+
+                            $idDetalleServicioSeleccionado = $resultadoIdClientePago->getIdDetalleServicio();
+                            echo "<script>document.getElementById('lista1').value = $idDetalleServicioSeleccionado;</script>";
+                            echo "<script>document.getElementById('lista2').value = $idCliente;</script>";
+                            
+                          ?>
                         
+                           
+                          </select>
+
+
                         
                        </div>
                       </div>
                     </div>
+
+                    <?php
+                        $pagoConsulta = new Pago();
+                        $idBusquedaPago = $_REQUEST['id'];
+                        $resultadoPrecarga = $pagoConsulta->buscarPorId($idBusquedaPago);
+
+                        $total = $resultadoPrecarga->getTotal();
+                        $descripcion = $resultadoPrecarga->getDescripcion();
+                        $mesPago = $resultadoPrecarga->getMes();
+
+                        $anioPago = $resultadoPrecarga->getAnio();
+                    
+                    ?>
 
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Costo del servicio (Q)</label>
                         <input type="number" step="0.01" class="form-control" placeholder="Costo del servicio (Q)" name="total" id="total"
-                        required min="1">
+                        required min="1" value="<?php echo $total;?>">
                       </div>
                     </div>
 
@@ -102,7 +159,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Descripción</label>
                         <input type="text" class="form-control" placeholder="Descripción" name="descripcion" id="descripcion"
-                        required min="1">
+                        required min="1" value="<?php echo $descripcion;?>">
                       </div>
                     </div>
 
@@ -128,6 +185,12 @@ include ("layout/nav.php");
                       </div>
                     </div>
 
+                    <?php
+                        //Obtener el mes
+                        echo "<script>document.getElementById('mes').value = $mesPago;</script>";
+                    
+                    ?>
+
                    <?php
                     $Date = date("d-m-Y");  
                     $year = date("Y");
@@ -151,9 +214,15 @@ include ("layout/nav.php");
 
                    ?>
 
+                    <?php
+                        //Obtener el año
+                        echo "<script>document.getElementById('anio').value = $anioPago;</script>";
+                    
+                    ?>
+
                   </div>  
                   <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
+                  <input type="submit" value="Editar" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
                   <a type="submit" class="btn btn-danger" href="pago.php">Regresar</a>
                 </div>     
                 </form>
@@ -226,6 +295,15 @@ include ("layout/footer.php");
     });
 </script>
 
+<script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.selectServicios').select2()
 
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+    });
 
-
+    </script>
