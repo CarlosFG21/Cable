@@ -276,7 +276,7 @@
          $resultadoDetalleServicio = new DetalleServicio();
          
          //Instrucción SQL
-        $sql = "select ds.id_detalle_servicio, ds.id_servicio, ds.id_direccion,ds.estado,ds.fecha, ds.hora,s.id_servicio, s.nombre as nombre_servicio, s.precio as precio_servicio, d.id_direccion, d.nombre as nombre_direccion from detalle_servicio ds, servicio s, direccion d where ds.id_servicio = s.id_servicio and ds.id_direccion = d.id_direccion and ds.estado=1 and ds.id_detalle_servicio='" . $idBusqueda . "'";
+        $sql = "select ds.id_detalle_servicio, ds.id_servicio, ds.id_direccion,ds.estado,ds.fecha, ds.hora,s.id_servicio, s.nombre as nombre_servicio, s.precio as precio_servicio, d.id_direccion, d.nombre as nombre_direccion from detalle_servicio ds, servicio s, direccion d where ds.id_servicio = s.id_servicio and ds.id_direccion = d.id_direccion and ds.id_detalle_servicio='" . $idBusqueda . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
