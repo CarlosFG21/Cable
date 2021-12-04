@@ -112,6 +112,12 @@ include ("layout/nav.php");
                                 $idServicio = $resultado[$i]->getIdDetalleServicio();
                                 $nombre = $resultado[$i]->getNombreServicio();
 
+                                $dir = new Direccion();
+                                $idDirBuscar = $resultado[$i]->getIdDireccion();
+                                $dirres = $dir->buscarPorId($idDirBuscar);
+                                $datosDireccion = $dirres->getNombre();
+                                $nombre = $nombre . " [" . $datosDireccion . "]";
+
                               echo "<option value='$idServicio'>$nombre</option>";
                             
                               
