@@ -3,6 +3,7 @@
 include ("layout/header.php");
 
 ?>
+  <link rel="stylesheet" href="../css/Reloj.css" />
   <title>Cablevisión | Robles</title>
   <!-- Tell the browser to be responsive to screen width -->
  
@@ -62,14 +63,20 @@ include ("layout/nav.php");
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px"></sup></h3>
-
+              <?php
+                 $conexion = new Conexion();
+                 $conexion->conectar();
+                 $sql3 = "SELECT id_detalle_servicio FROM detalle_servicio where estado=1";
+                 $resultados = mysqli_query($conexion->db,$sql3);
+                 $row4 = mysqli_num_rows($resultados);
+                echo "<h3>$row4</h3>";
+              ?>
                 <p>Servicios</p>
               </div>
               <div class="icon">
                 <i class="fas fa-tools"></i>
               </div>
-              <a href="#" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="servicio.php" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -123,8 +130,34 @@ include ("layout/nav.php");
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
+        <!--reloj-->
+        <div class="contenedor">
+        <div class="widget">
+        <div class="fecha">
+            <p id="diaSemana" class="diaSemana"></p>
+            <p id="dia" class="dia"></p>
+            <p>de</p>
+            <p id="mes" class="mes"></p>
+            <p>del</p>
+            <p id="anio" class="anio"></p>
+        </div>
+        <div class="reloj">
+           <p id="horas" class="horas"></p>
+           <p>:</p>
+           <p id="minutos" class="minutos"></p>
+           <p>:</p>
+        <div class="cajaSegundos">
+           <p id="ampm" class="ampm"></p>
+           <p id="segundos" class="segundos"></p>
+        </div>
+        </div>
+        </div>
+        </div>
           <!-- Left col -->
           <section class="col-lg-7 connectedSortable">
+
+          
+
           
           </section>
           <!-- /.Left col -->
@@ -151,5 +184,55 @@ include ("layout/nav.php");
 include ("layout/footer.php");
 
 ?>
+
+<script>
+$(function(){
+  var actualizarHora = function(){
+    var fecha = new Date(),
+        hora = fecha.getHours(),
+        minutos = fecha.getMinutes(),
+        segundos = fecha.getSeconds(),
+        diaSemana = fecha.getDay(),
+        dia = fecha.getDate(),
+        mes = fecha.getMonth(),
+        anio = fecha.getFullYear(),
+        ampm;
+    
+    var $pHoras = $("#horas"),
+        $pSegundos = $("#segundos"),
+        $pMinutos = $("#minutos"),
+        $pAMPM = $("#ampm"),
+        $pDiaSemana = $("#diaSemana"),
+        $pDia = $("#dia"),
+        $pMes = $("#mes"),
+        $pAnio = $("#anio");
+    var semana = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
+    var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    
+    $pDiaSemana.text(semana[diaSemana]);
+    $pDia.text(dia);
+    $pMes.text(meses[mes]);
+    $pAnio.text(anio);
+    if(hora>=12){
+      hora = hora - 12;
+      ampm = "PM";
+    }else{
+      ampm = "AM";
+    }
+    if(hora == 0){
+      hora = 12;
+    }
+    if(hora<10){$pHoras.text("0"+hora)}else{$pHoras.text(hora)};
+    if(minutos<10){$pMinutos.text("0"+minutos)}else{$pMinutos.text(minutos)};
+    if(segundos<10){$pSegundos.text("0"+segundos)}else{$pSegundos.text(segundos)};
+    $pAMPM.text(ampm);
+    
+  };
+  
+  
+  actualizarHora();
+  var intervalo = setInterval(actualizarHora,1000);
+});
+</script>
 
 
