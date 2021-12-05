@@ -59,29 +59,24 @@ include ("layout/nav.php");
               <div class="card-body">
                 <form role="form" method="post" action="../crud/ingresarDetalleServicio.php?id=<?php echo $idc; ?>">
                   <div class="row">
-                    
-                  <div class="col-sm-6">
+                    <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Seleccionar dirección de instalación</label>
                         <select class="form-control selectDirecciones" id="lista2" name="lista2">
-                        <option value="0">Seleccione dirección</option>
-                          <?php
-                            $direccion = new Direccion();
-                            $idDirecciones = $_REQUEST['id'];
-                            $resultado = $direccion->obtenerDireccionesCliente($idDirecciones);
+                          <option value="0">Seleccione dirección</option>
+                            <?php
+                              $direccion = new Direccion();
+                              $idDirecciones = $_REQUEST['id'];
+                              $resultado = $direccion->obtenerDireccionesCliente($idDirecciones);
 
-                            for($i=0; $i<sizeof($resultado);$i++){
+                              for($i=0; $i<sizeof($resultado);$i++){
                                 $idDireccion = $resultado[$i]->getIdDireccion();
                                 $nombreDireccion = $resultado[$i]->getNombre();
 
                                 echo "<option value='$idDireccion'>$nombreDireccion</option>";
-                            }
-
-                            
-                            
-                          ?>
-                          
+                              }
+                            ?>
                         </select>
                       </div>
                     </div>
@@ -106,8 +101,7 @@ include ("layout/nav.php");
                               echo "<option value='$idServicio'>$nombre</option>";
                               
                             }
-
-                            
+  
                           ?>
                           
                         </select>
@@ -119,27 +113,35 @@ include ("layout/nav.php");
                         <!--Aquí se cargará el precio del servicio según la selección-->
                     </div>
                     
-                  </div>  
+                  </div>
+                  
                   <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
-                  <a type="submit" class="btn btn-danger" href="servicio.php">Regresar</a>
-                </div>     
+                    <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
+                    <a type="submit" class="btn btn-danger" href="servicio.php">Regresar</a>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ingresarModal" name="btnAgregar" id="btnAgregar" data-whatever="@mdo">Agregar
+                    </button>
+                  </div>     
                 </form>
+
+                <!--llamo al modal-->
+                <?php include("modal-direccion-ingresar.php"); ?>
+
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-            <!-- general form elements disabled -->
-            
-            <!-- /.card -->
+            <!-- /.card-body -->
           </div>
-          <!--/.col (right) -->
+          <!-- /.card -->
+          <!-- general form elements disabled -->
+            
+          <!-- /.card -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
 
 <?php
 
