@@ -12,6 +12,8 @@ include ("layout/nav.php");
 
 ?>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -38,12 +40,65 @@ include ("layout/nav.php");
             <div class="card">
               <div class="card-header">
               <a type="submit" class="btn btn-primary" href="pago_ingresar.php">Ingresar pago</a>
-              <a type="submit" class="btn btn-primary" target="_blank" href="../reportes/reporte_usuario.php">Reporte</a>
-              </div>
+              <br>
+              <br>
+              <h4>Búsqueda</h4>
+              <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Buscar y seleccionar cliente</label>
+                        <select class="form-control selectCliente" id="lista2" name="lista2">
+                        <option value="0">Seleccionar cliente</option>
+                          <?php
+                            $cliente = new Cliente();
+            
+                            $resultado = $cliente->obtenerClientes();
+
+                            for($i=0; $i<sizeof($resultado);$i++){
+                                $idCliente = $resultado[$i]->getIdCliente();
+                                $dpiCliente = $resultado[$i]->getDpi();
+                                $nombreCliente = "[" . $dpiCliente . "] " . "[" . $resultado[$i]->getNombres() . " " . $resultado[$i]->getApellidos() . "]";
+
+                                echo "<option value='$idCliente'>$nombreCliente</option>";
+                            }
+
+                            
+                            
+                          ?>
+                          
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Filtro de búsqueda</label>
+                        <select class="form-control" name="filtro" id="filtro">
+                          <option value="0">Todos los registros hasta la fecha</option>
+                          <option value="1">Por cliente</option>
+                          <option value="2">Por rango de fechas</option>
+                          <option value="3">Por cliente y rango de fechas</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    
+              
+              <input type="date" class="btn btn-warning" placeholder="Desde" name="desde" id="desde">
+              <input type="date" class="btn btn-warning" placeholder="Hasta" name="hasta" id="hasta">
+              
+              <input type="button" class="btn btn-primary" value="Generar" id="btnGenerar" name="btnGenerar">
+              
+            
+            </div>
+            
               <!-- /.card-header -->
+              <div id="tablaresultados"> 
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
-                  <thead>
+                 
+                <thead>
                   <tr>
                     <th>ID</th>
                     <th>Servicio</th>
@@ -57,7 +112,6 @@ include ("layout/nav.php");
                   </tr>
                   </thead>
                   <tbody>
-                 
                  
                 <?php
                 
@@ -157,6 +211,8 @@ include ("layout/nav.php");
                   echo "</tr>";
                 }
                   ?>
+
+
                   
                   </tbody>
                   <tfoot>
@@ -172,9 +228,12 @@ include ("layout/nav.php");
                     <th>Acciones</th>
                   </tr>
                   </tfoot>
+                 
                 </table>
               </div>
               <!-- /.card-body -->
+              </div> 
+                <!--TABLA RESULTADOS DIV DINÁMICO-->
             </div>
             <!-- /.card -->
           </div>
@@ -186,6 +245,160 @@ include ("layout/nav.php");
     </section>
     <!-- /.content -->
   </div>
+
+  <script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.selectCliente').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+    });
+
+    /*$( ".select2" ).change(function() {
+     //Aquí cargamos el usuario
+    });*/
+    </script>
+
+<script type="text/javascript">
+
+function filtrarPorCliente(){
+    
+   
+    $.ajax({
+        type:"POST",
+        url:"busqueda_pago_cliente.php?id=" + $ ('#lista2').val() ,
+        //data:"id="+ $ ('#lista1').val(),
+        success:function(r){
+            $('#tablaresultados').html(r);
+        }
+    
+    });
+
+}
+
+function filtrarPorFechas(){
+  $.ajax({
+        type:"POST",
+        url:"busqueda_pago_fechas.php?fechaInicio=" + $ ('#desde').val() +"&fechaFin="+ $ ('#hasta').val(),
+        //data:"id="+ $ ('#lista1').val(),
+        success:function(r){
+            $('#tablaresultados').html(r);
+        }
+    
+    });
+}
+
+function filtrarPorClienteFecha(){
+  $.ajax({
+        type:"POST",
+        url:"busqueda_pago_cliente_fechas.php?fechaInicio=" + $ ('#desde').val() +"&fechaFin="+ $ ('#hasta').val() + "&idCliente=" + $ ('#lista2').val(),
+        //data:"id="+ $ ('#lista1').val(),
+        success:function(r){
+            $('#tablaresultados').html(r);
+        }
+    
+    });
+}
+
+function mostrarTodos(){
+  $.ajax({
+        type:"POST",
+        url:"busqueda_pago_todos.php",
+        //data:"id="+ $ ('#lista1').val(),
+        success:function(r){
+            $('#tablaresultados').html(r);
+        }
+    
+    });
+}
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    
+        //recargarLista();
+
+        $('#btnGenerar').click(function(){
+        //Llamamos a la función
+        //alert("haz hecho click en el boton generar");
+        var idCliente = document.getElementById('lista2').value;
+        var fechaInicio = document.getElementById('desde').value;
+        var fechaFin = document.getElementById('hasta').value;
+        var filtro = document.getElementById('filtro').value;
+
+       //------------------Mostrar todos------------------------------
+
+       if(filtro==0){
+         mostrarTodos();
+       }
+        
+       //------------Filtro solo por cliente--------------------------
+      if(filtro==1){
+        
+        if(idCliente!=0){
+        
+          filtrarPorCliente();
+        
+        }else{
+          
+          alert('Debes seleccionar un cliente primero');
+          
+        }
+      }
+
+      //------------Filtro por rango de fechas-------------------------
+
+      if(filtro==2){
+        
+        if(fechaInicio !=""){
+          if(fechaFin !=""){
+             //Validamos si la fecha de inicio es menor o igual a la fecha final
+             if(Date.parse(fechaInicio)<=Date.parse(fechaFin)){
+                filtrarPorFechas();
+             }else{
+               alert("La fecha de inicio no puede ser mayor a la fecha final");
+             }
+          }else{
+            alert("La fecha final no puede estar vacía");
+          }
+        }else{
+          alert("La fecha de inicio no puede estar vacía");
+        }
+      }
+
+      if(filtro==3){
+        if(idCliente!=0){
+        
+          if(fechaInicio !=""){
+          if(fechaFin !=""){
+             //Validamos si la fecha de inicio es menor o igual a la fecha final
+             if(Date.parse(fechaInicio)<=Date.parse(fechaFin)){
+                filtrarPorClienteFecha();
+             }else{
+               alert("La fecha de inicio no puede ser mayor a la fecha final");
+             }
+          }else{
+            alert("La fecha final no puede estar vacía");
+          }
+        }else{
+          alert("La fecha de inicio no puede estar vacía");
+        }
+      
+      }else{
+        
+        alert('Debes seleccionar un cliente primero');
+        
+      }
+      }
+        
+        });
+
+    });
+</script>
 
 <?php
 

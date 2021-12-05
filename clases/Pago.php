@@ -336,6 +336,142 @@
     
         }
 
+        //-------------------Función para buscar pagos por cliente---------------------------
+
+        public function obtenerPagosPorCliente($idClienteSearch){
+            //Instanciamos la clase conexión
+        $conexion = new Conexion();
+        //Conectamos a la base de datos
+        $conexion->conectar();
+        //Array contenedor de resultados
+        $resultadoPagos = array();
+        //Instrucción SQL
+        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and d.id_cliente='" . $idClienteSearch . "'";
+        //Ejecución de instrucción     
+        $ejecutar = mysqli_query($conexion->db, $sql);
+
+        while($fila = mysqli_fetch_array($ejecutar)){
+            
+            //Instanciamos objeto
+            $pagoIndex = new Pago();
+
+            $pagoIndex->setIdPago($fila['id_pago']);
+            $pagoIndex->setIdUsuario($fila['id_usuario']);
+            $pagoIndex->setNombreUsuario($fila['nombreusuario'] . " " . $fila['apellidousuario']);
+            $pagoIndex->setIdDetalleServicio($fila['id_detalle_servicio']);
+            $pagoIndex->setNombreServicio($fila['nombreservicio']);
+            $pagoIndex->setNombreCliente($fila['nombrescliente'] . " " . $fila['apellidoscliente']);
+            $pagoIndex->setDescripcion($fila['descripcion']);
+            $pagoIndex->setMes($fila['mes']);
+            $pagoIndex->setAnio($fila['anio']);
+            $pagoIndex->setTotal($fila['total']);
+            $pagoIndex->setEstado($fila['estado']);
+            $pagoIndex->setFecha($fila['fecha']);
+            $pagoIndex->setHora($fila['hora']);
+
+            //Llenamos el array de resultados de usuarios
+            array_push($resultadoPagos,$pagoIndex);
+           
+        }
+
+        //Nos desconectamos de la base de datos
+        $conexion->desconectar();
+
+        //Devolvemos los usuarios encontrados
+        return $resultadoPagos;
+        }
+
+
+        //----------------Función para obtener pagos por rango de fechas--------------
+
+        public function obtenerPagosPorFechas($fechaInicioPago,$fechaFinPago){
+             //Instanciamos la clase conexión
+        $conexion = new Conexion();
+        //Conectamos a la base de datos
+        $conexion->conectar();
+        //Array contenedor de resultados
+        $resultadoPagos = array();
+        //Instrucción SQL
+        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and p.fecha between '" . $fechaInicioPago . "'" . " and '" . $fechaFinPago . "'";
+        //Ejecución de instrucción     
+        $ejecutar = mysqli_query($conexion->db, $sql);
+
+        while($fila = mysqli_fetch_array($ejecutar)){
+            
+            //Instanciamos objeto
+            $pagoIndex = new Pago();
+
+            $pagoIndex->setIdPago($fila['id_pago']);
+            $pagoIndex->setIdUsuario($fila['id_usuario']);
+            $pagoIndex->setNombreUsuario($fila['nombreusuario'] . " " . $fila['apellidousuario']);
+            $pagoIndex->setIdDetalleServicio($fila['id_detalle_servicio']);
+            $pagoIndex->setNombreServicio($fila['nombreservicio']);
+            $pagoIndex->setNombreCliente($fila['nombrescliente'] . " " . $fila['apellidoscliente']);
+            $pagoIndex->setDescripcion($fila['descripcion']);
+            $pagoIndex->setMes($fila['mes']);
+            $pagoIndex->setAnio($fila['anio']);
+            $pagoIndex->setTotal($fila['total']);
+            $pagoIndex->setEstado($fila['estado']);
+            $pagoIndex->setFecha($fila['fecha']);
+            $pagoIndex->setHora($fila['hora']);
+
+            //Llenamos el array de resultados de usuarios
+            array_push($resultadoPagos,$pagoIndex);
+           
+        }
+
+        //Nos desconectamos de la base de datos
+        $conexion->desconectar();
+
+        //Devolvemos los usuarios encontrados
+        return $resultadoPagos;
+        }
+
+        //-------------------Función para filtrar por cliente y rango de fechas-----------------
+
+        public function filtrarPagosPorClienteFechas($idCliente_, $fechaInicioPago_,$fechaFinPago_){
+            //Instanciamos la clase conexión
+        $conexion = new Conexion();
+        //Conectamos a la base de datos
+        $conexion->conectar();
+        //Array contenedor de resultados
+        $resultadoPagos = array();
+        //Instrucción SQL
+        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and p.fecha between '" . $fechaInicioPago_ . "'" . " and '" . $fechaFinPago_ . "'" . " and d.id_cliente='" . $idCliente_ . "'";
+        //Ejecución de instrucción     
+        $ejecutar = mysqli_query($conexion->db, $sql);
+
+        while($fila = mysqli_fetch_array($ejecutar)){
+            
+            //Instanciamos objeto
+            $pagoIndex = new Pago();
+
+            $pagoIndex->setIdPago($fila['id_pago']);
+            $pagoIndex->setIdUsuario($fila['id_usuario']);
+            $pagoIndex->setNombreUsuario($fila['nombreusuario'] . " " . $fila['apellidousuario']);
+            $pagoIndex->setIdDetalleServicio($fila['id_detalle_servicio']);
+            $pagoIndex->setNombreServicio($fila['nombreservicio']);
+            $pagoIndex->setNombreCliente($fila['nombrescliente'] . " " . $fila['apellidoscliente']);
+            $pagoIndex->setDescripcion($fila['descripcion']);
+            $pagoIndex->setMes($fila['mes']);
+            $pagoIndex->setAnio($fila['anio']);
+            $pagoIndex->setTotal($fila['total']);
+            $pagoIndex->setEstado($fila['estado']);
+            $pagoIndex->setFecha($fila['fecha']);
+            $pagoIndex->setHora($fila['hora']);
+
+            //Llenamos el array de resultados de usuarios
+            array_push($resultadoPagos,$pagoIndex);
+           
+        }
+
+        //Nos desconectamos de la base de datos
+        $conexion->desconectar();
+
+        //Devolvemos los usuarios encontrados
+        return $resultadoPagos;
+        }
+
         
 
     }
