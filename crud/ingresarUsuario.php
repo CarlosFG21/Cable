@@ -22,15 +22,17 @@
     if(isset($_POST["btnGuardar"])){
 
     if($us->validarNickname($usuario)==0){
+
         //Accedemos al método guardar de la clase y pasamos parámetros para crear usuario
         $us->guardar($nombre,$apellido,$permiso,$usuario,$contrasena,$fecha,$horaReal);
         //Redireccionamos a la vista de lista de usuarios
+
         header("Location: ../vistas/usuario.php");
     }
 
     else{
         //En caso de que el usuario ya exista mostramos un mensaje y redireccionamos a la ventana de ingresar.
-        echo "<script>alert('El usuario ya existe'); window.location.href='../vistas/usuario_ingresar.php';</script>";
+        header("Location: ../vistas/usuario_ingresar.php?mensaje=existe");
         //header("Location: ../vistas/usuario_ingresar.php");
     }
 

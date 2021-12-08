@@ -265,6 +265,32 @@
 
         }
 
+        public function validarPlan($nombre){
+        
+            //Instanciamos clase conexión
+            $conexion = new Conexion();
+            //Nos conectamos a la base de datos
+            $conexion->conectar();
+            //Variable validadora de existencia de nombre
+            $res=0;
+    
+            $sql = "select nombre from servicio where nombre='" . $nombre . "'";
+                    
+            $ejecutar = mysqli_query($conexion->db, $sql);
+    
+            while($fila = mysqli_fetch_array($ejecutar)){
+                if(strcmp($fila[0], $nombre) === 0){
+                    $res=1;//Ya existe
+                    break;//Rompemos ciclo debido a que no sirve de nada seguir buscando debido a que ya hay primera coincidencia
+                }
+            }
+    
+            //Nos desconectamos de la base de datos
+            $conexion->desconectar();
+            //Devolvemos resultado 1=existe, 0 = no existe
+            return $res;
+           }
+
 
     }
 
