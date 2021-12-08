@@ -46,6 +46,17 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+              <?php
+               if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'existe'){
+              ?>
+              <div class="alert alert-danger alert-dismissible col-sm-6">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+                  El usuario ya existe.
+                </div>
+                <?php
+               }
+                ?>
                 <form role="form" method="post" action="../crud/ingresarUsuario.php">
                   <div class="row">
                     <div class="col-sm-6">
@@ -53,7 +64,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Nombre</label>
                         <input type="text" class="form-control" placeholder="Nombre" name="nombre" id="nombre"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
+                        pattern="^[a-zA-Záéíóú ]{1,30}" required minlength="1" maxlength="50">
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -61,14 +72,14 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Apellido</label>
                         <input type="text" class="form-control" placeholder="Apellido" name="apellido" id="apellido"
-                        required autocomplete="off" onkeypress="return (event.charCode >= 65 && event.charCode <= 165)" min="1">
+                        required pattern="^[a-zA-Záéíóú ]{1,30}" required minlength="1" maxlength="50">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Usuario</label>
-                        <input type="text" class="form-control" placeholder="Usuario" minlength="3" maxlength="9" required name="usuario" id="usuario">
+                        <input type="text" class="form-control" placeholder="Usuario" minlength="3" maxlength="9" required name="usuario" id="usuario" pattern="^[a-zA-Záéíóú0-9.,_- ]{1,30}">
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -85,7 +96,7 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>Contraseña</label>
-                        <input type="password" class="form-control" placeholder="Contraseña" minlength="4" maxlength="8" required name="contrasena" id="contrasena">
+                        <input type="password" class="form-control" placeholder="Contraseña" minlength="4" maxlength="8" required name="contrasena" id="contrasena" pattern="^[a-zA-Záéíóú0-9.,_- ]{1,30}">
                       </div>
                     </div>
                   </div>  
@@ -115,3 +126,27 @@ include ("layout/nav.php");
 include ("layout/footer.php");
 
 ?>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnGuardar').click(function() {
+
+        var valid = this.form.checkValidity();
+        if (valid) {
+          alert('!Desea guardar los datos');
+   
+        } else {
+            alert('Debe de rellenar los campos o coincidir con el formato indicado');
+        }
+
+        var nombre = $('#nombre').val();
+        var apellido = $('#apellido').val();
+        var usuario = $('#usuario').val();
+        var permiso = $('#permiso').val();
+        var contrasena = $('#contrasena').val();
+
+    });
+
+});
+</script>
+

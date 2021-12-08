@@ -43,6 +43,17 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+              <?php
+               if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'existeplan'){
+              ?>
+              <div class="alert alert-danger alert-dismissible col-sm-6">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+                  El plan ya existe.
+                </div>
+                <?php
+               }
+                ?>
                 <form role="form" method="post" action="../crud/ingresarPlan.php">
                   <div class="row">
                     <div class="col-sm-6">
@@ -50,7 +61,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Tipo</label>
                         <input type="text" class="form-control" placeholder="Tipo" name="tipo" id="tipo"
-                        required  min="1" >
+                        pattern="^[a-zA-Záéíóú ]{1,30}" required minlength="1" maxlength="50" >
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -58,7 +69,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Precio</label>
                         <input type="number" class="form-control" placeholder="Precio" name="precio" id="precio"
-                         min="1">
+                        pattern="^[0-9]{1,30}" required minlength="1" maxlength="50">
                       </div>
                     </div>
                   </div>  
@@ -91,3 +102,24 @@ include ("layout/footer.php");
 
 
 ?>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnGuardar').click(function() {
+
+        var valid = this.form.checkValidity();
+        if (valid) {
+          alert('!Desea guardar los datos');
+   
+        } else {
+          alert('Debe de rellenar los campos o coincidir con el formato indicado');
+        }
+
+        var nombre = $('#tipo').val();
+        var apellido = $('#precio').val();
+        
+
+    });
+
+});
+</script>
