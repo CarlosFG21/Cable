@@ -10,6 +10,7 @@ $reparacion = new Reparacion();
 $direccion = $_POST['cbDireccion'];
 $empleado = $_POST['cbEmpleado'];
 $descripcion =  $_POST['descripcion'];
+$estado=1;
 
     //Asignamos zona horaria al servidor    
     date_default_timezone_set('America/Guatemala');
@@ -20,9 +21,17 @@ $descripcion =  $_POST['descripcion'];
     //Damos formato a la hora
     $horaReal = date("H:i:s",$hora);
 
+if($reparacion->validarReparacion($direccion,$estado)==0){
+    
 $reparacion->guardar($direccion,$empleado,$descripcion,$horaReal,$fecha);
 
 header("Location: ../vistas/reparacion.php");
+
+}else{
+
+header("Location: ../vistas/reparacion_ingresar.php?mensaje=existereparacion");
+
+}
 
 
 }

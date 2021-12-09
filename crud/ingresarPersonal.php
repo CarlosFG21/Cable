@@ -23,10 +23,18 @@
     //Damos formato a la hora
     $horaReal = date("H:i:s",$hora);
 
+    if($personal->validarPersonal($nombres,$apellidos)==0){
 
-    $personal->guardar($nombres,$apellidos,$telefono,$cargo,$genero,$fechaNacimiento,$fecha,$horaReal);
+      $personal->guardar($nombres,$apellidos,$telefono,$cargo,$genero,$fechaNacimiento,$fecha,$horaReal);
 
-    header("Location: ../vistas/personal.php");
+      header("Location: ../vistas/personal.php");
+
+    }else{
+
+      header("Location: ../vistas/personal_ingresar.php?mensaje=existepersonal");
+
+    }
+    
         
   }
 
