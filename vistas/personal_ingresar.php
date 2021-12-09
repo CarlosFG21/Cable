@@ -45,6 +45,17 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+              <?php
+               if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'existepersonal'){
+              ?>
+              <div class="alert alert-danger alert-dismissible col-sm-6">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+                  El personal ya se encuentra registrado.
+                </div>
+                <?php
+               }
+                ?>
                 <form role="form" method="post" action="../crud/ingresarPersonal.php">
                   <div class="row">
                     <div class="col-sm-6">
@@ -52,7 +63,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Nombres</label>
                         <input type="text" class="form-control" placeholder="Nombre" name='nombres' id='nombres'
-                        required min="1">
+                        required minlength="1" maxlength="50" pattern="^[a-zA-Záéíóú ]{1,30}">
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -60,14 +71,14 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Apellidos</label>
                         <input type="text" class="form-control" placeholder="Apellido" name='apellidos' id='apellidos'
-                        required min="1">
+                        required minlength="1" maxlength="50" pattern="^[a-zA-Záéíóú ]{1,30}">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>Telefono</label>
-                        <input type="number" class="form-control" placeholder="Telefono" min="1" pattern="^[0-9]+" required name='telefono' id='telefono'>
+                        <input type="number" class="form-control" placeholder="Telefono" minlength="1" maxlength="8" pattern="^[0-9]+" required name='telefono' id='telefono'>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -124,3 +135,31 @@ include ("layout/nav.php");
 include ("layout/footer.php");
 
 ?>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnGuardar').click(function() {
+
+        var valid = this.form.checkValidity();
+        if (valid) {
+          alert('!Desea guardar los datos');
+   
+        } else {
+            alert('Debe de rellenar los campos o coincidir con el formato indicado');
+        }
+
+        var nombre = $('#nombres').val();
+        var apellido = $('#apellidos').val();
+        var telefono = $('#telefono').val();
+        var cargo = $('#cargo').val();
+        var genero = $('#genero').val();
+        var fecha = $('#fechaNacimiento').val();
+
+    });
+
+});
+</script>
+
+<script>var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("fechaNacimiento")[0].setAttribute('max', today);</script>
+

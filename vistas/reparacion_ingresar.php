@@ -76,6 +76,17 @@ $conexion->conectar();
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+              <?php
+               if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'existereparacion'){
+              ?>
+              <div class="alert alert-danger alert-dismissible col-sm-6">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+                  La reparacion ya se encuentra ingresada.
+                </div>
+                <?php
+               }
+                ?>
                 <form role="form" method="post" action="../crud/ingresarReparacion.php">
                   <div class="row">
                   <div class="col-sm-6">
@@ -123,7 +134,7 @@ $conexion->conectar();
                       <!-- text input -->
                       <div class="form-group">
                         <label>Descripcion</label>
-                        <input type="text" class="form-control" placeholder="Descripcion" min="1" name="descripcion" id="descripcion" required>
+                        <input type="text" class="form-control" placeholder="Descripcion" min="1" name="descripcion" id="descripcion" required minlength="1" minlength="50" pattern="^[a-zA-Záéíóú ]{1,30}">
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -213,4 +224,27 @@ include ("layout/footer.php");
 </script>
 
 <script src="../js/evento.js"></script>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnGuardarR').click(function() {
+
+        var valid = this.form.checkValidity();
+        if (valid) {
+          alert('!Desea guardar los datos');
+   
+        } else {
+            alert('Debe de rellenar los campos o coincidir con el formato indicado');
+        }
+
+        var descripcion = $('#descripcion').val();
+        var empleado = $('#cbEmpleado').val();
+        var direccion = $('#cbDireccion').val();
+        var cliente = $('#cbCliente').val();
+        
+
+    });
+
+});
+</script>
 

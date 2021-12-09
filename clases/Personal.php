@@ -312,6 +312,34 @@
         return $resultadoPersonal;
         }
 
+    
+
+    public function validarPersonal($nombres,$apellidos){
+        
+        //Instanciamos clase conexión
+        $conexion = new Conexion();
+        //Nos conectamos a la base de datos
+        $conexion->conectar();
+        //Variable validadora de existencia de personal
+        $res=0;
+
+        $sql = "select nombres,apellidos from personal where nombres='" . $nombres . "'" . " and apellidos='" . $apellidos . "'";
+                
+        $ejecutar = mysqli_query($conexion->db, $sql);
+
+        while($fila = mysqli_fetch_array($ejecutar)){
+            if(strcmp($fila[0], $nombres) === 0 && strcmp($fila[1],$apellidos)===0){
+                $res=1;//Ya existe
+                break;//Rompemos ciclo debido a que no sirve de nada seguir buscando debido a que ya hay primera coincidencia
+            }
+        }
+
+        //Nos desconectamos de la base de datos
+        $conexion->desconectar();
+        //Devolvemos resultado 1=existe, 0 = no existe
+        return $res;
+       }
+
     }
 
 ?>
