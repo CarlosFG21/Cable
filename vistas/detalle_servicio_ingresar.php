@@ -1,4 +1,3 @@
-
 <?php
 
 include ("layout/header.php");
@@ -70,6 +69,8 @@ include ("layout/nav.php");
                               $idDirecciones = $_REQUEST['id'];
                               $resultado = $direccion->obtenerDireccionesCliente($idDirecciones);
 
+                             
+                             
                               for($i=0; $i<sizeof($resultado);$i++){
                                 $idDireccion = $resultado[$i]->getIdDireccion();
                                 $nombreDireccion = $resultado[$i]->getNombre();
@@ -132,22 +133,42 @@ include ("layout/nav.php");
           </div>
           <!-- /.card -->
           <!-- general form elements disabled -->
-            
+         
           <!-- /.card -->
         </div>
         <!--/.col (right) -->
       </div>
+
       <!-- /.row -->
+      <div class="card">
+  <div class="card-header">
+    Ubicación en el mapa
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>¡La ubicación GPS presentada a continuación puede variar su precisión en intérvalos de 1 a 10 metros!.</p>
+      <div id="mapa">
+                            
+      </div>
+       </blockquote>
+  </div>
+</div>
     </div><!-- /.container-fluid -->
+    
+
   </section>
+  
   <!-- /.content -->
 </div>
+
+
 
 <?php
 
 include ("layout/footer.php");
 
 ?>
+
 
 <script>
     $(function () {
@@ -207,8 +228,50 @@ include ("layout/footer.php");
 
         $('#lista1').change(function(){
          recargarLista();
+         
         });
 
     });
 </script>
+
+
+<script>
+  
+function recargarMapa() {
+
+
+var mapOptions = {
+center: new google.maps.LatLng(25.80, -80.30),
+zoom: 10,
+mapTypeId: google.maps.MapTypeId.ROADMAP};
+var map = new google.maps.Map(document.getElementById("mapa"),mapOptions);
+
+marcador = new google.maps.Marker({
+    map: map,
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    position: {
+      lat: 25.80,
+      lng: -80.30
+    }
+  });
+
+document.getElementById("mapa").style.height="400px";
+document.getElementById("mapa").style.width="100%";
+}		
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    
+        //recargarLista();
+
+        $('#lista2').change(function(){
+         recargarMapa();
+         
+        });
+
+    });
+</script>
+
 

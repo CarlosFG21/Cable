@@ -12,11 +12,15 @@ $fecha = date('Y-m-d');
 $hora = time();
 $horaReal = date("H:i:s",$hora);
 
+//Coordenadas gps
+$latitud = $_POST['latitud'];
+$longitud = $_POST['longitud'];
+
 $direccio =  new Direccion();
 
 if(isset($_POST['btnGuardarD'])){
 
-    $direccio->guardar($id,$direccion,$fecha,$horaReal);
+    $direccio->guardar($id,$direccion,$fecha,$horaReal,$latitud,$longitud);
 
     header("Location: ../vistas/detalle_servicio_ingresar.php?id=$id");
 
