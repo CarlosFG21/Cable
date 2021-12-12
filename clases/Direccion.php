@@ -10,6 +10,25 @@
         public $estado;
         public $fecha;
         public $hora;
+        public $latitud;
+        public $longitud;
+
+        //obtener latitud
+        public function getLatitud(){
+            return $this->latitud;
+        }
+        //Setear latitud
+        public function setLatitud($_latitud){
+            $this->latitud = $_latitud;
+        }
+        //Obtener longitud
+        public function getLongitud(){
+            return $this->longitud;
+        }
+        //Setear longitud
+        public function setLongitud($_longitud){
+            $this->longitud = $_longitud;
+        }
 
         //Obtener id
         public function getIdDireccion(){
@@ -62,19 +81,19 @@
 
         //----------------------Función para guardar dirección--------------------------------
 
-        public function guardar($idClienteg,$nombreg,$fechag,$horag){
+        public function guardar($idClienteg,$nombreg,$fechag,$horag,$latitudg,$longitudg){
             //Instanciamos la clase conexión
         $conexion = new Conexion();
         //Conectamos a la base de datos
         $conexion->conectar();
         //Instrucción SQL
-        $sql = "insert into direccion(id_cliente,nombre,fecha,hora)values(?,?,?,?)";
+        $sql = "insert into direccion(id_cliente,nombre,fecha,hora,latitud,longitud)values(?,?,?,?,?,?)";
         //Preparamos la instrucción sql
         $stmt = $conexion->db->prepare($sql);
         
         //Enviamos los parámetros
         //i = integer, s = string, d= double...se colocan segun el tamaño de parametros
-        $stmt->bind_param('isss',$idClienteg, $nombreg, $fechag, $horag);
+        $stmt->bind_param('isssss',$idClienteg, $nombreg, $fechag, $horag,$latitudg,$longitudg);
           
         //Ejecutamos instrucción
         $stmt->execute();
@@ -85,20 +104,20 @@
 
         //---------------------Función para editar dirección--------------------------------------
 
-        public function editar($nombree, $idEditare){
+        public function editar($nombree, $latitude,$longitude,$idEditare){
 
             //Instanciamos la clase conexión
         $conexion = new Conexion();
         //Conectamos a la base de datos
         $conexion->conectar();
         //Instrucción SQL
-        $sql = "update direccion set nombre=? where id_direccion=?";
+        $sql = "update direccion set nombre=?, latitud=?, longitud=? where id_direccion=?";
         //Preparamos la instrucción sql
         $stmt = $conexion->db->prepare($sql);
         
         //Enviamos los parámetros
         //i = integer, s = string, d= double...se colocan segun el tamaño de parametros
-        $stmt->bind_param('si',$nombree,$idEditare);
+        $stmt->bind_param('sssi',$nombree,$latitude,$longitude,$idEditare);
           
         //Ejecutamos instrucción
         $stmt->execute();
