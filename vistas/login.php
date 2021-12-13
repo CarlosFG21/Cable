@@ -1,18 +1,16 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/Login_1.css" />
-    <title>Cablevision | Robles</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<link rel="stylesheet" href="../css/Login_1.css" />
+<title>Cablevision | Robles</title>
 </head>
 <body>
     <div class="container">
         <div class="forms-container">
-            <div class="signin-signup"-->
+            <div class="signin-signup">
                 <form action="../crud/validarUsuario.php" class="sign-in-form" method="post">
                     <h2 class="title">Bienvenido</h2>
                     <div class="input-field">
@@ -33,7 +31,7 @@
                 <div class="content">
                     <h3> Cablevisión Robles</h3>
                     <p>
-                        IMAGEN Y CORAZON DE GUALAN, A LA ORDEN DE TODOS LOS GUALANTECOS!
+                        IMAGEN Y CORAZÓN DE GUALÁN, A LA ORDEN DE TODOS LOS GUALANTECOS!
                     </p>
                 </div>
                 <img src="../img/victor.svg" class="image" alt="" />
@@ -42,3 +40,4 @@
     </div>
 </body>
 </html>
+<script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>

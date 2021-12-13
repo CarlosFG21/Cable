@@ -44,20 +44,31 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+              <?php
+               if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'existecliente'){
+              ?>
+              <div class="alert alert-danger alert-dismissible col-sm-6">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+                  El cliente ya existe.
+                </div>
+                <?php
+               }
+                ?>
                 <form role="form" method="post" action="../crud/ingresarCliente.php">
                   <div class="row">
                   <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>DPI</label>
-                        <input type="number" class="form-control" placeholder="DPI" min="1" pattern="^[0-9]+" name="dpi" id="dpi" required>
+                        <input type="number" class="form-control" placeholder="DPI" minlength="13" maxlength="13" pattern="^[0-9]+" name="dpi" id="dpi" required>
                       </div>
                     </div>  
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>NIT</label>
-                        <input type="number" class="form-control" placeholder="NIT" min="1" pattern="^[0-9]+" name="nit" id="nit" required>
+                        <input type="number" class="form-control" placeholder="NIT" minlength="9" maxlength="9" pattern="^[0-9]+" name="nit" id="nit" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -65,7 +76,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Nombres</label>
                         <input type="text" class="form-control" placeholder="Nombre" 
-                         min="1" name="nombre" id="nombre" required>
+                        minlength="1"  maxlength="50" pattern="^[a-zA-Záéíóú ]{1,30}" name="nombre" id="nombre" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -73,7 +84,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Apellidos</label>
                         <input type="text" class="form-control" placeholder="Apellido"
-                         min="1" name="apellido" id="apellido" required>
+                        minlength="1"  maxlength="50" pattern="^[a-zA-Záéíóú ]{1,30}" name="apellido" id="apellido" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -129,3 +140,30 @@ include ("layout/nav.php");
 include ("layout/footer.php");
 
 ?>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnGuardar').click(function() {
+
+        var valid = this.form.checkValidity();
+        if (valid) {
+          alert('!Desea guardar los datos');
+   
+        } else {
+            alert('Debe de rellenar los campos o coincidir con el formato indicado');
+        }
+
+        var nombre = $('#nombres').val();
+        var apellido = $('#apellidos').val();
+        var dpi = $('#dpi').val();
+        var nit = $('#nit').val();
+        var genero = $('#genero').val();
+        var fecha = $('#fechaNacimiento').val();
+
+    });
+
+});
+</script>
+
+<script>var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("fecha_nacimiento")[0].setAttribute('max', today);</script>

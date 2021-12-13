@@ -407,7 +407,7 @@
            //Instanciamos la clase usuario
            $usuario = new Usuario();
            //Sentencia sql
-           $sql = "select *from usuario where nickname='" . $nick_user . "'" . " and contrasena='" . $password_user . "'";
+           $sql = "select *from usuario where nickname='" . $nick_user . "'" . " and contrasena='" . $password_user . "'" . "and estado=1";
 
            $ejecutar = mysqli_query($conexion->db, $sql);
             //Recorremos los resultados de la consulta

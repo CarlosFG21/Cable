@@ -12,5 +12,6 @@
         header("Location: ../vistas/index.php");
     }else{
         echo "<script>alert('¡Usuario incorrecto!'); window.location.href='../vistas/login.php';</script>";
+        //header("Location: ../vistas/login.php?mensaje=usuario");
     }
 ?>
