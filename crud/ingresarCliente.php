@@ -25,10 +25,17 @@ $client =  new Cliente();
 
 if(isset($_POST['btnGuardar'])){
 
+    if($client->validarCliente($nombre,$apellido,$dpi,$nit)==0){
+
     $client->guardar($id,$nombre,$apellido,$dpi,$nit,$genero,$telefono,$fecha_nacimiento,$fecha,$horaReal);
 
     header("Location: ../vistas/cliente.php");
 
+    }else{
+        
+        header("Location: ../vistas/cliente_ingresar.php?mensaje=existecliente");
+
+    }
 
 }
 
