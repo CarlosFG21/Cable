@@ -291,6 +291,47 @@
             return $res;
            }
 
+           //Funcion para validar si ya existe el servicio o el plan al momento de editarlo
+
+           public function validarPlanEdiatr($tipo,$precio){
+
+
+            //Se efectua la instancia de la base de datos 
+
+            $conexion = new Conexion();
+
+            //Se conecta a la base de datos
+            $conexion->Conectar();
+
+            $resultado=0;
+
+            //Se efectua la sentencia sql a la base de datos para obtener los datos que se requiere
+            $sql = "select nombre,precio from servicio where nombre='". $tipo ."'" . "and precio='". $precio ."'";
+
+            //Se ingresa la sentencia a la funcion mysqli para realizar la consulta
+
+            $ejecutar = mysqli_query($conexion->db, $sql);
+
+            //Se recorre la consulta obtenido a travez de un ciclo 
+
+            while($fila = mysqli_fetch_array($ejecutar)){
+
+                if(strcmp($fila[0],$tipo)===0 && strcmp($fila[1],$precio)===0){
+                    $resultado=1;
+                    break;
+
+                }
+
+            }
+
+            $conexion->Conectar();
+
+
+            return $resultado;
+
+
+           }
+
 
     }
 

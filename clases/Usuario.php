@@ -478,6 +478,43 @@
         return $res;
        }
 
+       //Funcion para validar si ya existe ese usuario al momento de editar
+       public function validarUsuarioEditar($nombre,$apellido){
+
+        //Se efectua una instacia de la clase conexion 
+        $conexion = new Conexion();
+
+        //Se efectua la conexion con la base de datos
+        $conexion->conectar();
+
+        //Se declara una variable para validar si el usuario existe
+        $resultado =0;
+
+        //se declara una variable en donde se contendra todo el script de consulta
+        //para la verificacion del usuario
+        $sql = "select nombre,apellido from usuario where nombre='".$nombre."'" . "and apellido='".$apellido."'";
+
+        //efectuamos la peticion de la consulta mediante el mysqli_query
+        $ejecutar =  mysqli_query($conexion->db, $sql);
+
+        //se utiliza el ciclo while para recorrer la consulta 
+        while($fila =  mysqli_fetch_array($ejecutar)){
+
+            if(strcmp($fila[0],$nombre)===0 && strcmp($fila[1],$apellido)===0){
+                $resultado = 1;
+                break;
+            }
+        }
+
+           //se desconecta la base de datos
+        $conexion->conectar();
+
+        //retornamos mediante la variable si es 1 o 0 para la verificacion si existe o no
+        return $resultado;
+
+
+       }
+
 
     }
 ?>

@@ -61,7 +61,7 @@ include ("layout/nav.php");
                         <label>Tipo</label>
                         <?php
                         echo "<input type='text' class='form-control' placeholder='tipo' value='$tipo' name='tipo' id='tipo'
-                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1' >"
+                        minlength='1' maxlength='50' pattern='^[a-zA-Záéíóú ]{1,30}' required>"
                         ?>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ include ("layout/nav.php");
                         <label>Precio</label>
                         <?php
                         echo "<input type='text' class='form-control' placeholder='Precio' value='$precio' name='precio' id='precio'
-                        min='1'>"
+                        min='1'  pattern='^[0-9]+' required>"
                          ?>
                         </div>
                     </div>
@@ -105,3 +105,24 @@ include ("layout/footer.php");
 
 
 ?>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnEditar').click(function() {
+
+        var valid = this.form.checkValidity();
+        if (valid) {
+          alert('!Desea editar los datos');
+   
+        } else {
+            alert('Debe de rellenar los campos o coincidir con el formato indicado');
+        }
+
+        var tipo = $('#tipo').val();
+        var precio = $('#precio').val();
+        
+
+    });
+
+});
+</script>
