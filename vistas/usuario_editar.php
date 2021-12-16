@@ -48,7 +48,7 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                
+    
               <?php
                            $usuario = new Usuario();
                            $id= $_REQUEST['id'];
@@ -59,8 +59,11 @@ include ("layout/nav.php");
                            $nickname = $resultado->getNickname();
                            $permiso = $resultado->getRol();
                            $contrasena = $resultado->getContrasena();
+
+                           
                         ?>
-              
+
+
               <form role="form" method="post" action="../crud/editarUsuario.php?id=<?php echo $id;?>">
                   <div class="row">
                     <div class="col-sm-6">
@@ -72,7 +75,7 @@ include ("layout/nav.php");
                         
                       <?php  
                         echo "<input type='text' class='form-control' placeholder='Nombre' value='$nombre'
-                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1'name='nombre' id='nombre'>";
+                        minlength='1' maxlength='50' name='nombre' id='nombre' required>";
                       
                       ?>
                       </div>
@@ -85,7 +88,7 @@ include ("layout/nav.php");
                         <?php
                         
                         echo "<input type='text' class='form-control' placeholder='Apellido' value='$apellido'
-                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1' name='apellido' id='apellido'>";
+                        required minlength='1' maxlength='50' pattern='^[a-zA-Záéíóú ]{1,30}' name='apellido' id='apellido'>";
                         
                         ?>
                       
@@ -131,7 +134,7 @@ include ("layout/nav.php");
                         
                         <?php
                         
-                        echo"<input type='password' class='form-control' placeholder='Contraseña' value='$contrasena' name='contrasena' id='contrasena' required>";
+                        echo"<input type='password' class='form-control' placeholder='Contraseña' value='$contrasena' name='contrasena' id='contrasena' minlength='4 maxlength='8' pattern='^[a-zA-Záéíóú0-9.,_- ]{1,30}' required>";
                         
                         ?>
                       
@@ -164,3 +167,26 @@ include ("layout/nav.php");
 include ("layout/footer.php");
 
 ?>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnEditar').click(function() {
+
+        var valid = this.form.checkValidity();
+        if (valid) {
+          alert('!Desea editar los datos');
+   
+        } else {
+            alert('Debe de rellenar los campos o coincidir con el formato indicado');
+        }
+
+        var nombre = $('#nombre').val();
+        var apellido = $('#apellido').val();
+        var usuario = $('#usuario').val();
+        var permiso = $('#permiso').val();
+        var contrasena = $('#contrasena').val();
+
+    });
+
+});
+</script>
