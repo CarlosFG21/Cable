@@ -169,3 +169,27 @@ include ("layout/nav.php");
 include ("layout/footer.php");
 
 ?>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnEditar').click(function() {
+
+        var valid = this.form.checkValidity();
+        if (valid) {
+          alert('!Desea editar los datos');
+   
+        } else {
+            alert('Debe de rellenar los campos o coincidir con el formato indicado');
+        }
+
+        var nombre = $('#nombres').val();
+        var apellido = $('#apellidos').val();
+        var telefono = $('#telefono').val();
+        var cargo = $('#cargo').val();
+        var genero = $('#genero').val();
+        var fecha = $('#fechaNacimiento').val();
+
+    });
+
+});
+</script>

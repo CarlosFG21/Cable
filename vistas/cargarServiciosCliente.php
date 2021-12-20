@@ -119,7 +119,7 @@
                     <i class='fa fa-arrow-left'></i>
                     </a>"; 
                     }
-                    echo"<a type='submit' href='plan_vista.php?id=$id'class='btn bg-gradient-success'>
+                    echo"<a type='submit' href='servicio_vista.php?id=$id'class='btn bg-gradient-success'>
                     <i class='fas fa-eye'></i> 
                     </a></td>";
 
