@@ -22,9 +22,17 @@ $horaReal = date("H:i:s",$hora);
 
 if(isset($_POST["btnEditar"])){
 
+    if($cliente->validarCliente($nombre,$apellido,$dpi,$nit)==0){
+
     $cliente->editar($nombre,$apellido,$dpi,$nit,$genero,$telefono,$fechan,$fecha,$horaReal,$idcliente);
 
     header("Location: ../vistas/cliente.php");
+
+}else{
+
+    echo "<script>alert('¡El cliente a editar ya existe!'); window.location.href='../vistas/cliente_editar.php?id=$idcliente';</script>";
+
+}
 
 
 }

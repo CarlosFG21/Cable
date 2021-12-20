@@ -67,7 +67,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>DPI</label>
                         <?php
-                        echo "<input type='number' class='form-control' placeholder='DPI' value='$dpi' min='1' pattern='^[0-9]+' name='dpi' id='dpi'> ";
+                        echo "<input type='number' class='form-control' placeholder='DPI' value='$dpi' minlength='13' maxlength='13' pattern='^[0-9]+' name='dpi' id='dpi'> ";
                         ?>
                         </div>
                     </div>  
@@ -76,7 +76,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>NIT</label>
                         <?php
-                        echo "<input type='number' class='form-control' placeholder='NIT' value='$nit' min='1' pattern='^[0-9]+' name='nit' id='nit'>";
+                        echo "<input type='number' class='form-control' placeholder='NIT' value='$nit' minlength='9' maxlength='9' pattern='^[0-9]+' name='nit' id='nit'>";
                         ?>
                       </div>
                     </div>
@@ -86,7 +86,7 @@ include ("layout/nav.php");
                         <label>Nombres</label>
                         <?php
                        echo " <input type='text' class='form-control' placeholder='Nombre' value='$nombre' name='nombre' id='nombre'
-                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1'>";
+                        required minlength='1'  maxlength='50' pattern='^[a-zA-Záéíóú ]{1,30}'>";
                         ?>
                         </div>
                     </div>
@@ -96,7 +96,7 @@ include ("layout/nav.php");
                         <label>Apellidos</label>
                         <?php
                        echo " <input type='text' class='form-control' placeholder='Apellido' value='$apellido' name='apellido' id='apellido'
-                        required autocomplete='off' onkeypress='return (event.charCode >= 65 && event.charCode <= 165)' min='1'>";
+                        required minlength='1'  maxlength='50' pattern='^[a-zA-Záéíóú ]{1,30}'>";
                       ?>
                         </div>
                     </div>
@@ -166,3 +166,27 @@ include ("layout/nav.php");
 include ("layout/footer.php");
 
 ?>
+
+<script type="text/javascript">
+$(function() {
+    $('#btnEditar').click(function() {
+
+        var valid = this.form.checkValidity();
+        if (valid) {
+          alert('!Desea editar los datos');
+   
+        } else {
+            alert('Debe de rellenar los campos o coincidir con el formato indicado');
+        }
+
+        var nombre = $('#nombres').val();
+        var apellido = $('#apellidos').val();
+        var dpi = $('#dpi').val();
+        var nit = $('#nit').val();
+        var genero = $('#genero').val();
+        var fecha = $('#fechaNacimiento').val();
+
+    });
+
+});
+</script>
