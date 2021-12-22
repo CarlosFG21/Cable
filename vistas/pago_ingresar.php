@@ -1,6 +1,10 @@
 <?php
 
 include ("layout/header.php");
+//Reiniciamos variable de sesión de pago
+if(isset($_SESSION['pagoArray'])){
+  unset($_SESSION['pagoArray']);
+}
 
 ?>
   <title>Cablevisión | Robles</title>
@@ -46,7 +50,7 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form" method="post" action="../crud/ingresarPago.php">
+                <form role="form" method="post" action="../crud/ingresarPago.php" id="form">
                   <div class="row">
                     
                   <div class="col-sm-6">
@@ -93,7 +97,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Costo del servicio (Q)</label>
                         <input type="number" step="0.01" class="form-control" placeholder="Costo del servicio (Q)" name="total" id="total"
-                        required min="1">
+                         min="1">
                       </div>
                     </div>
 
@@ -102,7 +106,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Descripción</label>
                         <input type="text" class="form-control" placeholder="Descripción" name="descripcion" id="descripcion"
-                        required min="1">
+                         min="1">
                       </div>
                     </div>
 
@@ -152,11 +156,73 @@ include ("layout/nav.php");
                    ?>
 
                   </div>  
+
+                  <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Tipo de documento</label>
+                        <select class="form-control" name="tipo_documento" id="tipo_documento">
+                          <option>Factura</option>
+                          <option>Recibo</option>
+                        </select>
+                      </div>
+                    </div>
+
                   <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
                   <a type="submit" class="btn btn-danger" href="pago.php">Regresar</a>
+                  <input type="button" value="Agregar detalle de pago" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
+                  <input type="submit" value="Ingresar pago" class="btn btn-primary" name="btnPago" id="btnPago">
                 </div>     
                 </form>
+              </div>
+             
+             
+              <div id ="divTablaPagos">
+
+              
+
+                        <!-- /.card-header -->
+              <div id="tablaresultados"> 
+              
+             
+              <div class="card-body">
+             
+              
+                <table id="example1" class="table table-bordered table-striped">
+                 
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Servicio</th>
+                    <th>Mes de pago</th>
+                    <th>Año de pago</th>
+                    <th>Total</th>
+                    
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <?php
+                    echo "<tr>";
+                    echo "</tr>";
+                  
+                  ?>
+
+
+                </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>No.</th>
+                    <th>Servicio</th>
+                    <th>Mes de pago</th>
+                    <th>Año de pago</th>
+                    <th>Total</th>
+                   
+                    
+                  </tr>
+                  </tfoot>
+                 
+                </table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -212,6 +278,23 @@ include ("layout/footer.php");
         });
     
     }
+
+    //----------------Función para agregar pagos a tabla
+
+    function agregarPagoTabla(){
+        
+        $.ajax({
+            type:"POST",
+            url:"agregarPagoTabla.php",
+            data:$("#form").serialize(),
+            success:function(r){
+                $('#divTablaPagos').html(r);
+            }
+        
+        });
+    
+    }
+
 </script>
 
 <script type="text/javascript">
@@ -221,11 +304,17 @@ include ("layout/footer.php");
 
         $('#lista2').change(function(){
          recargarLista();
+         var Table = document.getElementById("example1");
+         Table.innerHTML = "";
         });
+
+        $('#btnGuardar').click(function(){
+
+          agregarPagoTabla();
+
+        });
+
+       
 
     });
 </script>
-
-
-
-

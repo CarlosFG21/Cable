@@ -66,6 +66,7 @@ include ("layout/nav.php");
                         $fecha = $resultado->getFecha();
                         $hora = $resultado->getHora();
                         $nombreUsuario = $resultado->getNombreUsuario();
+                        $tipoDocumento = $resultado->getTipoDocumento();
 
                         
                         //Imprimimos nombre
@@ -210,6 +211,23 @@ include ("layout/nav.php");
                         ?>
                       </div>
                     </div>
+
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Tipo de documento</label>
+                        <?php
+                       
+                        echo "<input type='text' class='form-control' value='$tipoDocumento' disabled>";
+                        
+                        ?>
+                      </div>
+                    </div>
+
+
+                    
+
+
 
                   </div>  
                   <div class="">

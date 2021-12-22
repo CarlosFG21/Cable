@@ -15,6 +15,7 @@
     $descripcion = $_POST['descripcion'];
     $mes = $_POST['mes'];
     $anio = $_POST['anio'];
+    $tipoDocumento = $_POST['tipo_documento'];
 
     //Asignamos zona horaria al servidor    
     date_default_timezone_set('America/Guatemala');
@@ -32,7 +33,7 @@
             $pago = new Pago();
         
             $idEditar = $_REQUEST['id'];
-            $pago->editar($idDetalleServicio,$idUsuario,$descripcion,$mes,$anio,$total,$fecha,$horaReal,$idEditar);
+            $pago->editar($idDetalleServicio,$idUsuario,$descripcion,$tipoDocumento,$mes,$anio,$total,$fecha,$horaReal,$idEditar);
             header("Location: ../vistas/pago.php");
             
 

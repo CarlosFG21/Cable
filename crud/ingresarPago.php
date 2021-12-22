@@ -3,18 +3,16 @@
     include("../clases/Pago.php");
     include("../clases/Usuario.php");
     
-    
-    if(isset($_POST['lista1'])){
-
-    $idCliente = $_POST['lista2'];
     session_start();
+
+    if(isset($_SESSION['pagoArray'])){
+        
+    $pagoArray = $_SESSION['pagoArray'];    
+    
+    if(sizeof($pagoArray)>0){
+
     $usuario = $_SESSION['usuario'];
     $idUsuario = $usuario->getIdUsuario();
-    $idDetalleServicio = $_POST['lista1'];
-    $total = $_POST['total'];
-    $descripcion = $_POST['descripcion'];
-    $mes = $_POST['mes'];
-    $anio = $_POST['anio'];
 
     //Asignamos zona horaria al servidor    
     date_default_timezone_set('America/Guatemala');
@@ -25,33 +23,31 @@
     //Damos formato a la hora
     $horaReal = date("H:i:s",$hora);
 
-    if($idDetalleServicio!=0){
-        
-        if($total>0){
-        
-            $pago = new Pago();
-            
-            if($pago->validarExistenciaPago($mes,$anio,$idDetalleServicio)==0){
+    for($i=0;$i<sizeof($pagoArray);$i++){
 
-            $pago->guardar($idDetalleServicio,$idUsuario,$descripcion,$mes,$anio,$total,$fecha,$horaReal);
-            header("Location: ../vistas/pago.php");
-            }else{
-                echo "<script>alert('El pago ya existe'); window.history.back ();</script>";
-            }
+  
+    $idDetalleServicio = $pagoArray[$i]->getIdDetalleServicio();
+    $total = $pagoArray[$i]->getTotal();
+    $descripcion = $pagoArray[$i]->getDescripcion();
+    $mes = $pagoArray[$i]->getMes();
+    $anio = $pagoArray[$i]->getAnio();
+    $tipoDocumento = $pagoArray[$i]->getTipoDocumento();
+   
+            $pago = new Pago();     
 
-        }else{
-            echo "<script>alert('El total a pagar es inválido'); window.history.back ();</script>";
-        
-        }
+            $pago->guardar($idDetalleServicio,$idUsuario,$descripcion,$tipoDocumento,$mes,$anio,$total,$fecha,$horaReal);
+    }
+    
+    //Limpiamos variable de sesión de pagos de la tabla
 
-    }else{
-        echo "<script>alert('Selecciona un servicio corecto'); window.history.back ();</script>";
-        
+    if(isset($_SESSION['pagoArray'])){
+        unset($_SESSION['pagoArray']);
     }
 
-}else{
-    echo "<script>alert('Debes seleccionar un cliente primero'); window.history.back ();</script>";
-}  
-
+    header("Location: ../vistas/pago.php");
+        }else{
+            echo "<script>alert('¡No haz ingresado pagos!'); window.history.back ();</script>";
+        }          
+    }
 
 ?>
