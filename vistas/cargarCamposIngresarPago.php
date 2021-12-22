@@ -3,6 +3,12 @@
     include("../db/Conexion.php");
     include("../clases/Direccion.php");
 
+    session_start();
+//Reiniciamos la variable de sesión cada vez que se cambie de cliente
+    if(isset($_SESSION['pagoArray'])){
+      unset($_SESSION['pagoArray']);
+    }
+
 ?>
                 
                 
@@ -89,10 +95,3 @@ function recargarListaPrecio(){
 
     });
 </script>
-
-
-                     
-
-                  
-
-    

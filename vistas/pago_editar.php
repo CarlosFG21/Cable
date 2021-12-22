@@ -146,6 +146,7 @@ include ("layout/nav.php");
                         $total = $resultadoPrecarga->getTotal();
                         $descripcion = $resultadoPrecarga->getDescripcion();
                         $mesPago = $resultadoPrecarga->getMes();
+                        $tipoDocumento = $resultadoPrecarga->getTipoDocumento();
 
                         $anioPago = $resultadoPrecarga->getAnio();
                     
@@ -226,7 +227,30 @@ include ("layout/nav.php");
                     
                     ?>
 
-                  </div>  
+                  </div> 
+                  
+                  <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Tipo de documento</label>
+                        <select class="form-control" name="tipo_documento" id="tipo_documento">
+                          
+                          <?php
+                        if(strcmp($tipoDocumento, "Factura") === 0){
+                          echo"<option>Factura</option>
+                          <option>Recibo</option>";
+                        }else{
+                          echo"<option>Recibo</option>
+                          <option>Factura</option>";
+                        }
+
+                          ?>
+                        </select>
+                      </div>
+                    </div>
+
+                  
+
                   <div class="">
                   <input type="submit" value="Editar" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
                   <a type="submit" class="btn btn-danger" href="pago.php">Regresar</a>
