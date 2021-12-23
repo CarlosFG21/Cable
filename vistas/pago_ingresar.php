@@ -50,7 +50,7 @@ include ("layout/nav.php");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form role="form" method="post" action="../crud/ingresarPago.php" id="form">
+                <form role="form" method="post" action="#" id="form">
                   <div class="row">
                     
                   <div class="col-sm-6">
@@ -170,8 +170,12 @@ include ("layout/nav.php");
 
                   <div class="">
                   <a type="submit" class="btn btn-danger" href="pago.php">Regresar</a>
-                  <input type="button" value="Agregar detalle de pago" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
-                  <input type="submit" value="Ingresar pago" class="btn btn-primary" name="btnPago" id="btnPago">
+                 <input type="button" value="Agregar detalle de pago" class="btn btn-primary" name="btnGuardar" id="btnGuardar">
+                  <input type="submit" value="Ingresar pago" class="btn btn-primary" name="btnPago" id="btnPago" onclick="window.open('../crud/ingresarPago.php')">
+                  
+                 
+                 
+                  
                 </div>     
                 </form>
               </div>

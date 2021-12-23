@@ -17,6 +17,7 @@
         public $mes;
         public $anio;
         public $total;
+        public $correlativoDocumento;
         public $estado;
         public $fecha;
         public $hora;
@@ -109,6 +110,14 @@
         public function setTotal($_total){
             $this->total = $_total;
         }
+        //Obtener correlativo de pago
+        public function getCorrelativoDocumento(){
+            return $this->correlativoDocumento;
+        }
+        //Setear correlativo de pago
+        public function setCorrelativoDocumento($_correlativoDocumento){
+            $this->correlativoDocumento = $_correlativoDocumento;
+        }
         //Obtener estado
         public function getEstado(){
             return $this->estado;
@@ -136,19 +145,19 @@
 
         //----------------------Guardar un pago--------------------------------------
 
-        public function guardar($idDetalleServiciog,$idUsuariog,$descripciong,$tipoDocumentog,$mesg,$aniog,$totalg,$fechag,$horag){
+        public function guardar($idDetalleServiciog,$idUsuariog,$descripciong,$tipoDocumentog,$mesg,$aniog,$correlativoDocumentog,$totalg,$fechag,$horag){
             //Instanciamos la clase conexión
         $conexion = new Conexion();
         //Conectamos a la base de datos
         $conexion->conectar();
         //Instrucción SQL
-        $sql = "insert into pago(id_detalle_servicio,id_usuario,descripcion,tipo_documento,mes,anio,total,fecha,hora)values(?,?,?,?,?,?,?,?,?)";
+        $sql = "insert into pago(id_detalle_servicio,id_usuario,descripcion,tipo_documento,mes,anio,correlativo_documento,total,fecha,hora)values(?,?,?,?,?,?,?,?,?,?)";
         //Preparamos la instrucción sql
         $stmt = $conexion->db->prepare($sql);
         
         //Enviamos los parámetros
         //i = integer, s = string, d= double...se colocan segun el tamaño de parametros
-        $stmt->bind_param('iissiidss',$idDetalleServiciog,$idUsuariog,$descripciong,$tipoDocumentog,$mesg,$aniog,$totalg,$fechag,$horag);
+        $stmt->bind_param('iissiiidss',$idDetalleServiciog,$idUsuariog,$descripciong,$tipoDocumentog,$mesg,$aniog,$correlativoDocumentog,$totalg,$fechag,$horag);
           
         //Ejecutamos instrucción
         $stmt->execute();
@@ -239,7 +248,7 @@
         //Array contenedor de resultados
         $resultadoPagos = array();
         //Instrucción SQL
-        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.tipo_documento, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente";
+        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio,p.correlativo_documento, p.descripcion, p.tipo_documento, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -262,6 +271,7 @@
             $pagoIndex->setEstado($fila['estado']);
             $pagoIndex->setFecha($fila['fecha']);
             $pagoIndex->setHora($fila['hora']);
+            $pagoIndex->setCorrelativoDocumento($fila['correlativo_documento']);
 
             //Llenamos el array de resultados de usuarios
             array_push($resultadoPagos,$pagoIndex);
@@ -288,7 +298,7 @@
          $resultadoPago = new Pago();
          
          //Instrucción SQL
-        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.tipo_documento, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and p.id_pago='" . $idBusqueda . "'";
+        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio,p.correlativo_documento, p.descripcion, p.tipo_documento, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and p.id_pago='" . $idBusqueda . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -308,6 +318,7 @@
             $resultadoPago->setEstado($fila['estado']);
             $resultadoPago->setFecha($fila['fecha']);
             $resultadoPago->setHora($fila['hora']);
+            $resultadoPago->setCorrelativoDocumento($fila['correlativo_documento']);
            
         }
             //Nos desconectamos de la base de datos
@@ -358,7 +369,7 @@
         //Array contenedor de resultados
         $resultadoPagos = array();
         //Instrucción SQL
-        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.tipo_documento, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and d.id_cliente='" . $idClienteSearch . "'";
+        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion,p.correlativo_documento, p.tipo_documento, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and d.id_cliente='" . $idClienteSearch . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -381,6 +392,7 @@
             $pagoIndex->setEstado($fila['estado']);
             $pagoIndex->setFecha($fila['fecha']);
             $pagoIndex->setHora($fila['hora']);
+            $pagoIndex->setCorrelativoDocumento($fila['correlativo_documento']);
 
             //Llenamos el array de resultados de usuarios
             array_push($resultadoPagos,$pagoIndex);
@@ -405,7 +417,7 @@
         //Array contenedor de resultados
         $resultadoPagos = array();
         //Instrucción SQL
-        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.tipo_documento, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and p.fecha between '" . $fechaInicioPago . "'" . " and '" . $fechaFinPago . "'";
+        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.correlativo_documento, p.tipo_documento, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and p.fecha between '" . $fechaInicioPago . "'" . " and '" . $fechaFinPago . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -428,6 +440,7 @@
             $pagoIndex->setEstado($fila['estado']);
             $pagoIndex->setFecha($fila['fecha']);
             $pagoIndex->setHora($fila['hora']);
+            $pagoIndex->setCorrelativoDocumento($fila['correlativo_documento']);
 
             //Llenamos el array de resultados de usuarios
             array_push($resultadoPagos,$pagoIndex);
@@ -451,7 +464,7 @@
         //Array contenedor de resultados
         $resultadoPagos = array();
         //Instrucción SQL
-        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.tipo_documento, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and p.fecha between '" . $fechaInicioPago_ . "'" . " and '" . $fechaFinPago_ . "'" . " and d.id_cliente='" . $idCliente_ . "'";
+        $sql = "select p.id_pago, p.id_usuario, p.id_detalle_servicio, p.descripcion, p.correlativo_documento, p.tipo_documento, p.mes, p.anio, p.total, p.estado, p.fecha, p.hora, u.id_usuario, u.nombre as nombreusuario, u.apellido as apellidousuario, s.id_servicio, s.nombre as nombreservicio, c.id_cliente, c.nombres as nombrescliente, c.apellidos as apellidoscliente, d.id_direccion, d.id_cliente,ds.id_detalle_servicio,ds.id_servicio, ds.id_direccion from pago p, usuario u, servicio s, direccion d, cliente c, detalle_servicio ds where p.id_detalle_servicio = ds.id_detalle_servicio and ds.id_direccion = d.id_direccion and ds.id_servicio = s.id_servicio and p.id_usuario = u.id_usuario and c.id_cliente = d.id_cliente and p.fecha between '" . $fechaInicioPago_ . "'" . " and '" . $fechaFinPago_ . "'" . " and d.id_cliente='" . $idCliente_ . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -474,6 +487,7 @@
             $pagoIndex->setEstado($fila['estado']);
             $pagoIndex->setFecha($fila['fecha']);
             $pagoIndex->setHora($fila['hora']);
+            $pagoIndex->setCorrelativoDocumento($fila['correlativo_documento']);
 
             //Llenamos el array de resultados de usuarios
             array_push($resultadoPagos,$pagoIndex);
