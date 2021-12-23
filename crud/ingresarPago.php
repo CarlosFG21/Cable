@@ -2,6 +2,7 @@
     
     include("../clases/Pago.php");
     include("../clases/Usuario.php");
+    include("../clases/Correlativo.php");
     
     session_start();
 
@@ -23,6 +24,10 @@
     //Damos formato a la hora
     $horaReal = date("H:i:s",$hora);
 
+    $correlativo = new Correlativo();
+    $correlativo->guardar($fecha,$horaReal);
+    $correlativoDocumento = $correlativo->obtenerCorrelativo();
+
     for($i=0;$i<sizeof($pagoArray);$i++){
 
   
@@ -32,19 +37,28 @@
     $mes = $pagoArray[$i]->getMes();
     $anio = $pagoArray[$i]->getAnio();
     $tipoDocumento = $pagoArray[$i]->getTipoDocumento();
+    
    
             $pago = new Pago();     
 
-            $pago->guardar($idDetalleServicio,$idUsuario,$descripcion,$tipoDocumento,$mes,$anio,$total,$fecha,$horaReal);
+            $pago->guardar($idDetalleServicio,$idUsuario,$descripcion,$tipoDocumento,$mes,$anio,$correlativoDocumento,$total,$fecha,$horaReal);
     }
     
     //Limpiamos variable de sesión de pagos de la tabla
 
-    if(isset($_SESSION['pagoArray'])){
-        unset($_SESSION['pagoArray']);
-    }
 
-    header("Location: ../vistas/pago.php");
+
+    if(isset($_SESSION['pagoArray'])){
+        
+        echo "<script>window.open('../reportes/reporte_comprobante.php');</script>";
+        echo "<script>window.close();</script>";
+        //unset($_SESSION['pagoArray']);
+        //header("Location: ../vistas/pago.php");
+    }
+    
+    //header("Location: ../vistas/pago.php");
+    
+    
         }else{
             echo "<script>alert('¡No haz ingresado pagos!'); window.history.back ();</script>";
         }          
