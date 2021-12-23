@@ -20,10 +20,16 @@ $direccio =  new Direccion();
 
 if(isset($_POST['btnGuardarD'])){
 
+    if($direccio->validarDireccion($direccion,$latitud,$longitud)==0){
+
     $direccio->guardar($id,$direccion,$fecha,$horaReal,$latitud,$longitud);
 
     header("Location: ../vistas/detalle_servicio_ingresar.php?id=$id");
+    }else{
 
+        echo "<script>alert('¡La direccion ya existe!'); window.location.href='../vistas/detalle_servicio_ingresar.php?id=$id';</script>";
+
+    }
 }
 
 

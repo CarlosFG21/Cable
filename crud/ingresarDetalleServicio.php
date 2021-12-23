@@ -20,9 +20,14 @@
 
         $detalleServicio = new DetalleServicio();
 
+        if($detalleServicio->validarDetalle($idDireccion,$idServicio)==0){
+
         $detalleServicio->guardar($idDireccion,$idServicio,$fecha,$horaReal);
 
         header("Location: ../vistas/servicio.php");
+        }else{
+            echo "<script>alert('¡Servicio ya ingresado!'); window.location.href='../vistas/detalle_servicio_ingresar.php?id=$idCliente';</script>";
+        }
 
         }else{
             echo "<script>alert('Verifica la información'); window.location='../vistas/detalle_servicio_ingresar.php?id=$idCliente';</script>";  

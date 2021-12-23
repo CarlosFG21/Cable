@@ -325,6 +325,42 @@
         return $resultadoDireccion;
         }
 
+        public function validarDireccion($direccion,$latitud,$longitud){
+
+            //Se efectua una instacia de la clase conexion 
+            $conexion = new Conexion();
+    
+            //Se efectua la conexion con la base de datos
+            $conexion->conectar();
+    
+            //Se declara una variable para validar si el usuario existe
+            $resultado =0;
+    
+            //se declara una variable en donde se contendra todo el script de consulta
+            //para la verificacion del usuario
+            $sql = "select nombre,latitud,longitud from direccion where nombre='".$direccion."'" . "and latitud='".$latitud."'"."and longitud='".$longitud."'";
+    
+            //efectuamos la peticion de la consulta mediante el mysqli_query
+            $ejecutar =  mysqli_query($conexion->db, $sql);
+    
+            //se utiliza el ciclo while para recorrer la consulta 
+            while($fila =  mysqli_fetch_array($ejecutar)){
+    
+                if(strcmp($fila[0],$direccion)===0 && strcmp($fila[1],$latitud)===0 && strcmp($fila[2],$longitud)===0){
+                    $resultado = 1;
+                    break;
+                }
+            }
+    
+               //se desconecta la base de datos
+            $conexion->conectar();
+    
+            //retornamos mediante la variable si es 1 o 0 para la verificacion si existe o no
+            return $resultado;
+    
+    
+           }
+
     }
 
 ?>
