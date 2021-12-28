@@ -12,6 +12,8 @@ include ("layout/nav.php");
 
 ?>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -38,8 +40,15 @@ include ("layout/nav.php");
             <div class="card">
               <div class="card-header">
               <a type="submit" class="btn btn-primary" href="personal_ingresar.php">Ingresar personal</a>
-              <a type="submit" class="btn btn-primary" href="../reportes/reporte_personal.php" target="_blank">Reporte</a>
+              <!--a type="submit" class="btn btn-primary" href="../reportes/reporte_personal.php" target="_blank">Reporte</a-->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reporteModal" name="btnreporte" id="btnreporte" data-whatever="@mdo">Reporte
+              </button>
+            
               </div>
+
+              <!--llamo al modal para hacer reportes-->
+              <?php include("modal_reporte_personal.php"); ?>
+
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
@@ -64,7 +73,7 @@ include ("layout/nav.php");
                     $personal = new Personal();
                     $arrayPersonal = $personal->obtenerPersonal();
 
-                  for($i=0; $i<sizeof($arrayPersonal); $i++){
+                    for($i=0; $i<sizeof($arrayPersonal); $i++){
                     
                     $idPersonal = $arrayPersonal[$i]->getIdPersonal();
                     $nombres = $arrayPersonal[$i]->getNombres();
