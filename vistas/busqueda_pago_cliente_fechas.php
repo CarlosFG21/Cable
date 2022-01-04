@@ -28,6 +28,20 @@
                 $fechaFinPago = $_REQUEST['fechaFin'];
                 $idClien = $_REQUEST['idCliente'];
                 $pagoArray = $pago->filtrarPagosPorClienteFechas($idClien,$fechaInicioPago,$fechaFinPago);
+
+                if(isset($_SESSION)){
+                  $_SESSION['pagoArray'] = $pagoArray;
+                  $_SESSION['tipoReporte'] = 3;
+                  $_SESSION['fechaInicio'] = $fechaInicioPago;
+                  $_SESSION['fechaFin'] = $fechaFinPago;
+                  
+                }else{
+                  session_start();
+                  $_SESSION['pagoArray'] = $pagoArray;
+                  $_SESSION['tipoReporte'] = 3;
+                  $_SESSION['fechaInicio'] = $fechaInicioPago;
+                  $_SESSION['fechaFin'] = $fechaFinPago;
+                }
                 
                 
                 for($i=0; $i<sizeof($pagoArray);$i++){
