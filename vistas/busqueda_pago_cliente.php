@@ -27,6 +27,14 @@
                 $idBusqueda = $_REQUEST['id'];
                 $pagoArray = $pago->obtenerPagosPorCliente($idBusqueda);
                 
+                if(isset($_SESSION)){
+                  $_SESSION['pagoArray'] = $pagoArray;
+                  $_SESSION['tipoReporte'] = 1;
+                }else{
+                  session_start();
+                  $_SESSION['pagoArray'] = $pagoArray;
+                  $_SESSION['tipoReporte'] = 1;
+                }
                 
                 for($i=0; $i<sizeof($pagoArray);$i++){
                   echo "<tr>";

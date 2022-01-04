@@ -27,6 +27,19 @@
                 $fechaInicioPago = $_REQUEST['fechaInicio'];
                 $fechaFinPago = $_REQUEST['fechaFin'];
                 $pagoArray = $pago->obtenerPagosPorFechas($fechaInicioPago,$fechaFinPago);
+
+                if(isset($_SESSION)){
+                  $_SESSION['pagoArray'] = $pagoArray;
+                  $_SESSION['tipoReporte'] = 2;
+                  $_SESSION['fechaInicio'] = $fechaInicioPago;
+                  $_SESSION['fechaFin'] = $fechaFinPago;
+                }else{
+                  session_start();
+                  $_SESSION['pagoArray'] = $pagoArray;
+                  $_SESSION['tipoReporte'] = 2;
+                  $_SESSION['fechaInicio'] = $fechaInicioPago;
+                  $_SESSION['fechaFin'] = $fechaFinPago;
+                }
                 
                 
                 for($i=0; $i<sizeof($pagoArray);$i++){

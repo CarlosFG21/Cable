@@ -89,6 +89,7 @@ include ("layout/nav.php");
               <input type="date" class="btn btn-warning" placeholder="Hasta" name="hasta" id="hasta">
               
               <input type="button" class="btn btn-primary" value="Generar" id="btnGenerar" name="btnGenerar">
+              <input type="button" class="btn btn-primary" value="Exportar PDF" id="btnExportar" name="btnExportar">
               
             
             </div>
@@ -398,6 +399,96 @@ function mostrarTodos(){
         });
 
     });
+</script>
+
+<script>
+
+$(document).ready(function(){
+    
+    //recargarLista();
+
+    $('#btnExportar').click(function(){
+    //Llamamos a la función
+    //alert("haz hecho click en el boton generar");
+    var idCliente = document.getElementById('lista2').value;
+    var fechaInicio = document.getElementById('desde').value;
+    var fechaFin = document.getElementById('hasta').value;
+    var filtro = document.getElementById('filtro').value;
+
+   //------------------Mostrar todos------------------------------
+
+   if(filtro==0){
+     mostrarTodos();
+     window.open('../reportes/reporte_pagos_pdf.php');
+   }
+    
+   //------------Filtro solo por cliente--------------------------
+  if(filtro==1){
+    
+    if(idCliente!=0){
+    
+      filtrarPorCliente();
+      window.open('../reportes/reporte_pagos_pdf.php');
+    
+    }else{
+      
+      alert('Debes seleccionar un cliente primero');
+      
+    }
+  }
+
+  //------------Filtro por rango de fechas-------------------------
+
+  if(filtro==2){
+    
+    if(fechaInicio !=""){
+      if(fechaFin !=""){
+         //Validamos si la fecha de inicio es menor o igual a la fecha final
+         if(Date.parse(fechaInicio)<=Date.parse(fechaFin)){
+            filtrarPorFechas();
+            window.open('../reportes/reporte_pagos_pdf.php');
+         }else{
+           alert("La fecha de inicio no puede ser mayor a la fecha final");
+         }
+      }else{
+        alert("La fecha final no puede estar vacía");
+      }
+    }else{
+      alert("La fecha de inicio no puede estar vacía");
+    }
+  }
+
+  if(filtro==3){
+    if(idCliente!=0){
+    
+      if(fechaInicio !=""){
+      if(fechaFin !=""){
+         //Validamos si la fecha de inicio es menor o igual a la fecha final
+         if(Date.parse(fechaInicio)<=Date.parse(fechaFin)){
+            filtrarPorClienteFecha();
+            window.open('../reportes/reporte_pagos_pdf.php');
+         }else{
+           alert("La fecha de inicio no puede ser mayor a la fecha final");
+         }
+      }else{
+        alert("La fecha final no puede estar vacía");
+      }
+    }else{
+      alert("La fecha de inicio no puede estar vacía");
+    }
+  
+  }else{
+    
+    alert('Debes seleccionar un cliente primero');
+    
+  }
+  }
+    
+    });
+
+});
+
+
 </script>
 
 <?php

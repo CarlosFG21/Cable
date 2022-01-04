@@ -27,6 +27,15 @@
                 
                 $pago = new Pago();
                 $pagoArray = $pago->obtenerPagos();
+
+                if(isset($_SESSION)){
+                  $_SESSION['pagoArray'] = $pagoArray;
+                  $_SESSION['tipoReporte'] = 0;
+                }else{
+                  session_start();
+                  $_SESSION['pagoArray'] = $pagoArray;
+                  $_SESSION['tipoReporte'] = 0;
+                }
                 
                 for($i=0; $i<sizeof($pagoArray);$i++){
                   echo "<tr>";

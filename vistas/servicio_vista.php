@@ -118,6 +118,44 @@ include("layout/nav.php");
           <!--/.col (right) -->
         </div>
         <!-- /.row -->
+
+        <div class="card">
+  <div class="card-header">
+    Ubicación en el mapa
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>¡La ubicación GPS presentada a continuación puede variar su precisión en intérvalos de 1 a 10 metros!.</p>
+      <div id="mapa">
+                            
+      </div>
+     
+      <div id="coordenadas">
+      <?php      
+
+      $idDireccionBuscar = $resultado->getIdDireccion();
+
+      $dir = new Direccion();
+      $resDir = $dir->buscarPorId($idDireccionBuscar);
+      $latitud = $resDir->getLatitud();
+      $longitud = $resDir->getLongitud();
+      
+      echo "<a type='submit' class='btn btn-danger' href='https://maps.google.com/?q=$latitud,$longitud' target='_blank'>Abrir en Google Maps</a>";
+    echo "<br>";
+    echo "<br>";
+      
+      echo "<div class='embed-responsive embed-responsive-16by9'>
+      <iframe class='embed-responsive-item' src='http://maps.google.com/maps?q=$latitud,$longitud&z=15&output=embed' allowfullscreen></iframe>
+      </div>";
+
+  ?>
+
+      </div>   
+
+       </blockquote>
+  </div>
+</div>
+
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -128,5 +166,6 @@ include("layout/nav.php");
 <?php
 
 include("layout/footer.php");
+
 
 ?>
