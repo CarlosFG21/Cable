@@ -61,14 +61,14 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>DPI</label>
-                        <input type="number" class="form-control" placeholder="DPI" minlength="13" maxlength="13" pattern="^[0-9]+" name="dpi" id="dpi" required>
+                        <input type="text" class="form-control" placeholder="DPI" minlength="13" maxlength="13" pattern="^[a-zA-Záéíóú0-9 ]{1,30}" name="dpi" id="dpi" required>
                       </div>
                     </div>  
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
                         <label>NIT</label>
-                        <input type="number" class="form-control" placeholder="NIT" minlength="9" maxlength="9" pattern="^[0-9]+" name="nit" id="nit" required>
+                        <input type="text" class="form-control" placeholder="NIT" minlength="9" maxlength="9" pattern="^[a-zA-Záéíóú0-9 ]{1,30}" name="nit" id="nit" required>
                       </div>
                     </div>
                     <div class="col-sm-6">

@@ -61,7 +61,7 @@ include ("layout/nav.php");
                         <label>Tipo</label>
                         <?php
                         echo "<input type='text' class='form-control' placeholder='tipo' value='$tipo' name='tipo' id='tipo'
-                        minlength='1' maxlength='50' pattern='^[a-zA-Záéíóú ]{1,30}' required>"
+                        minlength='1' maxlength='50' pattern='^[a-zA-Záéíóú0-9]{1,30}' required>"
                         ?>
                         </div>
                     </div>
