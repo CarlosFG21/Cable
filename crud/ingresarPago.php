@@ -8,7 +8,7 @@
 
     if(isset($_SESSION['pagoArray'])){
         
-    $pagoArray = $_SESSION['pagoArray'];    
+    $pagoArray = $_SESSION['pagoArray'];
     
     if(sizeof($pagoArray)>0){
 

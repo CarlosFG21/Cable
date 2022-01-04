@@ -45,9 +45,7 @@
                       </div>
                       
                     <div class="modal-footer">
-                      <!--a type="submit" class="btn btn-primary" href="../reportes/reporte_personal2.php" target="_blank">Generar Reporte</a-->
-                      <!--a type="submit" class="btn btn-primary" target="_blank">Generar Reporte</a-->
-                      <input type="submit" value="Generar Reporte" class="btn btn-primary" name="btnGenReport" id="btnGenReport" target="_blank">
+                      <input type="submit" value="Generar Reporte" class="btn btn-primary" name="btnGenReport" id="btnGenReport">
                       <button type="button" class="btn btn-danger" data-dismiss="modal" name="btnCancelarD" id="btnCancelarD">Cancelar</button>
                     </div>
                 </form>
@@ -88,13 +86,6 @@
           $('.select2').select2()
         }
 
-        /*if(filtroRep==3){
-          document.getElementById("map").style.width="0%";
-          document.getElementById("map").style.height="0px";
-          element.setAttribute("hidden", "hidden");
-          document.formmodal.campfecha.hidden = true;
-          document.formmodal.SEmpleado.hidden = true;
-        }*/
       });
     });
 </script>

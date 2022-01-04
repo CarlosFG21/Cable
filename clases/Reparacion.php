@@ -19,6 +19,8 @@
         public $estado;
         public $fechaReporte;
         public $hora;
+        //quitar en caso no se muestre el servicio
+        public $servicio;
 
         //Obtener id de reparación
         public function getIdReparacion(){
@@ -101,28 +103,39 @@
         public function setHora($_hora){
             $this->hora = $_hora;
         }
+        //quitar en caso no se muestre el servicio
+        //Obtener hora de reporte
+        public function getServicio(){
+            return $this->servicio;
+        }
+        //Setear hora de reporte
+        public function setServicio($_servicio){
+            $this->servicio = $_servicio;
+        }
 
         //--------------------------Función para guardar reparación----------------------------
 
-        public function guardar($idDirecciong,$idPersonalg,$descripciong,$fechaReporteg,$horag){
+        //public function guardar($idDirecciong,$idPersonalg,$descripciong,$fechaReporteg,$horag){
+        public function guardar($idDirecciong,$idPersonalg,$idServiciog,$descripciong,$fechaReporteg,$horag){
             //Instanciamos la clase conexión
-        $conexion = new Conexion();
-        //Conectamos a la base de datos
-        $conexion->conectar();
-        //Instrucción SQL
-        $sql = "insert into reparacion(id_direccion,id_personal,descripcion,fecha_reporte,hora)values(?,?,?,?,?)";
-        //Preparamos la instrucción sql
-        $stmt = $conexion->db->prepare($sql);
-        
-        //Enviamos los parámetros
-        //i = integer, s = string, d= double...se colocan segun el tamaño de parametros
-        $stmt->bind_param('iisss',$idDirecciong,$idPersonalg,$descripciong,$fechaReporteg,$horag);
-          
-        //Ejecutamos instrucción
-        $stmt->execute();
-        
-        //Desconectamos la base de datos
-        $conexion->desconectar();
+            $conexion = new Conexion();
+            //Conectamos a la base de datos
+            $conexion->conectar();
+            //Instrucción SQL
+            //$sql = "insert into reparacion(id_direccion,id_personal,descripcion,fecha_reporte,hora)values(?,?,?,?,?)";
+            $sql = "insert into reparacion(id_direccion,id_personal,id_servicio,descripcion,fecha_reporte,hora)values(?,?,?,?,?,?)";
+            //Preparamos la instrucción sql
+            $stmt = $conexion->db->prepare($sql);
+            
+            //Enviamos los parámetros
+            //i = integer, s = string, d= double...se colocan segun el tamaño de parametros
+            $stmt->bind_param('iisssi',$idDirecciong,$idPersonalg,$idServiciog,$descripciong,$fechaReporteg,$horag);
+            
+            //Ejecutamos instrucción
+            $stmt->execute();
+            
+            //Desconectamos la base de datos
+            $conexion->desconectar();
         }
 
         //--------------------------Función para editar reparación------------------------------
@@ -313,31 +326,33 @@
         public function buscarPorId($idBusqueda){
 
             //Instanciamos la clase conexión
-         $conexion = new Conexion();
-         //Conectamos a la base de datos
-         $conexion->conectar();
-         //Declaramos el objeto contenedor del resultado
-         $resultadoReparacion = new Reparacion();
+            $conexion = new Conexion();
+            //Conectamos a la base de datos
+            $conexion->conectar();
+            //Declaramos el objeto contenedor del resultado
+            $resultadoReparacion = new Reparacion();
          
-         //Instrucción SQL
-        $sql = "select r.id_reparacion, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion,d.id_cliente, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where d.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and r.id_reparacion='" . $idBusqueda . "'";
-        //Ejecución de instrucción     
-        $ejecutar = mysqli_query($conexion->db, $sql);
+            //Instrucción SQL
+            //$sql = "select r.id_reparacion, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion,d.id_cliente, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal from reparacion r, cliente c, direccion d, personal p where d.id_cliente = c.id_cliente and r.id_direccion = d.id_direccion and r.id_personal = p.id_personal and r.id_reparacion='" . $idBusqueda . "'";
+            $sql = "select r.id_reparacion, r.id_direccion, r.id_personal, r.descripcion, r.estado, r.fecha_reporte, r.hora, c.id_cliente, c.nombres as nombres_cliente, c.apellidos as apellidos_cliente, d.id_direccion,d.id_cliente, d.nombre as nombre_direccion, p.id_personal, p.nombres as nombres_personal, p.apellidos as apellidos_personal, s.id_servicio, s.nombre AS servicio from reparacion r JOIN direccion d ON r.id_direccion=d.id_direccion JOIN cliente c ON d.id_cliente=c.id_cliente JOIN personal p ON r.id_personal=p.id_personal JOIN detalle_servicio ds ON d.id_direccion=ds.id_direccion JOIN servicio s ON ds.id_servicio=s.id_servicio AND r.Id_servicio=s.id_servicio where r.id_reparacion='" . $idBusqueda . "'";
 
-        while($fila = mysqli_fetch_array($ejecutar)){
-            
-            $resultadoReparacion->setIdReparacion($fila['id_reparacion']);
-            $resultadoReparacion->setNombreCliente($fila['nombres_cliente'] . " " . $fila['apellidos_cliente']);
-            $resultadoReparacion->setIdDireccion($fila['id_direccion']);
-            $resultadoReparacion->setNombreDireccion($fila['nombre_direccion']);
-            $resultadoReparacion->setIdPersonal($fila['id_personal']);
-            $resultadoReparacion->setNombrePersonal($fila['nombres_personal'] . " ". $fila['apellidos_personal']);
-            $resultadoReparacion->setDescripcion($fila['descripcion']);
-            $resultadoReparacion->setEstado($fila['estado']);
-            $resultadoReparacion->setFechaReporte($fila['fecha_reporte']);
-            $resultadoReparacion->setHora($fila['hora']);
-           
-        }
+            //Ejecución de instrucción     
+            $ejecutar = mysqli_query($conexion->db, $sql);
+
+            while($fila = mysqli_fetch_array($ejecutar)){
+                $resultadoReparacion->setIdReparacion($fila['id_reparacion']);
+                $resultadoReparacion->setNombreCliente($fila['nombres_cliente'] . " " . $fila['apellidos_cliente']);
+                $resultadoReparacion->setIdDireccion($fila['id_direccion']);
+                $resultadoReparacion->setNombreDireccion($fila['nombre_direccion']);
+                $resultadoReparacion->setIdPersonal($fila['id_personal']);
+                $resultadoReparacion->setNombrePersonal($fila['nombres_personal'] . " ". $fila['apellidos_personal']);
+                $resultadoReparacion->setDescripcion($fila['descripcion']);
+                $resultadoReparacion->setEstado($fila['estado']);
+                $resultadoReparacion->setFechaReporte($fila['fecha_reporte']);
+                $resultadoReparacion->setHora($fila['hora']);
+                //quitar en caso no se muestre el servicio
+                $resultadoReparacion->setServicio($fila['servicio']);
+            }
             //Nos desconectamos de la base de datos
             $conexion->desconectar();
             //Devolvemos el usuario encontrado
@@ -456,6 +471,29 @@
             //Devolvemos resultado 1=existe, 0 = no existe
             return $res;
            }
+
+        public function obtenerIdRep(){
+            //Instanciamos la clase conexión
+            $conexion = new Conexion();
+            //Nos conectamos a la base de datos
+            $conexion->conectar();
+            //Declaramos el objeto contenedor del resultado
+            $IdRF = new Reparacion();
+            //Instrucción SQL
+            //$sql = "select id_reparacion from reparacion";
+            $sql = "select id_reparacion from reparacion order by id_reparacion desc limit 1";
+            //Ejecución de instrucción     
+            $ejecutar = mysqli_query($conexion->db, $sql);
+            $res = 0;
+
+            while($fila = mysqli_fetch_array($ejecutar)){
+                $res = $fila['id_reparacion'];
+            }
+            //Nos desconectamos de la base de datos
+            $conexion->desconectar();
+            //Devolvemos el usuario encontrado
+            return $res;
+        }
 
         
     }
