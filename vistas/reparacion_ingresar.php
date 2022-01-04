@@ -87,6 +87,7 @@ $conexion->conectar();
                 <?php
                }
                 ?>
+              <!--form role="form" method="post" action="../crud/ingresarReparacion.php" target="_blank"-->
                 <form role="form" method="post" action="../crud/ingresarReparacion.php">
                   <div class="row">
                   <div class="col-sm-6">
@@ -118,6 +119,15 @@ $conexion->conectar();
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
+                        <label>Servicio</label>
+                        <select class="form-control" name="cbServicio" id="cbServicio">
+                          <option value="" disabled="disabled" selected>Seleccione el servicio dañado</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
                         <label>Empleado</label>
                         <select class="form-control select2" name="cbEmpleado" id="cbEmpleado">
                         <option value="" disabled="disabled" selected>Seleccione un empleado</option>
@@ -140,14 +150,16 @@ $conexion->conectar();
                     <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
-                      <input id="txtId" type="hidden" name="txtId" type="text" class="form-control" placeholder="" value="0"  >
+                      <input id="txtId" type="hidden" name="txtId" type="text" class="form-control" placeholder="" value="0">
+                      <input id="txtIdS" type="hidden" name="txtIdS" type="text" class="form-control" placeholder="" value="0">
                       </div>
                     </div>
                   </div>  
                   <div class="">
-                  <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardarR" id="btnGuardarR">
-                  <a type="submit" class="btn btn-danger" href="reparacion.php">Regresar</a>
-                </div>     
+                    <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardarR" id="btnGuardarR">
+                    <!--input type="submit" class="btn btn-primary" value="Guardar" name="btnGuardarR" id="btnGuardarR" onClick="javascript:window.open('../reportes/reporte_comprobante_reparacion.php', '_blank');"-->
+                    <a type="submit" class="btn btn-danger" href="reparacion.php">Regresar</a>
+                  </div>     
                 </form>
               </div>
               <!-- /.card-body -->
@@ -182,62 +194,84 @@ include ("layout/footer.php");
         theme: 'bootstrap4'
       })
     });
-    </script>
+</script>
 
 <script>
-     $(document).ready(function(){
+  $(document).ready(function(){
     $("#cbCliente").change(function () { 	
 
-        document.getElementById("txtId").value = "";
+      document.getElementById("txtId").value = "";
    
-        $("#cbCliente option:selected").each(function () {
-            id_cliente = $(this).val();
+      $("#cbCliente option:selected").each(function () {
+        id_cliente = $(this).val();
             
-            $.post("../crud/getDireccion.php", { id_cliente: id_cliente }, function(data){
-                $("#cbDireccion").html(data);
-            });            
-        });
+        $.post("../crud/getDireccion.php", { id_cliente: id_cliente }, function(data){
+          $("#cbDireccion").html(data);
+        });            
+      });
     })
-});
+  });
 
+
+  $(document).ready(function(){
+    $("#cbDireccion").change(function () { 	
+
+      document.getElementById("txtIdS").value = "";
+   
+      $("#cbDireccion option:selected").each(function () {
+        id_direccion = $(this).val();
+            
+        $.post("../crud/getServicio.php", { id_direccion: id_direccion }, function(data){
+          $("#cbServicio").html(data);
+        });            
+      });
+    })
+  });
 
 </script>
 
 <script>
-     $(document).ready(function(){
+  $(document).ready(function(){
     $("#cbDireccion").change(function () { 	
-
-       var index =  document.getElementById("cbDireccion").selectedIndex;
-
-        if (index == 0){
-            document.getElementById("txtId").value = "";
-
-        }
-
-       
-        	
-       
+      var index =  document.getElementById("cbDireccion").selectedIndex;
+      if (index == 0){
+        document.getElementById("txtId").value = "";
+      }
     })
-});
+  });
 
+  $(document).ready(function(){
+    $("#cbServicio").change(function () { 	
+      var index =  document.getElementById("cbServicio").selectedIndex;
+      if (index == 0){
+        document.getElementById("txtIdS").value = "";
+      }
+    })
+  });
 
 </script>
 
 <script src="../js/evento.js"></script>
 
 <script type="text/javascript">
+
+
+
+
 $(function() {
     $('#btnGuardarR').click(function() {
 
         var valid = this.form.checkValidity();
+        var descripcion = $('#descripcion').val();
         if (valid) {
           alert('!Desea guardar los datos');
-   
+          abrircomprobante('../reportes/reporte_comprobante_reparacion.php');
+          //abrircomprobante('../reportes/reporte_comprobante_reparacion.php?id=descripcion');
         } else {
             alert('Debe de rellenar los campos o coincidir con el formato indicado');
         }
 
-        var descripcion = $('#descripcion').val();
+        //var descripcion = $('#descripcion').val();
         var empleado = $('#cbEmpleado').val();
         var direccion = $('#cbDireccion').val();
         var cliente = $('#cbCliente').val();
@@ -246,5 +280,12 @@ $(function() {
     });
 
 });
+
+  function abrircomprobante(url) {
+    // Abrir nuevo tab
+    var win = window.open(url, '_blank');
+    // Cambiar el foco al nuevo tab (punto opcional)
+    win.focus();
+  }
 </script>
 

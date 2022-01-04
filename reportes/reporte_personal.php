@@ -4,20 +4,6 @@ require('formato.php');
 $tipoReporte = $_POST['tipoReporte'];
 $tituloRep;
 
-function ReporteActual() {
-
-}
-function ReporteMes() {
-
-}
-function ReporteEmpleado() {
-
-}
-function ReporteGeneral() {
-    
-}
-
-
 include('../db/Conexion.php');
 $conexion = new Conexion();
 //Conectamos a la base de datos
