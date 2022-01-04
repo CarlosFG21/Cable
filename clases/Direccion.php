@@ -199,6 +199,8 @@
             $resultadoDireccion->setEstado($fila[3]);
             $resultadoDireccion->setFecha($fila[4]);
             $resultadoDireccion->setHora($fila[5]);
+            $resultadoDireccion->setLatitud($fila['latitud']);
+            $resultadoDireccion->setLongitud($fila['longitud']);
            
         }
             //Nos desconectamos de la base de datos
@@ -233,6 +235,8 @@
             $direccionIndex->setEstado($fila[3]);
             $direccionIndex->setFecha($fila[4]);
             $direccionIndex->setHora($fila[5]);
+            $direccionIndex->setLatitud($fila['latitud']);
+            $direccionIndex->setLongitud($fila['longitud']);
 
             //Llenamos el array de resultados de usuarios
             array_push($resultadoDireccion,$direccionIndex);
@@ -273,6 +277,8 @@
             $direccionIndex->setEstado($fila[3]);
             $direccionIndex->setFecha($fila[4]);
             $direccionIndex->setHora($fila[5]);
+            $direccionIndex->setLatitud($fila['latitud']);
+            $direccionIndex->setLongitud($fila['longitud']);
 
             //Llenamos el array de resultados de usuarios
             array_push($resultadoDireccion,$direccionIndex);
@@ -312,6 +318,8 @@
             $direccionIndex->setEstado($fila[3]);
             $direccionIndex->setFecha($fila[4]);
             $direccionIndex->setHora($fila[5]);
+            $direccionIndex->setLatitud($fila['latitud']);
+            $direccionIndex->setLongitud($fila['longitud']);
 
             //Llenamos el array de resultados de usuarios
             array_push($resultadoDireccion,$direccionIndex);

@@ -150,6 +150,12 @@ include ("layout/nav.php");
       <div id="mapa">
                             
       </div>
+     
+      <div id="coordenadas">
+            
+
+      </div>   
+
        </blockquote>
   </div>
 </div>
@@ -239,9 +245,26 @@ include ("layout/footer.php");
   
 function recargarMapa() {
 
+  $.ajax({
+            type:"POST",
+            url:"cargarCoordenadas.php?id=" + $ ('#lista2').val() ,
+            //data:"id="+ $ ('#lista1').val(),
+            success:function(r){
+                $('#coordenadas').html(r);
+            }
+        
+        });
+
+ var latitud;
+ var longitud;
+
+latitud = document.getElementById('longitud').value;
+longitud = document.getElementById('longitud').value;
+
+
 
 var mapOptions = {
-center: new google.maps.LatLng(25.80, -80.30),
+center: new google.maps.LatLng(latitud, longitud),
 zoom: 10,
 mapTypeId: google.maps.MapTypeId.ROADMAP};
 var map = new google.maps.Map(document.getElementById("mapa"),mapOptions);
@@ -251,13 +274,13 @@ marcador = new google.maps.Marker({
     draggable: true,
     animation: google.maps.Animation.DROP,
     position: {
-      lat: 25.80,
-      lng: -80.30
+      lat: latitud,
+      lng: longitud
     }
   });
 
-document.getElementById("mapa").style.height="400px";
-document.getElementById("mapa").style.width="100%";
+//document.getElementById("mapa").style.height="400px";
+//document.getElementById("mapa").style.width="100%";
 }		
 </script>
 
@@ -267,11 +290,14 @@ document.getElementById("mapa").style.width="100%";
         //recargarLista();
 
         $('#lista2').change(function(){
-         recargarMapa();
+
+          recargarMapa();
          
         });
 
     });
 </script>
+
+
 
 
