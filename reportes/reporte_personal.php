@@ -44,7 +44,7 @@ if ($tipoReporte==2) {
     $sql = "SELECT concat(nombres,' ',apellidos) AS empleado, cargo FROM personal WHERE Id_personal=$empleado";
     $res = mysqli_query($conexion->db, $sql);
     $fila = $res->fetch_assoc();
-    $tituloRep="Reporte Empleado - ".utf8_encode($fila['empleado']);
+    $tituloRep="Reporte Empleado - ".utf8_decode($fila['empleado']);
     //$consulta = "SELECT concat(c.nombres,' ',c.apellidos) AS cliente, d.nombre, r.descripcion, r.fecha_reporte, p.id_personal, concat(p.nombres,' ',p.apellidos) AS empleado, p.cargo FROM personal p JOIN reparacion r ON p.id_personal=r.id_personal JOIN direccion d ON r.id_direccion=d.id_direccion JOIN cliente c ON d.id_cliente=c.id_cliente WHERE p.estado=1 AND r.estado=3 AND p.id_personal=$empleado";
     $consulta = "SELECT concat(c.nombres,' ',c.apellidos) AS cliente, d.nombre, r.descripcion, r.fecha_reporte, r.hora FROM reparacion r JOIN direccion d ON r.id_direccion=d.id_direccion JOIN cliente c ON d.id_cliente=c.id_cliente WHERE r.estado=3 AND r.id_personal=$empleado ORDER BY r.fecha_reporte ASC";
 }

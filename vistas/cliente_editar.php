@@ -67,7 +67,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>DPI</label>
                         <?php
-                        echo "<input type='number' class='form-control' placeholder='DPI' value='$dpi' minlength='13' maxlength='13' pattern='^[0-9]+' name='dpi' id='dpi'> ";
+                        echo "<input type='text' class='form-control' placeholder='DPI' value='$dpi' minlength='13' maxlength='13' pattern='^[a-zA-Záéíóú0-9]{1,30}' name='dpi' id='dpi'> ";
                         ?>
                         </div>
                     </div>  
@@ -76,7 +76,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>NIT</label>
                         <?php
-                        echo "<input type='number' class='form-control' placeholder='NIT' value='$nit' minlength='9' maxlength='9' pattern='^[0-9]+' name='nit' id='nit'>";
+                        echo "<input type='text' class='form-control' placeholder='NIT' value='$nit' minlength='9' maxlength='9' pattern='^[a-zA-Záéíóú0-9]{1,30}' name='nit' id='nit'>";
                         ?>
                       </div>
                     </div>

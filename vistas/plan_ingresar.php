@@ -61,7 +61,7 @@ include ("layout/nav.php");
                       <div class="form-group">
                         <label>Tipo</label>
                         <input type="text" class="form-control" placeholder="Tipo" name="tipo" id="tipo"
-                        pattern="^[a-zA-Záéíóú ]{1,30}" required minlength="1" maxlength="50" >
+                        pattern="^[a-zA-Záéíóú0-9]{1,30}" required minlength="1" maxlength="50" >
                       </div>
                     </div>
                     <div class="col-sm-6">
