@@ -115,7 +115,7 @@ $pdf->setFillColor(232, 232, 232);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(15,6,'No',1,0,'C',1);
 $pdf->Cell(80,6,'Servicio',1,0,'C',1);
-$pdf->Cell(20,6,'Mes',1,0,'C',1);
+$pdf->Cell(25,6,'Mes',1,0,'C',1);
 $pdf->Cell(20,6,utf8_decode('Año'),1,0,'C',1);
 $pdf->Cell(50,6,utf8_decode('Precio'),1,1,'C',1);
 $pdf->SetFont('Arial','',12);
@@ -133,8 +133,49 @@ for($i=0; $i<sizeof($pago);$i++){
     $total = $total + $pago[$i]->getTotal();
     $pdf->Cell(15,10,($i+1),0,0,'C');
     $pdf->Cell(80,10,utf8_decode(limitarCadena($nombreServicio,25,"...")), 0, 0, 'C');
-    $pdf->Cell(20,10,utf8_decode($pago[$i]->getMes()), 0, 0, 'C');
-	$pdf->Cell(20,10,$pago[$i]->getAnio(), 0, 0, 'C');
+
+    $mesLetras="";
+
+    if($pago[$i]->getMes()==1){
+        $mesLetras="Enero";
+    }
+    if($pago[$i]->getMes()==2){
+        $mesLetras="Febrero";
+    }
+    if($pago[$i]->getMes()==3){
+        $mesLetras="Marzo";
+    }
+    if($pago[$i]->getMes()==4){
+        $mesLetras="Abril";
+    }
+    if($pago[$i]->getMes()==5){
+        $mesLetras="Mayo";
+    }
+    if($pago[$i]->getMes()==6){
+        $mesLetras="Junio";
+    }
+    if($pago[$i]->getMes()==7){
+        $mesLetras="Julio";
+    }    
+    if($pago[$i]->getMes()==8){
+        $mesLetras="Agosto";
+    }
+    if($pago[$i]->getMes()==9){
+        $mesLetras="Septiembre";
+    }
+    if($pago[$i]->getMes()==10){
+        $mesLetras="Octubre";
+    }
+    if($pago[$i]->getMes()==11){
+        $mesLetras="Noviembre";
+    }
+    if($pago[$i]->getMes()==12){
+        $mesLetras="Diciembre";
+    }
+
+    $pdf->Cell(25,10,limitarCadena(utf8_decode($mesLetras),13,"..."), 0, 0, 'C');
+	
+    $pdf->Cell(20,10,$pago[$i]->getAnio(), 0, 0, 'C');
     $pdf->Cell(50,10,"Q " . $pago[$i]->getTotal(), 0, 1, 'C');
 }
 
@@ -142,7 +183,7 @@ $pdf->SetFont('Arial','B',12);
 
 $pdf->Cell(15,10,("...."),1,0,'C');
 $pdf->Cell(80,10,utf8_decode(limitarCadena("Total a pagar (Q)",25,"...")), 1, 0, 'C');
-$pdf->Cell(20,10,utf8_decode("....."), 1, 0, 'C');
+$pdf->Cell(25,10,utf8_decode("....."), 1, 0, 'C');
 $pdf->Cell(20,10,".....", 1, 0, 'C');
 $pdf->Cell(50,10,"Q " . $total, 1, 1, 'C');
 
