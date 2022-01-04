@@ -15,7 +15,7 @@
     $contrasena = $_POST['contrasena'];
 
         
-       if($usuario->validarUsuarioEditar($nombre,$apellido)==0){
+       if($usuario->validarUsuarioEditar($nombre,$apellido,$permiso,$contrasena)==0){
         $usuario->editar($nombre,$apellido,$permiso,$nickname,$contrasena,$idEditar);
         header("Location: ../vistas/usuario.php");
        }else{

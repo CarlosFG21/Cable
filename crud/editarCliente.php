@@ -22,7 +22,7 @@ $horaReal = date("H:i:s",$hora);
 
 if(isset($_POST["btnEditar"])){
 
-    if($cliente->validarCliente($nombre,$apellido,$dpi,$nit)==0){
+    if($cliente->validarClienteEditar($nombre,$apellido,$dpi,$nit,$genero,$telefono,$fechan)==0){
 
     $cliente->editar($nombre,$apellido,$dpi,$nit,$genero,$telefono,$fechan,$fecha,$horaReal,$idcliente);
 

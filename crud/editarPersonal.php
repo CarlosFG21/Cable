@@ -15,7 +15,7 @@
     $genero = $_POST['genero'];
     $fechaNacimiento = $_POST['fechaNacimiento'];
 
-    if($personal->validarPersonal($nombres,$apellidos)==0){
+    if($personal->validarPersonalEditar($nombres,$apellidos,$telefono,$cargo,$genero,$fechaNacimiento)==0){
 
     $personal->editar($nombres,$apellidos,$telefono,$cargo,$genero,$fechaNacimiento,$idEditar);
 
