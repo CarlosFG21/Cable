@@ -187,7 +187,7 @@
          $resultadoDireccion = new Direccion();
          
          //Instrucción SQL
-        $sql = "select *from direccion where id_direccion='" . $idBusqueda . "'" ." and estado=1";
+        $sql = "select *from direccion where id_direccion='" . $idBusqueda . "'";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
