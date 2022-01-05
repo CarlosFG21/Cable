@@ -103,7 +103,7 @@ include("layout/nav.php");
                     </div>
                   </div>  
                   <div class="">
-                  <input type="submit" class="btn btn-primary" value="Guardar" name="btnGuardar" id="btnGuardar">
+                  <!--<input type="submit" class="btn btn-primary" value="Guardar" name="btnGuardar" id="btnGuardar">-->
                   <a type="submit" class="btn btn-danger" href="servicio.php">Regresar</a>
                 </div>     
                 </form>
