@@ -65,6 +65,11 @@ function limitarCadena($cadena, $limite, $sufijo){
     $pdf->SetFont('Arial','B',12);
     $pdf->Cell(18,8,'Cliente',0,0,'L',0);
     $pdf->setFont('Arial', '',11);
+    
+    if(strlen($Cliente)==0){
+        echo "<script>location.reload();</script>";
+    }
+
     $pdf->Cell(74,8,limitarCadena(utf8_decode($Cliente),35,"..."),'B',0,'L',0);
 
     $pdf->setFont('Arial', 'B',12);

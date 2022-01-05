@@ -183,16 +183,22 @@ $detalleServicio = new DetalleServicio();
 
 $total =0;
 $tipoReporte = $_SESSION['tipoReporte'];
+
+$contador = 1;
+
 for($i=0; $i<sizeof($pago);$i++){
+    
+    if($pago[$i]->getEstado()==1){
+
     $idDetalleBuscar= $pago[$i]->getIdDetalleServicio();
     $resDetalleServicio = $detalleServicio->buscarPorId($idDetalleBuscar);    
     $nombreServicio = $resDetalleServicio->getNombreServicio();
 
     $total = $total + $pago[$i]->getTotal();
     if($tipoReporte!=1 || $tipoReporte!=3){
-    $pdf->Cell(15,10,($i+1),0,0,'C');
+    $pdf->Cell(15,10,($contador),0,0,'C');
     }else{
-        $pdf->Cell(50,10,($i+1),0,0,'C');
+        $pdf->Cell(50,10,($contador),0,0,'C');
     }
     $pdf->Cell(80,10,utf8_decode(limitarCadena($nombreServicio,25,"...")), 0, 0, 'C');
 
@@ -245,6 +251,8 @@ for($i=0; $i<sizeof($pago);$i++){
         $pdf->Cell(50,10,utf8_decode(limitarCadena($pago[$i]->getNombreCliente(),20,"...")), 0, 0, 'C');
     }
     $pdf->Cell(30,10,"Q " . $pago[$i]->getTotal(), 0, 1, 'C');
+    $contador = $contador+1;
+}//Fin de if validador de estado existente
 }
 
 $pdf->SetFont('Arial','B',12);
