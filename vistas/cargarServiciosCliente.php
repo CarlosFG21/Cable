@@ -52,7 +52,7 @@
              
              ?>    
              
-             <a type="submit" class="btn btn-primary" href="#" target="_blank">Reporte</a>
+            <!-- <a type="submit" class="btn btn-primary" href="#" target="_blank">Reporte</a>-->
               </div>
 
             <div class="card">

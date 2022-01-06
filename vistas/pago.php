@@ -42,7 +42,7 @@ include ("layout/nav.php");
               <a type="submit" class="btn btn-primary" href="pago_ingresar.php">Ingresar pago</a>
               <br>
               <br>
-              <h4>Búsqueda</h4>
+              <!--<h4>Búsqueda</h4>-->
               <div class="col-sm-6">
                       <!-- text input -->
                       <div class="form-group">
@@ -88,7 +88,7 @@ include ("layout/nav.php");
               <input type="date" class="btn btn-warning" placeholder="Desde" name="desde" id="desde">
               <input type="date" class="btn btn-warning" placeholder="Hasta" name="hasta" id="hasta">
               
-              <input type="button" class="btn btn-primary" value="Generar" id="btnGenerar" name="btnGenerar">
+              <input type="button" class="btn btn-primary" value="Buscar" id="btnGenerar" name="btnGenerar">
               <input type="button" class="btn btn-primary" value="Exportar PDF" id="btnExportar" name="btnExportar">
               
             
@@ -490,6 +490,7 @@ $(document).ready(function(){
 
 
 </script>
+
 
 <?php
 
