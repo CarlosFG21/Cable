@@ -90,7 +90,7 @@ include ("layout/nav.php");
                   
                   </div> 
                   
-                  <a type="submit" class="btn btn-danger" href="servicio.php">Regresar</a>
+                  <!--<a type="submit" class="btn btn-danger" href="servicio.php">Regresar</a>-->
                 </div>     
                 </form>
               </div>

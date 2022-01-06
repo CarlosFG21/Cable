@@ -68,7 +68,7 @@ include ("layout/nav.php");
                       <!-- text input -->
                       <div class="form-group">
                         <label>NIT</label>
-                        <input type="text" class="form-control" placeholder="NIT" minlength="9" maxlength="9" pattern="^[a-zA-Záéíóú0-9 ]{1,30}" name="nit" id="nit" required>
+                        <input type="text" class="form-control" placeholder="NIT" minlength="9" maxlength="9" pattern="^[a-zA-Záéíóú0-9.,_-]{1,30}" name="nit" id="nit" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
