@@ -1,64 +1,53 @@
 <?php
-require('../pdf/fpdf.php');
+    require('formato.php');
 
-class PDF extends FPDF
-{
+    include('../clases/Cliente.php');
+    include('../clases/DetalleServicio.php');
+    include('../db/Conexion.php');
 
-function Header()
-{
-    
-    $this->Image('cable.jpg',10,10,40);
-    $this->SetFont('Arial','B',15);
-    $this->Cell(210,20,utf8_decode('Cablevisión Robles'),0,0,'C');
-    $this->Ln(9);
-    $this->Cell(210,20,'Reporte de Clientes',0,0,'C');
-    $this->Ln(6);
-    $this->SetFont('Arial','',12);
-    $this->Cell(209,30,'Horarios de atencion: Lunes a Domingo: 7 AM-5 PM ',0,0,'C');
-    $this->Ln(30);
-    
-}
+    $client = new Cliente();
+    $clientArray = $client->obtenerClientes();
 
-// Pie de página
-function Footer()
-{
-    // Posición: a 1,5 cm del final
-    $this->SetY(-15);
-    // Arial italic 8
-    $this->SetFont('Arial','I',8);
-    // Número de página
-    $this->Cell(0,10,utf8_decode('Página') .$this->PageNo().'/{nb}',0,0,'C');
-}
-}
+    $detalleServicio = new DetalleServicio();
 
-include('../db/Conexion.php');
-$conexion = new Conexion();
-//Conectamos a la base de datos
-$conexion->conectar();
-$consulta = "SELECT * FROM cliente WHERE estado=1";
-$resultado = mysqli_query($conexion->db, $consulta);
+    $tituloRep="Reporte Clientes";
+    // Creación del objeto de la clase heredada
+    $pdf = new PDF();
+    $pdf->AliasNbPages();
+    $pdf->AddPage();
 
+    $pdf->Cell(198,0,utf8_decode($tituloRep),0,1,'C');
+    $pdf->Ln(10);
 
-// Creación del objeto de la clase heredada
-$pdf = new PDF();
-$pdf->AliasNbPages();
-$pdf->AddPage();
+    $pdf->SetFillColor(225, 225, 225);
+    $pdf->SetFont('Arial','B',12);
+    $pdf->Cell(20,6,'ID',1,0,'C',1);
+    $pdf->Cell(30,6,'NIT',1,0,'C',1);
+    $pdf->Cell(85,6,'Cliente',1,0,'C',1);
+    $pdf->Cell(30,6,'Telefono',1,0,'C',1);
+    $pdf->Cell(25,6,utf8_decode('Servicios'),1,1,'C',1);
+    $pdf->SetFont('Arial','',12);
 
-$pdf->setFillColor(232, 232, 232);
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(40,6,'ID',1,0,'C',1);
-$pdf->Cell(50,6,'Nombre',1,0,'C',1);
-$pdf->Cell(50,6,'Apellido',1,0,'C',1);
-$pdf->Cell(50,6,utf8_decode('Telefono'),1,1,'C',1);
-$pdf->SetFont('Arial','',12);
+    for($i=0; $i<sizeof($clientArray); $i++){
+        $id = $clientArray[$i]->getIdCliente();
+        $nit = $clientArray[$i]->getNit();
+        $cliente = $clientArray[$i]->getNombres()." ".$clientArray[$i]->getApellidos();
+        $telefono = $clientArray[$i]->getTelefono();
+        $fecha = $clientArray[$i]->getFechaNacimiento(); 
+        $estado = $clientArray[$i]->getEstado();
+        //$servicios = $clientArray[$i]->getServicios();
 
-while ($row=mysqli_fetch_array($resultado)) {
-	$pdf->Cell(40,10,$row['id_cliente'],0,0,'C');
-    $pdf->Cell(50,10,utf8_decode($row['nombres']), 0, 0, 'C');
-    $pdf->Cell(50,10,utf8_decode($row['apellidos']), 0, 0, 'C');
-	$pdf->Cell(50,10,$row['telefono'], 0, 1, 'C');
-
-} 
-$pdf->Output();
+        $servicioArray = $detalleServicio->obtenerDetallesServiciosPorCliente($id);
+        $total=0;
+        for($j=0; $j<sizeof($servicioArray); $j++){
+            $total++;
+        }
+        $pdf->Cell(20,10,$id,0,0,'C');
+        $pdf->Cell(30,10,$nit,0,0,'C');
+        $pdf->Cell(85,10,utf8_decode($cliente), 0, 0, 'C');
+        $pdf->Cell(30,10,$telefono, 0, 0, 'C');
+        $pdf->Cell(25,10,$total, 0, 1, 'C');
+    } 
+    $pdf->Output();
 
 ?>

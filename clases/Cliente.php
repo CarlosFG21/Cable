@@ -17,6 +17,8 @@
         public $fecha;
         public $hora;
 
+        public $servicios;
+
         //obtener id del cliente
         public function getIdCliente(){
             return $this->idCliente;
@@ -112,6 +114,14 @@
         //setear hora
         public function setHora($_hora){
             $this->hora = $_hora;
+        }
+        //Obtener la cantidad de servicios
+        public function getServicios(){
+            return $this->servicios;
+        }
+        //Setear la cantidad de clientes
+        public function setServicios($_servicios){
+            $this->servicios = $_servicios;
         }
 
         //----------------------Función para guardar un cliente---------------------------------
@@ -267,6 +277,7 @@
         $resultadoClientes = array();
         //Instrucción SQL
         $sql = "select *from cliente";
+        //$sql = "SELECT c.id_cliente, c.id_usuario, c.nombres, c.apellidos, c.dpi, c.nit, c.genero, c.telefono, c.fecha_nacimiento, c.estado, c.fecha, c.hora, COUNT(ds.id_servicio) FROM cliente c INNER JOIN direccion d ON c.id_cliente=d.id_cliente INNER JOIN detalle_servicio ds ON d.id_direccion=ds.id_direccion GROUP BY c.id_cliente";
         //Ejecución de instrucción     
         $ejecutar = mysqli_query($conexion->db, $sql);
 
@@ -287,6 +298,7 @@
             $clienteIndex->setEstado($fila[9]);
             $clienteIndex->setFecha($fila[10]);
             $clienteIndex->setHora($fila[11]);
+            //$clienteIndex->setServicios($fila[12]);
            
 
             //Llenamos el array de resultados de usuarios

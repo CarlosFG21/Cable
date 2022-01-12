@@ -1,4 +1,13 @@
 <?php
+    function limitarCadena($cadena, $limite, $sufijo){
+	    if(strlen($cadena) > $limite){
+		    return substr($cadena, 0, $limite) . $sufijo;
+    	}
+	    return $cadena;
+    }
+?>
+
+<?php
 require('formato.php');
 
 $tipoReporte = $_POST['tipoReporte'];
@@ -54,10 +63,10 @@ $pdf->SetFillColor(225, 225, 225);
 $pdf->SetFont('Arial','B',11);
 
 if ($tipoReporte==2) {
-    $pdf->Cell(10,6,'Rep.',1,0,'C',1);
-    $pdf->Cell(57,6,'Cliente',1,0,'C',1);
-    $pdf->Cell(50,6,'Direccion',1,0,'C',1);
-    $pdf->Cell(50,6,'Detalle',1,0,'C',1);
+    $pdf->Cell(11,6,'Rep.',1,0,'C',1);
+    $pdf->Cell(58,6,'Cliente',1,0,'C',1);
+    $pdf->Cell(60,6,'Direccion',1,0,'C',1);
+    $pdf->Cell(38,6,'Detalle',1,0,'C',1);
     $pdf->Cell(23,6,'Fecha',1,1,'C',1);
     $pdf->SetFont('Arial','',11);
 
@@ -78,10 +87,10 @@ $pdf->Output();
 function MostrarEmpleado($pdf, $resultado) {
     $rep=1;
     while ($row=mysqli_fetch_array($resultado)) {
-        $pdf->Cell(10,7,$rep++, 0, 0, 'C');
-        $pdf->Cell(57,7,$row[0], 0, 0, 'C');
-        $pdf->Cell(50,7,$row[1], 0, 0, 'C');
-        $pdf->Cell(50,7,$row[2], 0, 0, 'C');
+        $pdf->Cell(11,7,$rep++, 0, 0, 'C');
+        $pdf->Cell(58,7,limitarCadena($row[0],29, ".."), 0, 0, 'L');
+        $pdf->Cell(60,7,limitarCadena($row[1],32, ".."), 0, 0, 'L');
+        $pdf->Cell(38,7,limitarCadena($row[2],20, ".."), 0, 0, 'L');
         $pdf->Cell(23,7,$row[3], 0, 1, 'C');
     }
 }

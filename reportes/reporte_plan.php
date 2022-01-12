@@ -1,62 +1,40 @@
 <?php
-require('../pdf/fpdf.php');
 
-class PDF extends FPDF
-{
+    require('formato.php');
+    require('../clases/Servicio.php');
+    include('../db/Conexion.php');
 
-function Header()
-{
+    $tituloRep="Reporte de Plan";
+    // Creación del objeto de la clase heredada
+    $pdf = new PDF();
+    $pdf->AliasNbPages();
+    $pdf->AddPage();
     
-    $this->Image('cable.jpg',10,10,40);
-    $this->SetFont('Arial','B',15);
-    $this->Cell(210,20,utf8_decode('Cablevisión Robles'),0,0,'C');
-    $this->Ln(9);
-    $this->Cell(210,20,'Reporte de Planes',0,0,'C');
-    $this->Ln(6);
-    $this->SetFont('Arial','',12);
-    $this->Cell(209,30,'Horarios de atencion: Lunes a Domingo: 7 AM-5 PM ',0,0,'C');
-    $this->Ln(30);
+    $pdf->Cell(198,0,utf8_decode($tituloRep),0,1,'C');
+    $pdf->Ln(10);
     
-}
+    $pdf->SetFillColor(225, 225, 225);
+    $pdf->SetFont('Arial','B',12);
+    $pdf->Cell(15,6,'ID',1,0,'C',1);
+    $pdf->Cell(95,6,'Tipo',1,0,'C',1);
+    $pdf->Cell(40,6,'Precio',1,0,'C',1);
+    $pdf->Cell(40,6,'Usuarios',1,1,'C',1);
+    $pdf->SetFont('Arial','',12);
 
-// Pie de página
-function Footer()
-{
-    // Posición: a 1,5 cm del final
-    $this->SetY(-15);
-    // Arial italic 8
-    $this->SetFont('Arial','I',8);
-    // Número de página
-    $this->Cell(0,10,utf8_decode('Página') .$this->PageNo().'/{nb}',0,0,'C');
-}
-}
+    $servicio = new Servicio();
+    $servicioArray = $servicio->obtenerServicios();
+    for($i=0; $i<sizeof($servicioArray); $i++){
+        $id =  $servicioArray[$i]->getIdServicio();
+        $tipo = $servicioArray[$i]->getNombre();
+        $precio = $servicioArray[$i]->getPrecio();
+        $estado = $servicioArray[$i]->getEstado();
+        $clientes = $servicioArray[$i]->getClientes();
 
-include('../db/Conexion.php');
-$conexion = new Conexion();
-//Conectamos a la base de datos
-$conexion->conectar();
-$consulta = "SELECT * FROM servicio WHERE estado=1";
-$resultado = mysqli_query($conexion->db, $consulta);
-
-
-// Creación del objeto de la clase heredada
-$pdf = new PDF();
-$pdf->AliasNbPages();
-$pdf->AddPage();
-
-$pdf->setFillColor(232, 232, 232);
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(61,6,'ID',1,0,'C',1);
-$pdf->Cell(65,6,'Tipo',1,0,'C',1);
-$pdf->Cell(65,6,'Precio',1,1,'C',1);
-$pdf->SetFont('Arial','',12);
-
-while ($row=mysqli_fetch_array($resultado)) {
-	$pdf->Cell(61,10,$row['id_servicio'],0,0,'C');
-    $pdf->Cell(65,10,utf8_decode($row['nombre']), 0, 0, 'C');
-    $pdf->Cell(65,10,utf8_decode($row['precio']), 0, 1, 'C');
-
-} 
-$pdf->Output();
+    	$pdf->Cell(15,10,$id,0,0,'C');
+        $pdf->Cell(95,10,utf8_decode($tipo), 0, 0, 'C');
+        $pdf->Cell(40,10,utf8_decode($precio), 0, 0, 'C');
+        $pdf->Cell(40,10,utf8_decode($clientes), 0, 1, 'C');
+    } 
+    $pdf->Output();
 
 ?>
