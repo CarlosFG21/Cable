@@ -22,10 +22,6 @@ class PDF extends FPDF
 
 function Header()
 {
-
-    
-    
-    //include('../db/Conexion.php');
     include('../clases/Pago.php');
     include('../clases/DetalleServicio.php');
     include('../clases/Direccion.php');
@@ -37,21 +33,29 @@ function Header()
     $correlativo = $corr->obtenerCorrelativo();
     
     $this->Image('cable.jpg',10,10,40);
+    $this->SetFont('Arial','B',30);
+    $this->SetTextColor(66, 131, 245);
+    $this->Cell(150,16,utf8_decode('"Cablevisión '),0,0,'R',0);
+    $this->SetTextColor(245, 0, 0);
+    $this->Cell(40,16,utf8_decode('Robles"'),0,0,'C');
+    $this->Ln(3);
     $this->SetFont('Arial','B',15);
-    $this->Cell(280,20,utf8_decode('Cablevisión Robles'),0,0,'C');
-    $this->Ln(9);
-    
-    
+    $this->SetTextColor(66, 131, 245);
+    $this->Cell(270,28,utf8_decode('Imagen y corazon de Gualán'),0,0,'C');
+    $this->Ln(18);
+    $this->SetFont('Arial','B',20);
+    $this->setTextColor(3,3,3);
+    $this->SetX(70);
+    $this->SetFillColor(215, 220, 224);
+    $this->Cell(160,1,'',0,1,'C',1);
     session_start();
 
     $tipoReporte = $_SESSION['tipoReporte'];
 
     if($tipoReporte==0){
-    $this->Ln(9);
     $this->Cell(280,20,'Reporte de todos los pagos',0,0,'C');
     }
     if($tipoReporte==1){
-        $this->Ln(9);
         $this->Cell(280,20,'Reporte de pagos por cliente',0,0,'C');
     }
     if($tipoReporte==2){
@@ -59,28 +63,27 @@ function Header()
         $fechaFin = $_SESSION['fechaFin'];
         $this->Cell(280,20,'Reporte de pagos',0,0,'C');
         //--------Cambiamos a color rojo----------
+        $this->SetFont('Arial','B',15);
         $this->setTextColor(244,48,13);
-        $this->Ln(9);
-        $this->Cell(280,20,"Desde: " . $fechaInicio . " hasta: " . $fechaFin,0,0,'C');
+        $this->Ln(7);
+        $this->Cell(280,25,"Desde: " . $fechaInicio . " hasta: " . $fechaFin,0,0,'C');
     }
     if($tipoReporte==3){
         $fechaInicio= $_SESSION['fechaInicio'];
         $fechaFin = $_SESSION['fechaFin'];
         $this->Cell(280,20,'Reporte de pagos por cliente',0,0,'C');
         //--------Cambiamos a color rojo----------
-    $this->setTextColor(244,48,13);
-    $this->Ln(9);
-    $this->Cell(280,20,"Desde: " . $fechaInicio . " hasta: " . $fechaFin,0,0,'C');
-        }
-    
+        $this->SetFont('Arial','B',14);
+        $this->setTextColor(244,48,13);
+        $this->Ln(7);
+        $this->Cell(280,24,"Desde: " . $fechaInicio . " hasta: " . $fechaFin,0,0,'C');
+    }
     
     //Color negro
     $this->setTextColor(3,3,3);
     $this->Ln(6);
     $this->SetFont('Arial','',12);
     $this->Ln(7);
-
-    
 
     $p = $_SESSION['pagoArray'];
 
@@ -134,7 +137,7 @@ window.close();
     $this->Ln(15);
     
  }else{
-     $this->Ln(15);
+     $this->Ln(7);
  }
     
 }

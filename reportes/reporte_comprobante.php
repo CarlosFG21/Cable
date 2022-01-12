@@ -1,29 +1,18 @@
 <?php
-function limitarCadena($cadena, $limite, $sufijo){
-	// Si la longitud es mayor que el límite...
-	if(strlen($cadena) > $limite){
-		// Entonces corta la cadena y ponle el sufijo
-		return substr($cadena, 0, $limite) . $sufijo;
-	}
-	
-	// Si no, entonces devuelve la cadena normal
-	return $cadena;
-}
-
-
+    function limitarCadena($cadena, $limite, $sufijo){
+        // Si la longitud es mayor que el límite...
+        if(strlen($cadena) > $limite){
+            // Entonces corta la cadena y ponle el sufijo
+            return substr($cadena, 0, $limite) . $sufijo;
+        }
+        // Si no, entonces devuelve la cadena normal
+        return $cadena;
+    }
 ?>
 
 <?php
-require('../pdf/fpdf.php');
+    require('formato.php');
 
-class PDF extends FPDF
-{
-
-
-function Header()
-{
-
-    //include('../db/Conexion.php');
     include('../clases/Pago.php');
     include('../clases/DetalleServicio.php');
     include('../clases/Direccion.php');
@@ -33,22 +22,23 @@ function Header()
 
     $corr = new Correlativo();
     $correlativo = $corr->obtenerCorrelativo();
-    
-    $this->Image('cable.jpg',10,10,40);
-    $this->SetFont('Arial','B',15);
-    $this->Cell(210,20,utf8_decode('Cablevisión Robles'),0,0,'C');
-    $this->Ln(9);
-    $this->Cell(210,20,'Comprobante de pago',0,0,'C');
+ 
+    // Creación del objeto de la clase heredada
+    $pdf = new PDF();
+    $pdf->AliasNbPages();
+    $pdf->AddPage();
+
+    //$pdf->Ln(9);
+    $pdf->Cell(192,1,'Comprobante de pago',0,0,'C');
     //--------Cambiamos a color rojo----------
-    $this->setTextColor(244,48,13);
-    $this->Ln(9);
-    $this->Cell(210,20,"No. " . $correlativo,0,0,'C');
-    
-    //Color negro
-    $this->setTextColor(3,3,3);
-    $this->Ln(6);
-    $this->SetFont('Arial','',12);
-    $this->Ln(7);
+    $pdf->setTextColor(244,48,13);
+    $pdf->Ln(4);
+    $pdf->Cell(190,8,"No. " . $correlativo,0,0,'C');
+    //Coor negro
+    $pdf->setTextColor(3,3,3);
+    //$pdf->Ln(1);
+    $pdf->SetFont('Arial','',12);
+    $pdf->Ln(1);
 
     session_start();
 
@@ -73,10 +63,10 @@ function Header()
     $nombreCliente = $resCliente->getNombres() . " " . $resCliente->getApellidos();
     $nitCliente = $resCliente->getNit();
 
-    $this->Cell(209,30,limitarCadena(utf8_decode('Nombre del cliente: ' . $nombreCliente),60,"..."),0,0,'L');
-    $this->Ln(7);
-    $this->Cell(209,30,limitarCadena(utf8_decode('Nit: ' . $nitCliente),60,"..."),0,0,'L');
-    $this->Ln(12);
+    $pdf->Cell(209,30,limitarCadena(utf8_decode('Nombre del cliente: ' . $nombreCliente),60,"..."),0,0,'L');
+    $pdf->Ln(7);
+    $pdf->Cell(209,30,limitarCadena(utf8_decode('Nit: ' . $nitCliente),60,"..."),0,0,'L');
+    $pdf->Ln(12);
     
     //Asignamos zona horaria al servidor    
     date_default_timezone_set('America/Guatemala');
@@ -87,29 +77,8 @@ function Header()
     //Damos formato a la hora
     $horaReal = date("H:i:s",$hora);
 
-    $this->Cell(210,20,utf8_decode('Fecha: '. $fecha . "     Hora: " . $horaReal),0,0,'L');
-    $this->Ln(15);
- 
-    
-}
-
-// Pie de página
-function Footer()
-{
-    // Posición: a 1,5 cm del final
-    $this->SetY(-15);
-    // Arial italic 8
-    $this->SetFont('Arial','I',8);
-    // Número de página
-    $this->Cell(0,10,utf8_decode('Página') .$this->PageNo().'/{nb}',0,0,'C');
-}
-}
-
-
-// Creación del objeto de la clase heredada
-$pdf = new PDF();
-$pdf->AliasNbPages();
-$pdf->AddPage();
+    $pdf->Cell(210,20,utf8_decode('Fecha: '. $fecha . "     Hora: " . $horaReal),0,0,'L');
+    $pdf->Ln(15);
 
 $pdf->setFillColor(232, 232, 232);
 $pdf->SetFont('Arial','B',12);
@@ -187,10 +156,8 @@ $pdf->Cell(25,10,utf8_decode("....."), 1, 0, 'C');
 $pdf->Cell(20,10,".....", 1, 0, 'C');
 $pdf->Cell(50,10,"Q " . $total, 1, 1, 'C');
 
-
 $pdf->Output();
 
 echo "<script>window.open('../vistas/pago.php');</script>";
-
 
 ?>

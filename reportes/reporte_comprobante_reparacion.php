@@ -1,17 +1,10 @@
-
 <?php
-function limitarCadena($cadena, $limite, $sufijo){
-	// Si la longitud es mayor que el límite...
-	if(strlen($cadena) > $limite){
-		// Entonces corta la cadena y ponle el sufijo
-		return substr($cadena, 0, $limite) . $sufijo;
-	}
-	
-	// Si no, entonces devuelve la cadena normal
-	return $cadena;
-}
-
-
+    function limitarCadena($cadena, $limite, $sufijo){
+	    if(strlen($cadena) > $limite){
+		    return substr($cadena, 0, $limite) . $sufijo;
+    	}
+	    return $cadena;
+    }
 ?>
 
 <?php
@@ -21,9 +14,6 @@ function limitarCadena($cadena, $limite, $sufijo){
     include('../db/Conexion.php');
     require('formato.php');
 
-
-   
-
     $Reparacion = new Reparacion();
     $id = $Reparacion->obtenerIdRep();
     $Rep = $Reparacion->buscarPorId($id);
@@ -31,8 +21,6 @@ function limitarCadena($cadena, $limite, $sufijo){
     $Direccion = $Rep->getNombreDireccion();
     $Empleado = $Rep->getNombrePersonal();
     $Descripcion = $Rep->getDescripcion();
-    //$Fecha = $Rep->getFechaReporte();
-    //$Hora = $Rep->getHora();
     $Servicio = $Rep->getServicio();
     
 
@@ -45,12 +33,8 @@ function limitarCadena($cadena, $limite, $sufijo){
     //Damos formato a la hora
     $Hora = date("H:i:s",$hora);
 
-
-
     $tituloRep="Comprobante de reparacion No. ".$id;
 
-    // Creación del objeto de la clase heredada
-    //$pdf = new PDF('P','mm',array(210,280));
     $pdf = new PDF('L','mm',array(210, 120));
     $pdf->AliasNbPages();
     $pdf->AddPage();
@@ -64,11 +48,6 @@ function limitarCadena($cadena, $limite, $sufijo){
     $pdf->Cell(18,8,'Cliente',0,0,'L',0);
     $pdf->setFont('Arial', '',11);
     
-    /*if(strlen($Cliente)==0){
-        echo "<script>location.reload();</script>";
-    }
-
-    */
     $pdf->Cell(74,8,limitarCadena(utf8_decode($Cliente),35,"..."),'B',0,'L',0);
 
     $pdf->setFont('Arial', 'B',12);
